@@ -1,0 +1,2 @@
+class EmploymentsController < ApplicationController
+end
