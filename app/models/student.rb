@@ -3,6 +3,6 @@ class Student < ActiveRecord::Base
   has_many :mentorships
   has_many :partners, :through => :relationships
   has_many :relationships
-  attr_accessible :email, :name, :phone_number, :skill
+  attr_accessible :email, :name, :phone_number, :skills
 end
 
