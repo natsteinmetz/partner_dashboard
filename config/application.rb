@@ -58,5 +58,11 @@ module PartnerDashboard
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    #setting up directories folder for factory girl
+    #It might make more sense to put this in the test environment setup
+    config.generators do |g|
+        g.factory_girl dir: 'spec/support'
+    end
   end
 end
