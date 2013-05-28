@@ -9,8 +9,7 @@ feature "Viewing students" do
                                              skills: "quantum mechanics") }
 
   before do
-    user = FactoryGirl.create(:user)
-    user.confirm!
+    user = FactoryGirl.create(:confirmed_user)
     sign_in_as!(user)
   end
 
