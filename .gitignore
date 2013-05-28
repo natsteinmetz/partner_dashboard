@@ -19,3 +19,6 @@
 
 #ignore binstubs
 /bin
+
+#ignore my todo list
+TODO
