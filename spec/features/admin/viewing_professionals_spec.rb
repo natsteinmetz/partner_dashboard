@@ -8,7 +8,8 @@ feature 'viewing professionals' do
     visit '/users/sign_in'
     fill_in "Email", :with => admin.email
     fill_in "Password", :with => admin.password
-    page.should have_content ("Partners Index")
+    click_button "Sign in"
+    page.should have_content("Admin::Partners#index")
   end
 
 end
