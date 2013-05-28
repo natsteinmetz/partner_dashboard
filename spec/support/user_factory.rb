@@ -6,13 +6,13 @@ FactoryGirl.define do
     password_confirmation "password"
 
     factory :confirmed_user do
-      after_create do |user|
+      after(:create) do |user|
         user.confirm!
       end
     end
 
     factory :admin_user do
-      after_create do |user|
+      after(:create) do |user|
         user.confirm!
         user.update_attributes(:admin, true)
       end
