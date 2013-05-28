@@ -10,6 +10,7 @@ feature "Viewing students" do
 
   before do
     user = FactoryGirl.create(:user)
+    user.confirm!
     sign_in_as!(user)
   end
 
