@@ -1,7 +1,26 @@
-<h1>Code Fellows Students</h1>
+<div class="row">
+	<h1>Code Fellows Students</h1>
+</div>
 
-<ul>
-	<% @students.each do |student| %>
-	<li><%= student.name %> | <%= student.skills %></li>
+<div class="row">
+	<% if @students.empty? %>
+	Sorry, there aren't any students here yet...
+	<% else %>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Skills</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @students.each do |student| %>
+				<tr>
+					<td><%= student.name %></td>
+					<td><%= student.skills %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
 	<% end %>
-</ul>
+</div>
