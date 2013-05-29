@@ -12,4 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+
+//= require list
+
 //= require_tree .
