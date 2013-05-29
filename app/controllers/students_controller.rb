@@ -2,6 +2,7 @@ class StudentsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @students = Student.order("name")
+    @all_students = Student.order("name")
+    @contacted_students = current_user.partner.students
   end
 end

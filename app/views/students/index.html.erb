@@ -3,7 +3,7 @@
 </div>
 
 <div class="row">
-	<% if @students.empty? %>
+	<% if @all_students.empty? %>
 	Sorry, there aren't any students here yet...
 	<% else %>
 	<table id="students" class="table">
@@ -18,10 +18,18 @@
 			</tr>
 		</thead>
 		<tbody class="list">
-			<% @students.each do |student| %>
+			<% @all_students.each do |student| %>
 				<tr>
 					<td class="name"><%= student.name %></td>
 					<td class="skills"><%= student.skills %></td>
+					<td><% if @contacted_students.include? student %>
+							<button class="btn disabled">Pending</button>
+						<% else %>
+							<%= button_to "Contact",
+								{ controller: "relationships", action: "create", student_id: student.id },
+								class: "btn btn-primary", form_class: "contact-button" %>
+						<% end %>
+					</td>
 				</tr>
 			<% end %>
 		</tbody>
