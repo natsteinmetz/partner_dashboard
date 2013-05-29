@@ -1,6 +1,6 @@
 class Admin::PartnersController < Admin::BaseController
   def index
-    @partners = Partners.all
+    @partners = Partner.all
   end
 
 end
