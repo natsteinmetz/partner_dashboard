@@ -1,0 +1,13 @@
+<h1>Admin::Professionals#index</h1>
+
+<ul>
+<% @partners.each do |partner| %>
+  <li> <%= link_to partner.name, admin_partner_path(partner) %>
+    <ul>
+      <% partner.professionals.each do |professional| %>
+        <li> <%= link_to professional.name, admin_professional_path(professional) %> </li>
+      <% end %>
+    </ul>
+  </li>
+<% end %>
+</ul>

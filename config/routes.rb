@@ -1,5 +1,7 @@
 PartnerDashboard::Application.routes.draw do
 
+  get "professionals/index"
+
   devise_for :users
 
   root :to => "students#index"
@@ -24,5 +26,6 @@ PartnerDashboard::Application.routes.draw do
   namespace :admin do
     root :to => "base#index"
     resources :partners
+    resources :professionals
   end
 end
