@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.13'
 gem 'devise', '~> 2.2.4'
 
-
 gem 'sqlite3'
 gem 'dynamic_form', '~> 1.1.4'
 gem 'bootstrap-sass', '~> 2.3.1.0'
@@ -19,16 +18,16 @@ gem 'jquery-rails'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'
-	gem 'pry-rails'
-	gem 'pry-debugger'
-	gem 'pry-doc'
+  gem 'pry-rails'
+  gem 'pry-debugger'
+  gem 'pry-doc'
 end
 
 group :test do
-	gem 'capybara', '~> 2.1.0'
-	gem 'launchy'
-	gem 'simplecov', :require => false
-	gem 'factory_girl_rails', '~> 4.0'
+  gem 'capybara', '~> 2.1.0'
+  gem 'launchy'
+  gem 'simplecov', :require => false
+  gem 'factory_girl_rails', '~> 4.0'
   gem 'email_spec', '1.2.1'
 end
 
