@@ -9,12 +9,14 @@
 <body>
 
 <% flash.each do |key, value| %>
-  <div class='flash' id='<%= key %>'>
+  <div class="alert <%= key == :alert ? "alert-error" : "alert-info" %>">
     <%= value %>
   </div>
 <% end %>
 
-<%= yield %>
+<div class="container">
+	<%= yield %>
+</div>
 
 </body>
 </html>
