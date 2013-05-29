@@ -12,13 +12,13 @@ feature 'viewing professionals' do
     fill_in "Email", :with => admin.email
     fill_in "Password", :with => admin.password
     click_button "Sign in"
-    page.should have_content("Admin::Professionals#index")
+    page.should have_content("Code Fellows Company Professionals")
   end
 
   scenario "An admin user's professionals view contains all the professionals and their partner" do
     sign_in_as!(admin)
     visit '/admin/professionals'
-    page.should have_content "Admin::Professionals#index"
+    page.should have_content "Code Fellows Company Professionals"
     [professional_one,
      professional_two,
      professional_three].each do |professional|
