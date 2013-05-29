@@ -1,4 +1,38 @@
-<h1>Admin::Professionals#index</h1>
+<div class="row">
+  <h1>Code Fellows Company Professionals</h1>
+</div>
+
+<div class="row">
+  <% if @partners.empty? %>
+  Sorry, there aren't any partners or professionals here yet...
+  <% else %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Partner Name</th>
+        <th>Professional Name</th>
+        <th>Professional Email</th>
+        <th>Professional Phone Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @partners.each do |partner| %>
+        <% partner.professionals.each do |professional| %>
+          <tr>
+            <td><%= partner.name %></td>
+            <td><%= professional.name %></td>
+            <td><%= professional.email %></td>
+            <td><%= professional.phone_number %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
+</div>
+
+
+<!-- <h1>Admin::Professionals#index</h1>
 
 <ul>
 <% @partners.each do |partner| %>
@@ -11,3 +45,5 @@
   </li>
 <% end %>
 </ul>
+
+ -->
