@@ -8,6 +8,9 @@
 </head>
 <body>
 
+<%= render 'layouts/navbar' %>
+
+- See more at: http://www.w3resource.com/twitter-bootstrap/navbar-tutorial.php#sthash.70eQdgUX.dpuf
 <% flash.each do |key, value| %>
   <div class="alert <%= key == :alert ? "alert-error" : "alert-info" %>">
     <%= value %>

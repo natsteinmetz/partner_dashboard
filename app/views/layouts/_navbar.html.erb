@@ -1,0 +1,19 @@
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+    <ul class="nav">
+    <%= link_to "Partner Dashboard", root_path, class: "brand" %>
+    <% if user_signed_in? %>
+      <% if current_user.admin? %>
+        <%= render 'layouts/navbar_admin_links' %>
+      <% else %>
+        <%= render 'layouts/navbar_links' %>
+      <% end %>
+      <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => "btn-btn-navbar" %></li>
+    <% else %>
+      <li><%= link_to "Sign up", new_user_registration_path, :class => "btn-btn-navbar" %></li>
+      <li><%= link_to "Sign in", new_user_session_path, :class => "btn-btn-navbar" %></li>
+    <% end %>
+    </div>
+  </div>
+</div>
