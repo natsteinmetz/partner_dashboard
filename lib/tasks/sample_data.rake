@@ -7,7 +7,7 @@ namespace :db do
                 password: "password",
                 password_confirmation: "password").confirm!
     50.times do |n|
-      email = "#{Faker::Name.name.sub(/\s/, '').downcase}@example.com"
+      email = "#{Faker::Name.name.emailize}@example.com"
       password = "password"
       User.create(email: email,
                   password: password,
@@ -19,7 +19,7 @@ namespace :db do
                        "iOS", "Android", "Go", "Python", "Haskell", "Ember.js", "Node.js"]
     50.times do |n|
       name = Faker::Name.name
-      email = "#{name.sub(/\s/, '').downcase}@gmail.com"
+      email = "#{name.emailize}@gmail.com"
       phone_number = Faker::PhoneNumber.phone_number
       #Find a better way to do this
       skills = possible_skills.sample + ', ' + possible_skills.sample + ', ' + possible_skills.sample
@@ -38,7 +38,7 @@ namespace :db do
       (1..rand(2..5)).to_a.each do |i|
         name = Faker::Name.name
         phone_number = Faker::PhoneNumber.phone_number
-        email = "#{name.sub(/\s/, '').downcase}@#{partner.name.sub(/\s/, '').downcase}.com"
+        email = "#{name.emailize}@#{partner.name.emailize}.com"
         professional = Professional.create(name: name, phone_number: phone_number, email: email)
         partner.professionals << professional
       end
