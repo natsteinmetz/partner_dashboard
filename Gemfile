@@ -7,6 +7,7 @@ gem 'devise', '~> 2.2.4'
 gem 'sqlite3'
 gem 'dynamic_form', '~> 1.1.4'
 gem 'bootstrap-sass', '~> 2.3.1.0'
+gem 'faker', '~>1.0.1'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
