@@ -9,7 +9,7 @@ feature "Inviting potential users" do
   let!(:partner) { FactoryGirl.create(:partner) }
 
   scenario "admin can send a user an invitation and assign him/her to a particular partner" do
-    #in context of admin
+  #in context of admin
     sign_in_as!(admin)
     click_link "Invite A New User"
     select partner.name, :from => "user[partner_id]"
@@ -19,7 +19,7 @@ feature "Inviting potential users" do
     #TODO, this is ugly, Need to sign out as admin or i'll get redirected when I accept the invitation,
     click_link "Sign out"
 
-    #in context of invited user
+  #in context of invited user
     open_email "invitee@example.com", :with_subject => /Invitation instructions/
     visit_in_email "Accept invitation"
     fill_in "Password", :with => invitee_password
