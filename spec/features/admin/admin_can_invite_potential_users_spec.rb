@@ -22,7 +22,6 @@ feature "Inviting potential users" do
     #in context of invited user
     open_email "invitee@example.com", :with_subject => /Invitation instructions/
     visit_in_email "Accept invitation"
-    puts page.body
     fill_in "Password", :with => invitee_password
     fill_in "Password confirmation", :with => invitee_password
     click_button "Set my password"
