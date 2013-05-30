@@ -1,5 +1,5 @@
 require 'spec_helper'
 
 describe User do
-  it "always has an associated partner"
+  it { should validate_presence_of(:partner) }
 end

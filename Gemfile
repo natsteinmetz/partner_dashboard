@@ -19,6 +19,7 @@ gem 'jquery-rails'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'
+  gem 'shoulda-matchers', '~> 2.1.0'
   gem 'pry-rails'
   gem 'pry-debugger'
   gem 'pry-doc'

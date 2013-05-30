@@ -5,9 +5,7 @@ FactoryGirl.define do
     password "password"
     password_confirmation "password"
 
-    after(:create) do |user|
-      user.partner = create(:partner)
-    end
+    partner { create(:partner) }
 
     factory :confirmed_user do
       after(:create) do |user|
