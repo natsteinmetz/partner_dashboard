@@ -11,12 +11,10 @@ FactoryGirl.define do
       after(:create) do |user|
         user.confirm!
       end
-    end
 
-    factory :admin_user do
-      after(:create) do |user|
-        user.confirm!
-        user.update_attribute(:admin, true)
+      factory :admin_user do
+        admin true
+        partner nil
       end
     end
   end

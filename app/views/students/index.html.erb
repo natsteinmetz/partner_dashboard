@@ -22,14 +22,17 @@
 				<tr>
 					<td class="name"><%= student.name %></td>
 					<td class="skills"><%= student.skills %></td>
-					<td><% if @contacted_students.include? student %>
-							<button class="btn disabled">Pending</button>
-						<% else %>
-							<%= button_to "Contact",
-								{ controller: "relationships", action: "create", student_id: student.id },
-								class: "btn btn-primary", form_class: "contact-button" %>
-						<% end %>
-					</td>
+
+					<% unless current_user.admin? %>
+						<td><% if @contacted_students.include? student %>
+								<button class="btn disabled">Pending</button>
+							<% else %>
+								<%= button_to "Contact",
+									{ controller: "relationships", action: "create", student_id: student.id },
+									class: "btn btn-primary", form_class: "contact-button" %>
+							<% end %>
+						</td>
+					<% end %>
 				</tr>
 			<% end %>
 		</tbody>
