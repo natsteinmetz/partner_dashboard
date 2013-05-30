@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
       if resource.is_a?(User) && resource.admin?
         admin_professionals_path
       else
-        super
+        students_path
       end
   end
 

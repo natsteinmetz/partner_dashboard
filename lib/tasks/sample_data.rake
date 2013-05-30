@@ -2,17 +2,8 @@ namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
 
-    #Create some users, should probably put this under partners and professionals
-    User.create(email: "example@example.com",
-                password: "password",
-                password_confirmation: "password").confirm!
-    50.times do |n|
-      email = "#{Faker::Name.name.emailize}@example.com"
-      password = "password"
-      User.create(email: email,
-                  password: password,
-                  password_confirmation: password).confirm!
-    end
+
+
 
     #Create some students
     possible_skills = ["C++", "Java", "Ruby", "Rails", "HTML5", "CSS3", "Javascript", "jQuery", "C", "OOP", "Backend Development", "Frontend Development", "Sysadmin",
@@ -43,5 +34,15 @@ namespace :db do
         partner.professionals << professional
       end
     end
+
+    #Create some users, should probably put this under partners and professionals
+    example_user = User.create(email: "example@example.com",
+                password: "password",
+                password_confirmation: "password")
+
+    example_user.confirm!
+
+    example_user.partner = Partner.first
+    example_user.save
   end
 end

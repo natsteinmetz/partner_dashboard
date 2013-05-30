@@ -1,7 +1,7 @@
 PartnerDashboard::Application.routes.draw do
 
+  root :to => redirect("/users/sign_in")
 
-  root :to => "students#index"
 
   resources :relationships
 
