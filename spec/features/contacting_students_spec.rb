@@ -20,4 +20,6 @@ feature "Contacting students" do
       page.should have_content("Pending")
     end
   end
+
+  scenario "users see when their contact request is accepted"
 end
