@@ -7,12 +7,6 @@ def should_have_students(*students)
   end
 end
 
-def sign_in_and_visit_students_as(user)
-  sign_in_as!(user)
-  visit "/"
-  click_link "Students"
-end
-
 feature "Viewing students" do
   let!(:student_albert) { FactoryGirl.create(:student,
                                              name: "Albert Einstein",
