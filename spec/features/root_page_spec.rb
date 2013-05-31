@@ -12,5 +12,13 @@ feature "Root page" do
     page.should have_link("Request Invitation")
   end
 
+  scenario "logged in user shouldn't see already signed in error on root" do
+    user = FactoryGirl.create(:confirmed_user)
+    sign_in_as!(user)
+
+    visit "/"
+    page.should_not have_content I18n.t("devise.failure.already_authenticated")
+  end
+
   scenario "Root page has links to other codefellows sites and the about page"
 end
