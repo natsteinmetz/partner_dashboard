@@ -6,21 +6,33 @@
   <% if @partners.empty? %>
   Sorry, there aren't any partners here yet...
   <% else %>
-  <table class="table">
+  <table id = "partners" class="table">
     <thead>
       <tr>
-        <th>Partner Name</th>
+        <th class="sort" data-sort="name">Partner Name</th>
         <th>Partner Type</th>
+        <th class="input-prepend">
+          <span class="add-on"><i class="icon-filter"></i></span>
+          <input id="partner-filter" type="text" class="search input-medium" placeholder="Filter Partners" />
+        </th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="list">
       <% @partners.each do |partner| %>
         <tr>
-          <td><%= partner.name %></td>
-          <td><%= partner.kind %></td>
+          <td class="name"><%= partner.name %></td>
+          <td class="kind"><%= partner.kind %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
   <% end %>
 </div>
+
+<script>
+  var options ={
+    valueNames: ['name', 'kind']
+  };
+
+  var partnersList = new List('partners', options);
+</script>
