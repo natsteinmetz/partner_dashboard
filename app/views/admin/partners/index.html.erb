@@ -1,1 +1,26 @@
-<h1>Admin::Partners#index</h1>
+<div class="row">
+  <h1>Code Fellows Partners</h1>
+</div>
+
+<div class="row">
+  <% if @partners.empty? %>
+  Sorry, there aren't any partners here yet...
+  <% else %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Partner Name</th>
+        <th>Partner Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @partners.each do |partner| %>
+        <tr>
+          <td><%= partner.name %></td>
+          <td><%= partner.kind %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
+</div>
