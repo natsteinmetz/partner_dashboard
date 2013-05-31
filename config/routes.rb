@@ -3,11 +3,7 @@ PartnerDashboard::Application.routes.draw do
   root :to => redirect("/users/sign_in")
 
   resources :relationships
-  resources :mentorships
-  resources :employments
   resources :students
-  resources :professionals
-  resources :partners
 
   namespace :admin do
     root :to => "base#index"
