@@ -35,7 +35,6 @@ feature 'viewing professionals' do
     visit '/'
     click_link "Professionals"
     fill_in "professional-filter", with: professional_one.partners.first.name
-    puts page.body
     page.should have_content professional_one.name
     page.should_not have_content professional_two.name
   end
