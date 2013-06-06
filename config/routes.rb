@@ -2,6 +2,8 @@ PartnerDashboard::Application.routes.draw do
 
   root :to => "home#index"
 
+  match "/request_invite", to: "home#request_invite", via: :get, as: :request_invite
+
   resources :relationships
   resources :students
 
