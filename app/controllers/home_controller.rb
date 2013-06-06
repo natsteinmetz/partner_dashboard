@@ -1,3 +1,5 @@
+#Controller used for public actions
+
 class HomeController < ApplicationController
   def index
     flash.keep
@@ -8,5 +10,9 @@ class HomeController < ApplicationController
     else
       redirect_to students_path
     end
+  end
+
+  def request_invite
+
   end
 end
