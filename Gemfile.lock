@@ -31,6 +31,11 @@ GEM
     addressable (2.3.4)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    better_errors (0.7.2)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+    binding_of_caller (0.7.1)
+      debug_inspector (>= 0.0.1)
     bootstrap-sass (2.3.1.0)
       sass (~> 3.2)
     builder (3.0.4)
@@ -53,6 +58,7 @@ GEM
     coffee-script-source (1.6.2)
     columnize (0.3.6)
     database_cleaner (1.0.1)
+    debug_inspector (0.0.2)
     debugger (1.6.0)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
@@ -190,6 +196,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  better_errors
+  binding_of_caller
   bootstrap-sass (~> 2.3.1.0)
   capybara (~> 2.1.0)
   capybara-webkit (~> 1.0.0)
