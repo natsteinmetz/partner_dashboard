@@ -11,13 +11,4 @@ class HomeController < ApplicationController
       redirect_to students_path
     end
   end
-
-  def request_invite
-  end
-
-  def send_invite
-    flash[:notice] = "An invitation request has been sent to the admin."
-    AdminMailer.invite_request(params[:form_fields]).deliver
-    redirect_to new_user_session_path
-  end
 end

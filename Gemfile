@@ -23,6 +23,11 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-debugger'
   gem 'pry-doc'
+	gem 'binding_of_caller'
+end
+
+group :development do
+  gem 'better_errors'
 end
 
 group :test do

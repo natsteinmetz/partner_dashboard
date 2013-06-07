@@ -2,8 +2,9 @@ PartnerDashboard::Application.routes.draw do
 
   root :to => "home#index"
 
-  match "/request_invite", to: "home#request_invite", via: :get, as: :request_invite
-  match "/send_invite", to: "home#send_invite", via: :post, as: :send_invite
+  match "/invite_requests/new", to: "invite_requests#new", via: :get, as: :new_invite_request
+  #TODO: I don't want this send invite path to be public
+  match "/invite_requests", to: "invite_requests#create", via: :post, as: :invite_requests
 
   resources :relationships
   resources :students
