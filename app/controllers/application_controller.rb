@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
       end
   end
 
-private
+  private
   def authorize_admin!
     authenticate_user!
     unless current_user.admin?

@@ -1,19 +1,11 @@
 require 'spec_helper'
 
 feature "Visitor" do
-  before do
-    visit '/'
-    click_link "Request Invite"
-  end
+  let!(:potential_user){ create_potential_user }
 
   scenario "can request invite with valid information" do
-
-    #Fill in email and message to admin
-    fill_in "Company", with: "Acme"
-    fill_in "Role (optional)", with: "Hiring Manager"
-    fill_in "Message to Admin", with: "Please add me to partner dashboard."
-    click_button "Submit"
-    page.should have_content "Invitation request sent to admin."
+    request_invite(potential_user)
+    page.should have_content "An invitation request has been sent to the admin."
   end
 
   scenario "cannot request invite with invalid information"

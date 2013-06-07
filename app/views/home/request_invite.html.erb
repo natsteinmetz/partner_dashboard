@@ -1,0 +1,22 @@
+<%#= NEED TO Namespace potential user params %>
+<%= form_tag send_invite_path, :method => "post", :multipart => true do  %>
+  <%= label_tag "form_fields[:email]", "Email" %>
+  <%= text_field_tag "form_fields[:email]" %>
+
+  <%= label_tag "form_fields[:first_name]", "First Name" %>
+  <%= text_field_tag "form_fields[:first_name]" %>
+
+  <%= label_tag "form_fields[:last_name]", "Last Name" %>
+  <%= text_field_tag "form_fields[:last_name]" %>
+
+  <%= label_tag "form_fields[:company]", "Company" %>
+  <%= text_field_tag "form_fields[:company]" %>
+
+  <%= label_tag "form_fields[:role]", "Role(optional)" %>
+  <%= text_field_tag "form_fields[:role]" %>
+
+  <%= label_tag "form_fields[:message]", "Message to Admin" %>
+  <%= text_area_tag "form_fields[:message]" %>
+
+  <%= submit_tag "Submit" %>
+<% end %>
