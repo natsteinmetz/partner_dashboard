@@ -25,7 +25,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-debugger'
   gem 'pry-doc'
-	gem 'binding_of_caller'
+  gem 'binding_of_caller'
   gem 'dotenv-rails'
 end
 
