@@ -24,7 +24,7 @@
 					<td class="skills"><%= student.skills %></td>
 
 					<% unless current_user.admin? %>
-						<td><% if @contacted_students.include? student %>
+						<td><% if current_user.has_contacted? student %>
 								<button class="btn disabled">Pending</button>
 							<% else %>
 								<%= button_to "Contact",

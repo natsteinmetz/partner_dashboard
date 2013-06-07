@@ -3,6 +3,5 @@ class StudentsController < ApplicationController
 
   def index
     @all_students = Student.order("name")
-    @contacted_students = current_user.partner.students unless current_user.admin?
   end
 end
