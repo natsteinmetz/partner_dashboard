@@ -39,4 +39,8 @@ PartnerDashboard::Application.configure do
   config.action_mailer.default_url_options = {
     :host => 'localhost:3000'
   }
+
+  #TODO, move these constants to a seperate file, have this file load them
+  ADMIN_EMAIL = "admin@codefellows.com"
+
 end
