@@ -14,6 +14,7 @@ FactoryGirl.define do
 
       factory :admin_user do
         admin true
+        email ADMIN_EMAIL
         partner nil
       end
     end
