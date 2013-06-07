@@ -1,0 +1,21 @@
+<%= form_for @invite_request do |f| %>
+  <%= f.label :email, "Email" %>
+  <%= f.text_field :email %>
+
+  <%= f.label :first_name, "First Name" %>
+  <%= f.text_field :first_name %>
+
+  <%= f.label :last_name, "Last Name" %>
+  <%= f.text_field :last_name %>
+
+  <%= f.label :company, "Company" %>
+  <%= f.text_field :company %>
+
+  <%= f.label :role, "Role(optional)" %>
+  <%= f.text_field :role %>
+
+  <%= f.label :message, "Message to Admin" %>
+  <%= f.text_area :message, size: "60x12" %>
+
+  <%= f.submit "Submit" %>
+<% end %>

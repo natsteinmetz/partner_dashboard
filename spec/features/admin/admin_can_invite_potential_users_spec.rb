@@ -10,19 +10,22 @@ feature "Inviting potential users" do
 
   #TODO, create_potential_user returns a hash, but i'd like an object with attributes, couldn't
   #figure out a way to include class files in specs
-  let!(:potential_user) { create_potential_user }
+
+  let!(:invite_request) { create_invite_request }
 
   context "Visitor Requests Invite" do
     before do
-      request_invite(potential_user)
+      request_invite(invite_request)
       sign_in_as!(admin)
     end
 
-    scenario "Admin receives an email when an invite is requested" do
+    scenario "Admin receives an email to invite a potential user when an invite is requested" do
       email = open_email admin.email, :with_subject => /would like to be added/
-      potential_user.each do |key, value|
+      invite_request.each do |key, value|
         email.should have_content(value)
       end
+      visit_in_email "Go to Dashboard"
+      page.should have_content "Send invitation"
     end
 
   end
