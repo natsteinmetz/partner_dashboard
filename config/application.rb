@@ -62,7 +62,7 @@ module PartnerDashboard
     #setting up directories folder for factory girl
     #It might make more sense to put this in the test environment setup
     config.generators do |g|
-        g.factory_girl dir: 'spec/support'
+        g.factory_girl :dir => 'spec/support'
     end
   end
 end

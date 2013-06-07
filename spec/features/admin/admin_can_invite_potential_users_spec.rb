@@ -8,10 +8,33 @@ feature "Inviting potential users" do
   let!(:admin) { FactoryGirl.create(:admin_user) }
   let!(:partner) { FactoryGirl.create(:partner) }
 
+  #TODO, create_potential_user returns a hash, but i'd like an object with attributes, couldn't
+  #figure out a way to include class files in specs
+  let!(:potential_user) { create_potential_user }
+
+  context "Visitor Requests Invite" do
+    before do
+      request_invite(potential_user)
+      sign_in_as!(admin)
+    end
+
+    scenario "Admin receives an email when an invite is requested" do
+      email = open_email admin.email, :with_subject => /would like to be added/
+      potential_user.each do |key, value|
+        email.should have_content(value)
+      end
+    end
+
+  end
+
+
+
   scenario "admin can send a user an invitation and assign him/her to a particular partner" do
-  #in context of admin
+    #in context of admin
     sign_in_as!(admin)
     click_link "Invite A New User"
+
+    #TODO, apparently this select tag is named incorrectly, it should be something like partner[partner_id]
     select partner.name, :from => "user[partner_id]"
     fill_in "Email", :with => invitee_email
     click_button "Send an invitation"
@@ -19,7 +42,7 @@ feature "Inviting potential users" do
     #TODO, this is ugly, Need to sign out as admin or i'll get redirected when I accept the invitation,
     click_link "Sign out"
 
-  #in context of invited user
+    #in context of invited user
     open_email "invitee@example.com", :with_subject => /Invitation instructions/
     visit_in_email "Accept invitation"
     fill_in "Password", :with => invitee_password

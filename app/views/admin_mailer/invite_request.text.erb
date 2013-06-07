@@ -1,0 +1,12 @@
+<%#= TODO, create html mailer view %>
+
+The following user would like to be added to the Partner Dashboard:
+Name: <%= @potential_user[":first_name"] %> <%= @potential_user[":last_name"] %>
+Email: <%= @potential_user[":email"] %>
+Company: <%= @potential_user[":company"] %>
+Role: <%= @potential_user[":role"] %>
+Message: <%= @potential_user[":message"] %>
+
+Please follow the link below to make sure their information is correct
+before sending an invitation:
+<%= link_to "Go to Dashboard", new_user_invitation_path(@potential_user) %>
