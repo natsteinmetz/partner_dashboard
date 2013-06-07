@@ -38,4 +38,18 @@ PartnerDashboard::Application.configure do
   config.action_mailer.default_url_options = {
     :host => 'localhost:3000'
   }
+
+  #TODO, move these constants to a seperate file, have this file load them
+  ADMIN_EMAIL = "james.n.sean@gmail.com"
+  ADMIN_PASSWORD = "codefellows"
+  config.action_mailer.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    :address        => "smtp.sendgrid.net",
+    :port           => "25",
+    :authentication => :plain,
+    :user_name      => ADMIN_EMAIL,
+    :password       => ADMIN_PASSWORD,
+    :domain         => "baci.lindsaar.net"
+    }
+
 end
