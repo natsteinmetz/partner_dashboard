@@ -30,3 +30,6 @@ doc/
 .project
 .DS_Store
 .idea
+
+# Environment Variables
+.env
