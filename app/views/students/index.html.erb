@@ -19,21 +19,7 @@
 		</thead>
 		<tbody class="list">
 			<% @all_students.each do |student| %>
-				<tr>
-					<td class="name"><%= student.name %></td>
-					<td class="skills"><%= student.skills %></td>
-
-					<% unless current_user.admin? %>
-						<td><% if current_user.has_contacted? student %>
-								<button class="btn disabled">Pending</button>
-							<% else %>
-								<%= button_to "Contact",
-									{ controller: "relationships", action: "create", student_id: student.id },
-									class: "btn btn-primary", form_class: "contact-button" %>
-							<% end %>
-						</td>
-					<% end %>
-				</tr>
+				<%= render student %>
 			<% end %>
 		</tbody>
 	</table>
