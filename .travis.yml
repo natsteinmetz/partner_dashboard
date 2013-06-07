@@ -1,0 +1,6 @@
+language: ruby
+gemfile: Gemfile.ci
+script: xvfb-run rspec
+rvm:
+  - 2.0.0
+  - 1.9.3
