@@ -3,7 +3,7 @@
 </div>
 
 <div class="row">
-	<% if @all_students.empty? %>
+	<% if @students.empty? %>
 	Sorry, there aren't any students here yet...
 	<% else %>
 	<table id="students" class="table">
@@ -18,9 +18,7 @@
 			</tr>
 		</thead>
 		<tbody class="list">
-			<% @all_students.each do |student| %>
-				<%= render student %>
-			<% end %>
+			<%= render @students %>
 		</tbody>
 	</table>
 	<% end %>
