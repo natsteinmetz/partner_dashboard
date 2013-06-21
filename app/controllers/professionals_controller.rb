@@ -1,2 +1,0 @@
-class ProfessionalsController < ApplicationController
-end
