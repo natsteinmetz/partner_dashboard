@@ -44,11 +44,12 @@ PartnerDashboard::Application.configure do
   ADMIN_PASSWORD = "codefellows"
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-    :address        => "smtp.sendgrid.net",
-    :port           => "25",
+    :address        => "smtp.gmail.com",
+    :port           => "587",
     :authentication => :plain,
     :user_name      => ADMIN_EMAIL,
     :password       => ADMIN_PASSWORD,
+    :enable_starttls_auto => true,
     :domain         => "baci.lindsaar.net"
     }
 
