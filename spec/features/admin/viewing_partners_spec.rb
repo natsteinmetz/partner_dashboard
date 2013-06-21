@@ -5,11 +5,20 @@ feature "Viewing Partners" do
   let!(:partner_two) { FactoryGirl.create(:partner, kind: "Startup") }
 
   context "without logging in" do
-    scenario "Partners link is hidden"
+    scenario "Partners link is hidden" do
+      visit "/"
+      assert_no_link_for("Partners")
+    end
   end
 
   context "as a normal user" do
-    scenario "Partners link is hidden"
+    let(:user) { FactoryGirl.create(:confirmed_user) }
+    scenario "Partners link is hidden" do
+      sign_in_as!(user)
+
+      visit "/"
+      assert_no_link_for("Partners")
+    end
   end
 
   context "as an admin user" do
