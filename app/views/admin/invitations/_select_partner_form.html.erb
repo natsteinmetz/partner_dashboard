@@ -1,0 +1,4 @@
+<%= fields_for resource do |f| %>
+  <%= f.label "Assign to Partner"%>
+  <%= f.collection_select :partner_id, Partner.order("name ASC"), :id, :name, :prompt => "Select A Partner" -%>
+<% end %>

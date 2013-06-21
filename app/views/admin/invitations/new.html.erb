@@ -4,7 +4,7 @@
   <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
     <%= devise_error_messages! %>
     <%= f.label "Partner"%>
-    <%= f.collection_select :partner_id, @partners, :id, :name, :prompt => "Select A Partner" %>
+    <%= f.collection_select :partner_id, Partner.order("name ASC"), :id, :name, :prompt => "Select A Partner" %>
     <% resource.class.invite_key_fields.each do |field| -%>
       <%= f.label field %>
       <%= f.text_field field %></p>

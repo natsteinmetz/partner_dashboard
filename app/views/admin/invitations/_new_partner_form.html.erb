@@ -1,0 +1,30 @@
+<h2>Create Partner</h2>
+<%= form_for @partner, url: admin_users_invitation_create_partner_path, remote: true do |f| %>
+
+  <% if @partner.errors.any? %>
+    <div id="error_explanation" class="alert">
+      <h3><%= pluralize(@partner.errors.count, "error") %>
+        prohibited this partner from being saved:</h3>
+      <ul>
+      <% @partner.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :kind %>
+    <%= f.text_field :kind %>
+  </p>
+
+  <p>
+    <%= f.submit "Create Partner", class: "btn btn-primary" %>
+  </p>
+<% end %>
+
+<button id="go_back_button" class="btn btn-primary">Go Back</button>

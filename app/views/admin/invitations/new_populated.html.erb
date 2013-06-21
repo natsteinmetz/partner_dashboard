@@ -1,0 +1,39 @@
+<div class="row">
+  <h2>Invitee Info</h2>
+  <ul>
+    <% @invite_request.instance_values.each do |key, value| %>
+      <li><%= key.to_s.delete(":").capitalize  %>: <%= value %></li>
+    <% end %>
+  </ul>
+
+  <div id="form_container">
+    <div id="invitation_form">
+      <h2><%= t "devise.invitations.new.header" %></h2>
+      <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
+        <%= devise_error_messages! %>
+
+        <% resource.class.invite_key_fields.each do |field| -%>
+          <%= f.label field %>
+          <%= f.text_field field, value: resource.email  %>
+        <% end %>
+
+        <%= render "select_partner_form" %>
+
+        <span id="create_partner_link">
+          <%= link_to "Partner not listed?", {
+            controller: "invitations",
+            action: "new_partner",
+            partner_name: @invite_request.company,
+            remote: true
+          }%>
+        </span>
+
+        <div class="controls">
+          <%= f.submit t("devise.invitations.new.submit_button"), class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+    <div id="new_partner_form"></div>
+  </div>
+
+</div>
