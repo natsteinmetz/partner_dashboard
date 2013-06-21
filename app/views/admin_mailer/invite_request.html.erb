@@ -1,0 +1,12 @@
+<h2>The following user would like to be added to the Partner Dashboard:</h2>
+<ul>
+  <li>Name: <%= @invite_request.first_name %> <%= @invite_request.last_name %></li>
+  <li>Email: <%= @invite_request.email %></li>
+  <li>Company: <%= @invite_request.company %></li>
+  <li>Role: <%= @invite_request.role %></li>
+  <li>Message: <%= @invite_request.message %></li>
+</ul>
+
+<p>Please follow the link below to make sure their information is correct
+before sending an invitation:</p>
+<%= link_to "Go to Dashboard", new_user_invitation_url(:invite_request => @invite_request.to_h ) %>

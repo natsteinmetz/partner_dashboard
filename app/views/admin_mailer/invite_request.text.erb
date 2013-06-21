@@ -9,4 +9,5 @@ Message: <%= @invite_request.message %>
 
 Please follow the link below to make sure their information is correct
 before sending an invitation:
-<%= link_to "Go to Dashboard", new_user_invitation_path(:invite_request => @invite_request.to_h ) %>
+<%# TODO: Make the link below an entire url in text, no anchors %>
+<%#= link_to "Go to Dashboard", new_user_invitation_url(:invite_request => @invite_request.to_h ) %>
