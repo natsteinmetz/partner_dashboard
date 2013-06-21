@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "Inviting potential users" do
+feature "Inviting potential users:" do
   invitee_name = "invitee"
   invitee_email = "invitee@example.com"
   invitee_password = "password"
@@ -11,23 +11,35 @@ feature "Inviting potential users" do
   #TODO, create_potential_user returns a hash, but i'd like an object with attributes, couldn't
   #figure out a way to include class files in specs
 
-  let!(:invite_request) { create_invite_request }
+  let!(:invite_request) { create_invite_request company: partner.name }
 
-  context "Visitor Requests Invite" do
+  context "Visitor Requests Invite:" do
     before do
       request_invite(invite_request)
       sign_in_as!(admin)
     end
 
     scenario "Admin receives an email to invite a potential user when an invite is requested" do
-      email = open_email admin.email, :with_subject => /would like to be added/
+      email = open_email admin.email, with_subject: /would like to be added/
       invite_request.each do |key, value|
-        email.should have_content(value)
+        email.should have_content value
       end
-      visit_in_email "Go to Dashboard"
-      page.should have_content "Send invitation"
+      email.should have_content "Go to Dashboard"
     end
 
+    scenario "Admin follows invite request link to a populated invite form" do
+      follow_invite_request_link(admin)
+      invite_request.each do |key,value|
+        page.should have_content value
+      end
+      binding.pry
+      find_field("Email").value.should eq invite_request[:email]
+      find_field("user_partner_id").find('option[selected]').text.should eq invite_request[:company]
+      page.should have_button "Send an invitation"
+    end
+
+    scenario "Admin can create a new partner on the form and assign the invitee to it." do
+    end
   end
 
 
