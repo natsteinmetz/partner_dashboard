@@ -8,4 +8,7 @@ class Partner < ActiveRecord::Base
   has_many :users
 
   attr_accessible :kind, :name
+
+  validates :name, :kind, presence: true
+  validates :name, uniqueness: true
 end
