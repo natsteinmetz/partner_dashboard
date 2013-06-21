@@ -30,6 +30,10 @@ doc/
 .project
 .DS_Store
 .idea
+<<<<<<< HEAD
 
 # Environment Variables
 .env
+
+# RVM loader
+.rvmrc
