@@ -15,7 +15,7 @@ PartnerDashboard::Application.routes.draw do
     resources :partners
     resources :professionals
     resources :students
-  end
+   end
 
   devise_for :users, :skip => :invitations
 
@@ -26,5 +26,7 @@ PartnerDashboard::Application.routes.draw do
     get "/users/invitation/remove(.:format)" => "admin/invitations#destroy", :as => "remove_user_invitation"
     post "admin/users/invitation(.:format)" => "admin/invitations#create", :as => "user_invitation"
     get "admin/users/invitation/new(.:format)" => "admin/invitations#new", :as => "new_user_invitation"
+    get "admin/users/invitation/new_partner" => "admin/invitations#new_partner"
+    post "admin/users/invitation/create_partner" => "admin/invitations#create_partner"
   end
 end
