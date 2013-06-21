@@ -32,7 +32,6 @@ feature "Inviting potential users:" do
       invite_request.each do |key,value|
         page.should have_content value
       end
-      binding.pry
       find_field("Email").value.should eq invite_request[:email]
       find_field("user_partner_id").find('option[selected]').text.should eq invite_request[:company]
       page.should have_button "Send an invitation"
