@@ -23,10 +23,9 @@ feature "Viewing Partners" do
 
   context "as an admin user" do
     let!(:admin) { FactoryGirl.create(:admin_user) }
+    before { sign_in_as!(admin) }
 
     scenario "they can see the partners" do
-      sign_in_as!(admin)
-
       visit "/"
       click_link "Partners"
       page.should have_content partner_one.name
@@ -36,8 +35,16 @@ feature "Viewing Partners" do
       page.should have_content partner_two.kind
     end
 
+    scenario "there is a message when there are no partners" do
+      Partner.destroy_all
+      visit "/"
+      click_link "Partners"
+
+      page.should_not have_content("Partner Name")
+      page.should have_content("Sorry, there aren't any partners here yet...")
+    end
+
     scenario "only showing partners of a particular type", :js => true do
-      sign_in_as!(admin)
       visit "/"
       click_link "Partners"
       fill_in "partner-filter", with: partner_one.kind

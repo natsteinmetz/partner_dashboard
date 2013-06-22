@@ -3,8 +3,8 @@
 </div>
 
 <div class="row">
-  <% if @partners.empty? %>
-  Sorry, there aren't any partners or professionals here yet...
+  <% if @professionals.empty? %>
+  Sorry, there aren't any professionals here yet...
   <% else %>
   <table id="professionals" class="table">
     <thead>
@@ -20,8 +20,8 @@
       </tr>
     </thead>
     <tbody class="list">
-      <% @partners.each do |partner| %>
-        <% partner.professionals.each do |professional| %>
+      <% @professionals.each do |professional| %>
+        <% professional.partners.each do |partner| %>
           <tr>
             <td class="partner_name"><%= partner.name %></td>
             <td class="professional_name"><%= professional.name %></td>
