@@ -28,5 +28,7 @@ PartnerDashboard::Application.routes.draw do
     get "admin/users/invitation/new(.:format)" => "admin/invitations#new", :as => "new_user_invitation"
     get "admin/users/invitation/new_partner" => "admin/invitations#new_partner"
     post "admin/users/invitation/create_partner" => "admin/invitations#create_partner"
+    get "admin/users/invitation/new_professional" => "admin/invitations#new_professional"
+    post "admin/users/invitation/create_professional" => "admin/invitations#create_professional"
   end
 end
