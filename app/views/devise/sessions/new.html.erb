@@ -1,33 +1,14 @@
-<div class="hero-unit" >
-  <h1>Connect With Code Fellows Students!</h1>
-  <p></p>
-  <p>Tired of finding the right match for your company?  The Partner Dashboard allows you to easily connect with graduates and current students of Code Fellows that meet
-    the requirements for your job opening.</p>
-
-
-  <h2>Sign in</h2>
-
-  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-    <%= f.label :email %>
-    <%= f.email_field :email, :autofocus => true %>
-
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-
-    <% if devise_mapping.rememberable? -%>
-      <div class="control-group">
-        <label for="user_remember_me" class="checkbox">
-          <%= f.check_box :remember_me %> Remember me
-        </label>
-      </div>
-    <% end -%>
-
-    <div class="controls">
-      <%= f.submit "Sign in", class: "btn btn-primary" %>
+  <div class="row-fluid">
+    <div class="hero-unit span8">
+      <h1>Connect With Code Fellows!</h1>
+      <p></p>
+      <p>Tired of finding the right match for your company?  The Partner Dashboard allows you to easily connect with graduates and current students of Code Fellows that meet
+        the requirements for your job opening.</p>
+      <%= link_to "Request Invitation", new_invite_request_path, class: "btn btn-primary" %>
     </div>
-  <% end %>
+    <div class="span4"><%= render "sign_in" %></div>
+  </div>
 
-<p><%= link_to "Request Invitation", new_invite_request_path %></p>
-<%= render "devise/shared/links" %>
-
-</div>
+  <div class="row">
+    <%= render "devise/shared/links" %>
+  </div>
