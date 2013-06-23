@@ -4,6 +4,7 @@ class InviteRequest
   extend ActiveModel::Naming
 
   attr_accessor :first_name, :last_name, :email, :company, :role, :message
+  validates :first_name, :last_name, :email, :role, presence: true
 
   validates_length_of :message, maximum: 500
   #TODO add other validations
