@@ -30,8 +30,10 @@ namespace :db do
         name = Faker::Name.name
         phone_number = Faker::PhoneNumber.phone_number
         email = "#{name.emailize}@#{partner.name.emailize}.com"
-        professional = Professional.create(name: name, phone_number: phone_number, email: email)
-        partner.professionals << professional
+        professional = Professional.new(name: name, phone_number: phone_number, email: email)
+        professional.employments.build(role: "Hiring Manager",
+                                       partner_id: partner.id)
+        professional.save
       end
     end
 
