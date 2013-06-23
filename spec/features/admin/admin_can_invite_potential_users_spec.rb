@@ -43,7 +43,7 @@ feature "Inviting potential users:" do
 
 
 
-  scenario "admin can send a user an invitation and assign him/her to a particular partner" do
+  scenario "Admin can send an invitation to an email address" do
     #in context of admin
     sign_in_as!(admin)
     click_link "Invite A New User"
