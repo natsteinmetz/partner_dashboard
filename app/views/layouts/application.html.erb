@@ -10,13 +10,13 @@
 
 <%= render 'layouts/navbar' %>
 
-<% flash.each do |key, value| %>
-  <div class="alert <%= key == :alert ? "alert-error" : "alert-info" %>">
-    <%= value %>
-  </div>
-<% end %>
-
 <div class="container">
+    <% flash.each do |key, value| %>
+      <div class="alert <%= key == :alert ? "alert-error" : "alert-info" %>">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= value %>
+      </div>
+    <% end %>
 	<%= yield %>
 </div>
 
