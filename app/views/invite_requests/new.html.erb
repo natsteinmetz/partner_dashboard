@@ -1,4 +1,10 @@
+<h2>Request Invitation</h2>
 <%= form_for @invite_request do |f| %>
+
+  <% if @invite_request.errors %>
+    <%= f.error_messages %>
+  <% end %>
+
   <%= f.label :email, "Email" %>
   <%= f.text_field :email %>
 
@@ -11,7 +17,7 @@
   <%= f.label :company, "Company" %>
   <%= f.text_field :company %>
 
-  <%= f.label :role, "Role(optional)" %>
+  <%= f.label :role, "Role" %>
   <%= f.text_field :role %>
 
   <%= f.label :message, "Message to Admin" %>
