@@ -10,6 +10,11 @@ class ApplicationController < ActionController::Base
       end
   end
 
+  def get_referer_params(key)
+    referer_params = Rack::Utils.parse_query URI(request.referer).query
+    referer_params[key]
+  end
+
   private
   def authorize_admin!
     authenticate_user!
