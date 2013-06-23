@@ -15,4 +15,5 @@
 
 //= require list
 
+//= require bootstrap
 //= require_tree .
