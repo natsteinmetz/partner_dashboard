@@ -7,7 +7,7 @@ feature "Viewing Partners" do
   context "without logging in" do
     scenario "Partners link is hidden" do
       visit "/"
-      assert_no_link_for("Partners")
+      page.should_not have_link("Partners")
     end
   end
 
@@ -17,7 +17,7 @@ feature "Viewing Partners" do
       sign_in_as!(user)
 
       visit "/"
-      assert_no_link_for("Partners")
+      page.should_not have_link("Partners")
     end
   end
 
