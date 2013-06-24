@@ -2,43 +2,33 @@ class Admin::InvitationsController < Devise::InvitationsController
   def new
     if params[:invite_request]
       @invite_request = InviteRequest.new params[:invite_request]
-
       user_params = ActiveSupport::HashWithIndifferentAccess.new(
         email: @invite_request.email,
         partner_id: nil
         )
-
       if Partner.exists?(name: @invite_request.company)
         user_params.merge! partner_id: Partner.find_by_name(@invite_request.company).id
       end
-
-      #TODO: create a filter method to strip out unwanted params
-      # so I can avoid user_params nastiness above
       build_resource user_params
-      render "new_populated"
     else
       build_resource
-      render "new"
     end
   end
 
   def new_partner
-    @partner = Partner.new(name: params[:partner_name])
-    respond_to do |format|
-      format.js
+    if params[:partner_name]
+      @partner = Partner.new(name: params[:partner_name])
+    else
+      @partner = Partner.new()
     end
   end
 
   def create_partner
     @partner = Partner.new(params[:partner])
-    respond_to do |format|
-      format.js {
-        if @partner.save
-          render "create_partner"
-        else
-          render "new_partner"
-        end
-      }
+    if @partner.save
+      render "create_partner"
+    else
+      render "new_partner"
     end
   end
 
@@ -52,8 +42,8 @@ class Admin::InvitationsController < Devise::InvitationsController
       @professional.employments.build(role: get_referer_params("invite_request[role]"),
                                       partner_id: params[:partner_id])
     else
-      @employment = @partner.employments.build
-      @professional = @partner.professionals.build
+      @professional = Professional.new(email: params[:email])
+      @professional.employments.build(partner_id: params[:partner_id])
     end
   end
 
