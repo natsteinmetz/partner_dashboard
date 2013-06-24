@@ -4,5 +4,6 @@ FactoryGirl.define do
     email "student@example.com"
     phone_number "(555) 555-5555"
     skills "javascript, c++, ruby"
+    for_hire false
   end
 end

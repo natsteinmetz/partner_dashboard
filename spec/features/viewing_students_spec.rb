@@ -10,7 +10,8 @@ end
 feature "Viewing students" do
   let!(:student_albert) { FactoryGirl.create(:student,
                                              name: "Albert Einstein",
-                                             skills: "relativity") }
+                                             skills: "relativity",
+                                             for_hire: true) }
   let!(:student_werner) { FactoryGirl.create(:student,
                                              name: "Werner Heisenberg",
                                              skills: "quantum mechanics") }
@@ -29,6 +30,27 @@ feature "Viewing students" do
       fill_in "student-filter", with: student_werner.skills
       page.should have_content student_werner.name
       page.should_not have_content student_albert.name
+    end
+
+    scenario "showing which students are for hire" do
+      albert_xpath = [
+        "//tr/td[@class='name' ",               # find the cell with class="name"
+        "and text()='#{student_albert.name}']", # and text="Albert Einstein"
+        "/..",                                  # look in the parent
+        "/td[@class='for-hire']",               # for a cell with class="for-hire"
+        "/i[contains(@class, 'icon-ok')]"       # and an icon with class="icon-ok"
+      ].join
+      page.should have_xpath(albert_xpath)
+
+      # FIXME: DRY
+      werner_xpath = [
+        "//tr/td[@class='name' ",               # find the cell with class="name"
+        "and text()='#{student_werner.name}']", # and text="Albert Einstein"
+        "/..",                                  # look in the parent
+        "/td[@class='for-hire']",               # for a cell with class="for-hire"
+        "/i[contains(@class, 'icon-ok')]"       # and an icon with class="icon-ok"
+      ].join
+      page.should_not have_xpath(werner_xpath)
     end
   end
 

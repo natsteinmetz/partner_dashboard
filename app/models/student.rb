@@ -8,6 +8,6 @@ class Student < ActiveRecord::Base
   has_many :courses, through: :enrollments
   has_many :enrollments
 
-  attr_accessible :email, :name, :phone_number, :skills
+  attr_accessible :email, :name, :phone_number, :skills, :for_hire
 end
 
