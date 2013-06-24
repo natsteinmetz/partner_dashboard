@@ -1,17 +1,95 @@
 <div class="row">
-  <h2><%= t "devise.invitations.new.header" %></h2>
-
-  <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
-    <%= devise_error_messages! %>
-    <%= f.label "Partner"%>
-    <%= f.collection_select :partner_id, Partner.order("name ASC"), :id, :name, :prompt => "Select A Partner" %>
-    <% resource.class.invite_key_fields.each do |field| -%>
-      <%= f.label field %>
-      <%= f.text_field field %></p>
-    <% end -%>
-
-    <div class="controls">
-      <%= f.submit t("devise.invitations.new.submit_button"), class: "btn btn-primary" %>
-    </div>
+  <% if @invite_request %>
+    <h2>Invitee Info</h2>
+    <ul>
+      <% @invite_request.instance_values.each do |key, value| %>
+        <li><%= key.to_s.delete(":").capitalize  %>: <%= value %></li>
+      <% end %>
+    </ul>
   <% end %>
+
+  <div id="form_container">
+    <div id="invitation_form">
+      <h2><%= t "devise.invitations.new.header" %></h2>
+      <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
+        <%= devise_error_messages! %>
+
+        <% resource.class.invite_key_fields.each do |field| -%>
+          <%= f.label field %>
+          <%= f.text_field field, value: resource.email  %>
+        <% end %>
+
+        <%= render "select_partner_form" %>
+
+        <% if @invite_request %>
+          <span id="add_partner_link">
+            <%= link_to "Partner not listed?", {
+              controller: "invitations",
+              action: "new_partner",
+              partner_name: @invite_request.company,
+              remote: true }%>
+          </span>
+        <% else %>
+          <span id="add_partner_link">
+            <%= link_to "Partner not listed?", {
+              controller: "invitations",
+              action: "new_partner",
+              remote: true }%>
+          </span>
+        <% end %>
+
+
+        <div id="add_professional_button" style ="display:none">
+          <button class="btn btn-primary">Add as Professional</button>
+        </div>
+
+        </br>
+
+        <div class="controls">
+          <%= f.submit t("devise.invitations.new.submit_button"), class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+    <div id="new_partner_form"></div>
+    <div id="new_professional_form"></div>
+  </div>
+
 </div>
+
+<script>
+  $(document).ready( function(){
+    if ($("#user_partner_id option:selected").text() != "Select A Partner") {
+      $("#add_professional_button").show()
+    }
+    else {
+      $("#add_professional_button").hide()
+    }
+
+    //Assign click handler to partner dropdown
+    $("#user_partner_id").change( function(e){
+      if ($("#user_partner_id option:selected").text() != "Select A Partner") {
+        $("#add_professional_button").fadeIn()
+      }
+      else {
+        $("#add_professional_button").fadeOut()
+      }
+    });
+
+    $("#add_professional_button").click( function(e){
+      var data = {
+        partner_id: $("#user_partner_id option:selected").val(),
+        email: $("#user_email").val()
+      }
+
+      var email = {
+      }
+      $.ajax({
+        url: "/admin/users/invitation/new_professional",
+        data: data,
+        dataType: "script"
+      });
+
+      return false;
+    });
+  });
+</script>
