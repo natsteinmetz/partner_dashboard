@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130529222420) do
+ActiveRecord::Schema.define(:version => 20130624200143) do
+
+  create_table "courses", :force => true do |t|
+    t.string   "title"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.string   "topic"
+    t.text     "details"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "employments", :force => true do |t|
     t.integer  "partner_id"
@@ -23,6 +33,16 @@ ActiveRecord::Schema.define(:version => 20130529222420) do
 
   add_index "employments", ["partner_id"], :name => "index_employments_on_partner_id"
   add_index "employments", ["professional_id"], :name => "index_employments_on_professional_id"
+
+  create_table "enrollments", :force => true do |t|
+    t.integer  "course_id"
+    t.integer  "student_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "enrollments", ["course_id"], :name => "index_enrollments_on_course_id"
+  add_index "enrollments", ["student_id"], :name => "index_enrollments_on_student_id"
 
   create_table "mentorships", :force => true do |t|
     t.integer  "professional_id"
