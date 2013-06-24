@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130529222420) do
+ActiveRecord::Schema.define(:version => 20130624191836) do
 
   create_table "employments", :force => true do |t|
     t.integer  "partner_id"
@@ -53,9 +53,9 @@ ActiveRecord::Schema.define(:version => 20130529222420) do
   create_table "relationships", :force => true do |t|
     t.integer  "partner_id"
     t.integer  "student_id"
-    t.string   "status"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.boolean  "connected"
   end
 
   add_index "relationships", ["partner_id"], :name => "index_relationships_on_partner_id"
