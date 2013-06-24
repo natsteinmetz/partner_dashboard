@@ -35,5 +35,8 @@ feature "Contacting students" do
     scenario "admin users don't have a link to contact students" do
       page.should_not have_content("Contact")
     end
+
+    scenario "admin can approve contact" do
+    end
   end
 end
