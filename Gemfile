@@ -8,7 +8,10 @@ gem 'devise_invitable', '~> 1.1.0'
 
 gem 'sqlite3'
 gem 'dynamic_form', '~> 1.1.4'
+
 gem 'bootstrap-sass', '~> 2.3.1.0'
+gem 'font-awesome-sass-rails'
+
 gem 'faker', '~>1.0.1'
 
 group :assets do
