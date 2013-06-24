@@ -2,15 +2,11 @@ class RelationshipsController < ApplicationController
   before_filter :authenticate_user!
 
   #TODO: Use ajax?
+  #TODO: Add conditional to make sure a contact cannot be requestd twice
   def create
-    relationship = Relationship.new(status: "pending")
-
-    student = Student.find(params[:student_id])
-    relationship.student = student
-    relationship.partner_id = current_user.partner_id
-    relationship.save
-
-    flash[:notice] = "You successfully requested contact with #{student.name}."
+    Relationship.pending!(current_user.partner.id, params[:student_id])
+    flash[:notice] = "You successfully requested contact with #{Student.find(params[:student_id]).name}."
     redirect_to students_path
   end
+
 end
