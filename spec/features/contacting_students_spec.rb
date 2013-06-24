@@ -23,6 +23,7 @@ feature "Contacting students" do
     end
 
     scenario "users see when their contact request is accepted"
+    end
   end
 
   context "as an admin user" do
