@@ -2,20 +2,40 @@ namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
 
-    #Create some students
+    #Create some "real" students
+    Student.create(name: "Sean Irby",
+                   email: "sean.t.irby@gmail.com",
+                   phone_number: "206-794-9466",
+                   skills: "Ruby, Rails, Javascript, SQL",
+                   for_hire: true,
+                   bio: Faker::Lorem.paragraphs(3).join,
+                   links: "https://github.com/seanirby"
+                  )
+    Student.create(name: "James Adney",
+                   email: "jfadney@gmail.com",
+                   phone_number: "206-794-9466",
+                   skills: "Ruby, Rails, Javascript, Go, Python, Django",
+                   for_hire: true,
+                   bio: Faker::Lorem.paragraphs(3).join,
+                   links: "https://github.com/jamesadney"
+                  )
+
+    #Create some fake students
     possible_skills = ["C++", "Java", "Ruby", "Rails", "HTML5", "CSS3", "Javascript", "jQuery", "C", "OOP", "Backend Development", "Frontend Development", "Sysadmin",
                        "iOS", "Android", "Go", "Python", "Haskell", "Ember.js", "Node.js"]
     50.times do |n|
       name = Faker::Name.name
       email = "#{name.emailize}@gmail.com"
-      phone_number = Faker::PhoneNumber.phone_number
+      phone_number = Faker::PhoneNumber.cell_phone
       #Find a better way to do this
       skills = possible_skills.sample + ', ' + possible_skills.sample + ', ' + possible_skills.sample
       Student.create(name: name,
                      email: email,
                      phone_number: phone_number,
                      skills: skills,
-                     for_hire: [true, false].sample)
+                     for_hire: [true, false].sample,
+                     bio: Faker::Lorem.paragraphs(3).join,
+                     links: "https://github.com/#{name.emailize}")
     end
 
     #Create some partners and professionals
