@@ -4,7 +4,7 @@ class StudentsController < ApplicationController
 
   def index
     current_user.partner = Partner.includes(:students).find(current_user.partner.id)
-    @students = Student.order("name")
+    @students = Student.includes(:courses).order("name")
   end
 
   def show
