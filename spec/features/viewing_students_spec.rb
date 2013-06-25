@@ -35,7 +35,7 @@ feature "Viewing students" do
     scenario "showing which students are for hire" do
       albert_xpath = [
         "//tr/td[@class='name' ",               # find the cell with class="name"
-        "and text()='#{student_albert.name}']", # and text="Albert Einstein"
+        "and contains(., '#{student_albert.name}')]", # and contains the text "Albert Einstein"
         "/..",                                  # look in the parent
         "/td[@class='for-hire']",               # for a cell with class="for-hire"
         "/i[contains(@class, 'icon-ok')]"       # and an icon with class="icon-ok"
@@ -45,7 +45,7 @@ feature "Viewing students" do
       # FIXME: DRY
       werner_xpath = [
         "//tr/td[@class='name' ",               # find the cell with class="name"
-        "and text()='#{student_werner.name}']", # and text="Albert Einstein"
+        "and contains(., '#{student_werner.name}')]", # and text="Werner Heisenberg"
         "/..",                                  # look in the parent
         "/td[@class='for-hire']",               # for a cell with class="for-hire"
         "/i[contains(@class, 'icon-ok')]"       # and an icon with class="icon-ok"
