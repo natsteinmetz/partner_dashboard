@@ -6,6 +6,13 @@
   </td>
   <td class="name"><%= link_to student.name, student_path(student) %></td>
   <td class="skills"><%= student.skills %></td>
+  <td class="courses">
+    <ul>
+      <% student.courses.each do |course| %>
+        <li><%= course.title %></li>
+      <% end %>
+    </ul>
+  </td>
 
   <% unless current_user.admin? %>
     <td><% if current_user.has_contacted? student %>

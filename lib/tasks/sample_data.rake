@@ -23,19 +23,33 @@ namespace :db do
     #Create some fake students
     possible_skills = ["C++", "Java", "Ruby", "Rails", "HTML5", "CSS3", "Javascript", "jQuery", "C", "OOP", "Backend Development", "Frontend Development", "Sysadmin",
                        "iOS", "Android", "Go", "Python", "Haskell", "Ember.js", "Node.js"]
-    50.times do |n|
-      name = Faker::Name.name
-      email = "#{name.emailize}@gmail.com"
-      phone_number = Faker::PhoneNumber.cell_phone
-      #Find a better way to do this
-      skills = possible_skills.sample + ', ' + possible_skills.sample + ', ' + possible_skills.sample
-      Student.create(name: name,
-                     email: email,
-                     phone_number: phone_number,
-                     skills: skills,
-                     for_hire: [true, false].sample,
+    course_titles = ["iOS June 2013", "Rails August 2013", "Python September 2014", "Javascript January 2014", "Erlang March 2016"]
+    course_topics = ["iOS", "Rails", "Python", "Javascript", "Erlang"]
+
+    # create courses with students
+    5.times do |n|
+      start_date = Date.today >> n
+      end_date = start_date.next_month
+      course = Course.create(title: course_titles[n],
+                             topic: course_topics[n],
+                             details: Faker::Lorem.paragraph,
+                             start_date: start_date,
+                             end_date: end_date)
+
+      10.times do
+        name = Faker::Name.name
+        email = "#{name.emailize}@gmail.com"
+        phone_number = Faker::PhoneNumber.phone_number
+        #Find a better way to do this
+        skills = possible_skills.sample + ', ' + possible_skills.sample + ', ' + possible_skills.sample
+        course.students.create(name: name,
+                       email: email,
+                       phone_number: phone_number,
+                       skills: skills,
+                       for_hire: [true, false].sample,
                      bio: Faker::Lorem.paragraphs(3).join,
                      links: "https://github.com/#{name.emailize}")
+      end
     end
 
     #Create some partners and professionals
