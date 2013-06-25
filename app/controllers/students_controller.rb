@@ -3,7 +3,12 @@ class StudentsController < ApplicationController
   #TODO: Add before filter to ensure user's partner has a relationship
 
   def index
-    current_user.partner = Partner.includes(:students).find(current_user.partner.id)
+
+    # Eager load students to check relationship status
+    unless current_user.admin?
+      current_user.partner = Partner.includes(:students).find(current_user.partner.id)
+    end
+
     @students = Student.includes(:courses).order("name")
   end
 
