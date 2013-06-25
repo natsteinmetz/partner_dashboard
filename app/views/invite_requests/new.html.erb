@@ -1,27 +1,31 @@
-<h2>Request Invitation</h2>
-<%= form_for @invite_request do |f| %>
+<div class="row-fluid">
+  <h2>Request Invitation</h2>
+</div>
+<div class="row-fluid">
+  <%= form_for @invite_request do |f| %>
 
-  <% if @invite_request.errors %>
-    <%= f.error_messages %>
+    <% if @invite_request.errors %>
+      <%= f.error_messages %>
+    <% end %>
+
+    <%= f.label :email, "Email" %>
+    <%= f.text_field :email %>
+
+    <%= f.label :first_name, "First Name" %>
+    <%= f.text_field :first_name %>
+
+    <%= f.label :last_name, "Last Name" %>
+    <%= f.text_field :last_name %>
+
+    <%= f.label :company, "Company" %>
+    <%= f.text_field :company %>
+
+    <%= f.label :role, "Role" %>
+    <%= f.text_field :role %>
+
+    <%= f.label :message, "Message to Admin" %>
+    <%= f.text_area :message, size: "60x12" %>
+
+    <%= f.submit "Submit" %>
   <% end %>
-
-  <%= f.label :email, "Email" %>
-  <%= f.text_field :email %>
-
-  <%= f.label :first_name, "First Name" %>
-  <%= f.text_field :first_name %>
-
-  <%= f.label :last_name, "Last Name" %>
-  <%= f.text_field :last_name %>
-
-  <%= f.label :company, "Company" %>
-  <%= f.text_field :company %>
-
-  <%= f.label :role, "Role" %>
-  <%= f.text_field :role %>
-
-  <%= f.label :message, "Message to Admin" %>
-  <%= f.text_area :message, size: "60x12" %>
-
-  <%= f.submit "Submit" %>
-<% end %>
+</div>
