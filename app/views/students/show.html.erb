@@ -1,0 +1,45 @@
+<div class="row-fluid">
+  <div class="span2">
+    <%= gravatar_image_tag @student.email, alt: @student.name %>
+  </div>
+  <div class="span6">
+    <h2>
+      <%= @student.name %>
+      <% if @student.for_hire %>
+        <span class="label label-success">For Hire!</span>
+      <% end %>
+    </h2>
+    <table class="profile_contact_info">
+      <tr>
+        <th scope="row" style="text-align: left">Phone Number</th>
+        <td><%= @student.phone_number %></td>
+      </tr>
+      <tr>
+        <th scope="row" style="text-align: left">Email</th>
+        <td><%= @student.email %></td>
+      </tr>
+      <tr>
+        <th scope="row" style="text-align: left">Links</th>
+        <td><%= @student.links %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span8">
+    <h3>Skills</h3>
+    <p>
+      <%= @student.skills %>
+    </p>
+    <h3>Bio</h3>
+    <p>
+      <%= @student.bio %>
+    </p>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <button class="btn btn-primary">Download Resume</button>
+</div>
+
