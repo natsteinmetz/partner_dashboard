@@ -1,5 +1,30 @@
-<li><%= link_to "Manage Relationships", admin_relationships_path, :class => "btn-btn-navbar" %></li>
-<li><%= link_to "Partners", admin_partners_path, :class => "btn-btn-navbar" %></li>
-<li><%= link_to "Professionals", admin_professionals_path, :class => "btn-btn-navbar" %></li>
+<li class="dropdown">
+  <a class="dropdown-toggle" id="adminLabel" role="button" data-toggle="dropdown" href="#">
+    Admin
+    <b class="caret"></b>
+  </a>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="adminLabel">
+    <li>
+      <%= link_to "Invite A New User", new_user_invitation_path, :class => "btn-btn-navbar" %>
+    </li>
+    <li>
+      <%= link_to "Manage Relationships", admin_relationships_path, :class => "btn-btn-navbar" %>
+    <li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a class="dropdown-toggle" id="partnersLabel" role="button" data-toggle="dropdown" href="#">
+    Partners
+    <b class="caret"></b>
+  </a>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="partnersLabel">
+    <li>
+      <%= link_to "Partners Index", admin_partners_path, :class => "btn-btn-navbar" %>
+    </li>
+    <li>
+      <%= link_to "Professionals Index", admin_professionals_path, :class => "btn-btn-navbar" %>
+    </li>
+  </ul>
+</li>
+
 <li><%= link_to "Students", students_path, :class => "btn-btn-navbar" %></li>
-<li><%= link_to "Invite A New User", new_user_invitation_path, :class => "btn-btn-navbar" %></li>

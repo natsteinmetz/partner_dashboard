@@ -37,7 +37,8 @@ feature 'viewing professionals' do
 
     scenario "user can filter professionals by partner name", :js => true do
       visit '/'
-      click_link "Professionals"
+      click_link "Partners"
+      click_link "Professionals Index"
       fill_in "professional-filter", with: professional_one.partners.first.name
       page.should have_content professional_one.name
       page.should_not have_content professional_two.name
