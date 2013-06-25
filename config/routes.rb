@@ -8,13 +8,13 @@ PartnerDashboard::Application.routes.draw do
   match "/invite_requests", to: "invite_requests#create", via: :post, as: :invite_requests
 
   resources :relationships, only: :create
-  resources :students, only: :index
+  resources :students, only: [:index, :show]
 
   namespace :admin do
     root :to => "base#index"
     resources :partners, only: :index
     resources :professionals, only: :index
-    resources :students, only: :index
+    resources :students, only: [:index, :show]
     resources :relationships
    end
 
