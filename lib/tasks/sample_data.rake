@@ -2,9 +2,6 @@ namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
 
-
-
-
     #Create some students
     possible_skills = ["C++", "Java", "Ruby", "Rails", "HTML5", "CSS3", "Javascript", "jQuery", "C", "OOP", "Backend Development", "Frontend Development", "Sysadmin",
                        "iOS", "Android", "Go", "Python", "Haskell", "Ember.js", "Node.js"]
@@ -35,6 +32,11 @@ namespace :db do
                                        partner_id: partner.id)
         professional.save
       end
+    end
+
+    #Create some pending relationships
+    (1..10).each do |n|
+      Relationship.create(partner_id: Partner.find(n).id, student_id: Student.find(n).id)
     end
 
     #Create some users, should probably put this under partners and professionals
