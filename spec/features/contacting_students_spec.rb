@@ -22,7 +22,7 @@ feature "Contacting students" do
       end
     end
 
-    scenario "users see when their contact request is accepted"
+    scenario "users see when their contact request is accepted" do
     end
   end
 
