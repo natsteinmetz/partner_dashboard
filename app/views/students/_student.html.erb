@@ -4,7 +4,7 @@
       <i class="icon-ok icon-large"></i>
     <% end %>
   </td>
-  <td class="name"><%= student.name %></td>
+  <td class="name"><%= link_to student.name, student_path(student) %></td>
   <td class="skills"><%= student.skills %></td>
 
   <% unless current_user.admin? %>
