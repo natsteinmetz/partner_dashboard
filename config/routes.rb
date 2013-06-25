@@ -15,6 +15,7 @@ PartnerDashboard::Application.routes.draw do
     resources :partners
     resources :professionals
     resources :students
+    resources :relationships
    end
 
   devise_for :users, :skip => :invitations
