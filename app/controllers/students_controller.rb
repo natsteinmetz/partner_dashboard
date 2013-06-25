@@ -3,6 +3,7 @@ class StudentsController < ApplicationController
   #TODO: Add before filter to ensure user's partner has a relationship
 
   def index
+    current_user.partner = Partner.includes(:students).find(current_user.partner.id)
     @students = Student.order("name")
   end
 
