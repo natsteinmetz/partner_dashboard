@@ -3,7 +3,7 @@ FactoryGirl.define do
     factory :pending_relationship do
       partner
       student
-      connected false
+      contact_allowed false
     end
   end
 end

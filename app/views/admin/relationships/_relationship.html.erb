@@ -1,9 +1,9 @@
 <tr id="relationship[<%= relationship.id %>]">
-  <% connected = relationship.connected? %>
-  <td class="status_label"><%= render "status", locals: {connected: connected} %></td>
+  <% contact_allowed = relationship.contact_allowed? %>
+  <td class="status_label"><%= render "status", locals: {contact_allowed: contact_allowed} %></td>
   <td><%= relationship.partner.name %></td>
   <td><%= relationship.student.name  %></td>
-  <% if relationship.connected? %>
+  <% if relationship.contact_allowed? %>
     <td><%= link_to "Destroy", admin_relationship_path(relationship),
               method: "delete",
               data: {
