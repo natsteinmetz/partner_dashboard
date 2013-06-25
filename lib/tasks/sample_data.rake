@@ -14,7 +14,8 @@ namespace :db do
       Student.create(name: name,
                      email: email,
                      phone_number: phone_number,
-                     skills: skills)
+                     skills: skills,
+                     for_hire: [true, false].sample)
     end
 
     #Create some partners and professionals

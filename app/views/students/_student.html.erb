@@ -1,4 +1,9 @@
 <tr>
+  <td class="for-hire">
+    <% if student.for_hire? %>
+      <i class="icon-ok icon-large"></i>
+    <% end %>
+  </td>
   <td class="name"><%= student.name %></td>
   <td class="skills"><%= student.skills %></td>
 

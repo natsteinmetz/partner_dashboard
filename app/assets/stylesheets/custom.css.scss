@@ -2,6 +2,7 @@ $sansFontFamily: 'Open Sans', Helvetica, Arial, sans-serif;
 
 @import "bootstrap";
 @import "flatten-bootstrap";
+@import "font-awesome";
 
 body {
   padding-top: 60px;
@@ -13,4 +14,8 @@ body {
 
 .sort {
 	cursor: pointer;
+}
+
+td.for-hire {
+	width: 3em;
 }

@@ -13,6 +13,16 @@
 
 ActiveRecord::Schema.define(:version => 20130625005138) do
 
+  create_table "courses", :force => true do |t|
+    t.string   "title"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.string   "topic"
+    t.text     "details"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "employments", :force => true do |t|
     t.integer  "partner_id"
     t.integer  "professional_id"
@@ -23,6 +33,16 @@ ActiveRecord::Schema.define(:version => 20130625005138) do
 
   add_index "employments", ["partner_id"], :name => "index_employments_on_partner_id"
   add_index "employments", ["professional_id"], :name => "index_employments_on_professional_id"
+
+  create_table "enrollments", :force => true do |t|
+    t.integer  "course_id"
+    t.integer  "student_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "enrollments", ["course_id"], :name => "index_enrollments_on_course_id"
+  add_index "enrollments", ["student_id"], :name => "index_enrollments_on_student_id"
 
   create_table "mentorships", :force => true do |t|
     t.integer  "professional_id"
@@ -68,6 +88,7 @@ ActiveRecord::Schema.define(:version => 20130625005138) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.string   "phone_number"
+    t.boolean  "for_hire"
   end
 
   create_table "users", :force => true do |t|
@@ -99,7 +120,9 @@ ActiveRecord::Schema.define(:version => 20130625005138) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["invitation_token"], :name => "index_users_on_invitation_token", :unique => true
+  add_index "users", ["invited_by_id", "invited_by_type"], :name => "index_users_on_invited_by_id_and_invited_by_type"
   add_index "users", ["invited_by_id"], :name => "index_users_on_invited_by_id"
+  add_index "users", ["partner_id"], :name => "index_users_on_partner_id"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

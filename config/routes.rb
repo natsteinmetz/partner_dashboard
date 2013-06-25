@@ -7,15 +7,14 @@ PartnerDashboard::Application.routes.draw do
   #TODO: I don't want this send invite path to be public
   match "/invite_requests", to: "invite_requests#create", via: :post, as: :invite_requests
 
-  resources :relationships
-  resources :students
+  resources :relationships, only: :create
+  resources :students, only: :index
 
   namespace :admin do
     root :to => "base#index"
-    resources :partners
-    resources :professionals
-    resources :students
-    resources :relationships
+    resources :partners, only: :index
+    resources :professionals, only: :index
+    resources :students, only: :index
    end
 
   devise_for :users, :skip => :invitations

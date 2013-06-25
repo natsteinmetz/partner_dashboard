@@ -1,2 +1,0 @@
-module Admin::PartnersHelper
-end
