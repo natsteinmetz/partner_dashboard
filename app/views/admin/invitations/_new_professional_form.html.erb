@@ -1,11 +1,11 @@
-<h2>Add <%= professional.name %></h2>
-<%= form_for professional, url: admin_users_invitation_create_professional_path, remote: true do |f| %>
-  <% if professional.errors.any? %>
+<h2>Add <%= @professional.name %></h2>
+<%= form_for @professional, url: admin_users_invitation_create_professional_path, remote: true do |f| %>
+  <% if @professional.errors.any? %>
     <div id="error_explanation" class="alert">
-      <h3><%= pluralize(professional.errors.count, "error") %>
+      <h3><%= pluralize(@professional.errors.count, "error") %>
         prohibited this professional from being saved:</h3>
       <ul>
-      <% professional.errors.full_messages.each do |msg| %>
+      <% @professional.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
