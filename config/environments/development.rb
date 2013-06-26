@@ -35,22 +35,27 @@ PartnerDashboard::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
+  unless ENV["ADMIN_EMAIL"]
+    ENV["ADMIN_EMAIL"] = "james.n.sean@gmail.com"
+  end
+
+  unless ENV["HOSTNAME"]
+    ENV["HOSTNAME"] = "localhost:3000"
+  end
+
   config.action_mailer.default_url_options = {
-    :host => 'localhost:3000'
-  }
+    :host => ENV["HOSTNAME"]  }
 
   #TODO, move these constants to a seperate file, have this file load them
-  ADMIN_EMAIL = "james.n.sean@gmail.com"
   ADMIN_PASSWORD = "codefellows"
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     :address        => "smtp.gmail.com",
     :port           => "587",
     :authentication => :plain,
-    :user_name      => ADMIN_EMAIL,
+    :user_name      => ENV["ADMIN_EMAIL"],
     :password       => ADMIN_PASSWORD,
     :enable_starttls_auto => true,
     :domain         => "baci.lindsaar.net"
     }
-
 end
