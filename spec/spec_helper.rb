@@ -1,6 +1,5 @@
-require 'coveralls'
-Coveralls.wear!('rails')
-#TODO:Figure out if I need to start SimpleCov too.
+require 'simplecov'
+SimpleCov.start
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
