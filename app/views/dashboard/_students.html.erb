@@ -1,0 +1,30 @@
+<% if @students.empty? %>
+  <span>
+    Sorry, there aren't any students yet...
+  </span>
+<% else %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          For Hire
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Skills
+        </th>
+        <th>
+          Courses
+        </th>
+        <th>
+          Status
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @students %>
+    </tbody>
+  </table>
+<% end %>

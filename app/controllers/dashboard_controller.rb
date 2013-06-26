@@ -1,8 +1,10 @@
+#TODO: Break active record queries up into different scopes
 class DashboardController < ApplicationController
   def dash
-    #Current Courses
+    #Load current courses
     @courses = Course.where(":todays_date >= start_date AND :todays_date <= end_date", {todays_date: Date.today})
-    @students= current_user.partner.includes(:relationships, :students).students.where()
+    #Load connected students
+    @students = current_user.partner.students.all(joins: :relationships, conditions: {"relationships.contact_allowed" => true})
   end
 
   def courses
@@ -14,11 +16,19 @@ class DashboardController < ApplicationController
     elsif params[:scope] == "Upcoming"
       @courses = Course.where(":todays_date < start_date", {todays_date: todays_date})
     else
-      redirect_to :dash
+      render :dash
     end
     render "courses"
   end
 
   def students
+    if params[:scope] == "Connected"
+      @students = current_user.partner.students.all(joins: :relationships, conditions: {"relationships.contact_allowed" => true})
+    elsif params[:scope] == "Pending"
+      @students = current_user.partner.students.all(joins: :relationships, conditions: {"relationships.contact_allowed" => false})
+    else
+      render :dash
+    end
+    render "students"
   end
 end
