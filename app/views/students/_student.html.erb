@@ -6,7 +6,7 @@
     <% end %>
   </td>
   <td class="name">
-    <%= render "student_link", locals: {connected: connected, student: student } %>
+    <%= name_cell student %>
   </td>
   <td class="skills"><%= student.skills %></td>
   <td class="courses">
@@ -16,5 +16,7 @@
       <% end %>
     </ul>
   </td>
-  <%= render "student_actions", locals: {connected: connected, student: student } %>
+  <td class="actions">
+    <%= action_cell student %>
+  </td>
 </tr>
