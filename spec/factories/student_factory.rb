@@ -7,5 +7,9 @@ FactoryGirl.define do
     for_hire false
     bio "Saved the world from alien invasion."
     links "https://api.github.com/users/mojombo"
+
+    courses do
+      Array(1..2).sample.times.map { FactoryGirl.create(:course) }
+    end
   end
 end

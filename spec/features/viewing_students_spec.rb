@@ -7,6 +7,23 @@ def should_have_students(*students)
   end
 end
 
+# Find the table row for a student
+def within_row_for(student, &block)
+  row_xpath = [
+    "//tr/td[@class='name' ",               # find the cell with class="name"
+    "and contains(., '#{student.name}')]",  # and contains the text "Albert Einstein"
+    "/..",                                  # find the parent
+  ].join
+
+  within(:xpath, row_xpath, &block)
+end
+
+# Matches a table cell with the class="for-hire" with an icon-ok inside it
+FOR_HIRE_ICON_XPATH = [
+  "td[@class='for-hire']",               # for a cell with class="for-hire"
+  "/i[contains(@class, 'icon-ok')]"      # and an icon with class="icon-ok"
+].join
+
 feature "Viewing students" do
   let!(:student_albert) { FactoryGirl.create(:student,
                                              name: "Albert Einstein",
@@ -33,24 +50,21 @@ feature "Viewing students" do
     end
 
     scenario "showing which students are for hire" do
-      albert_xpath = [
-        "//tr/td[@class='name' ",               # find the cell with class="name"
-        "and contains(., '#{student_albert.name}')]", # and contains the text "Albert Einstein"
-        "/..",                                  # look in the parent
-        "/td[@class='for-hire']",               # for a cell with class="for-hire"
-        "/i[contains(@class, 'icon-ok')]"       # and an icon with class="icon-ok"
-      ].join
-      page.should have_xpath(albert_xpath)
+      within_row_for student_albert do
+        page.should have_xpath(FOR_HIRE_ICON_XPATH)
+      end
 
-      # FIXME: DRY
-      werner_xpath = [
-        "//tr/td[@class='name' ",               # find the cell with class="name"
-        "and contains(., '#{student_werner.name}')]", # and text="Werner Heisenberg"
-        "/..",                                  # look in the parent
-        "/td[@class='for-hire']",               # for a cell with class="for-hire"
-        "/i[contains(@class, 'icon-ok')]"       # and an icon with class="icon-ok"
-      ].join
-      page.should_not have_xpath(werner_xpath)
+      within_row_for student_werner do
+        page.should_not have_xpath(FOR_HIRE_ICON_XPATH)
+      end
+    end
+
+    scenario "showing each students' courses" do
+      within_row_for student_albert do
+        student_albert.courses.each do |course|
+          page.should have_content(course.title)
+        end
+      end
     end
   end
 
