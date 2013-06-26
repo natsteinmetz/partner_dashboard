@@ -15,8 +15,8 @@ PartnerDashboard::Application.routes.draw do
     root :to => "base#index"
     resources :partners, only: :index
     resources :professionals, only: :index
-    resources :students, only: [:index, :show]
-    resources :relationships
+    resources :students, only: :index
+    resources :relationships, except: [:show, :edit]
    end
 
   devise_for :users, :skip => :invitations
