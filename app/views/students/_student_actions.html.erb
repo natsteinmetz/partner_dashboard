@@ -1,0 +1,13 @@
+<% unless current_user.admin? %>
+  <td>
+  <% if locals[:connected] %>
+    <button class="btn btn-success btn-disabled">Connected</button>
+  <% elsif current_user.has_contacted? locals[:student] %>
+    <button class="btn disabled">Pending</button>
+  <% else %>
+    <%= button_to "Contact",
+    { controller: "relationships", action: "create", student_id: locals[:student].id },
+    class: "btn btn-primary", form_class: "contact-button" %>
+  <% end %>
+  </td>
+<% end %>

@@ -17,4 +17,14 @@ class User < ActiveRecord::Base
       self.partner.students.include? student
     end
   end
+
+  def connected?(student)
+    if self.admin?
+      true
+    elsif self.partner.relationships.where("student_id = ? AND contact_allowed = ?", student.id, true).empty?
+      false
+    else
+      true
+    end
+  end
 end

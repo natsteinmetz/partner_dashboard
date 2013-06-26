@@ -14,13 +14,12 @@ class StudentsController < ApplicationController
   end
 
   def show
-    @student = Student.find(params[:id])
   end
 
 private
   def confirm_relationship
-    binding.pry
-    unless current_user.partner.relationships.where("student_id = ?", params[:id]).contact_allowed?
+    @student = Student.find(params[:id])
+    unless current_user.connected?(@student)
       flash[:alert] = "You do not have permission to view this user"
       redirect_to students_path
     end

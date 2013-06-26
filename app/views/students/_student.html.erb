@@ -1,10 +1,13 @@
+<% connected = current_user.connected?(student) %>
 <tr>
   <td class="for-hire">
     <% if student.for_hire? %>
       <i class="icon-ok icon-large"></i>
     <% end %>
   </td>
-  <td class="name"><%= link_to student.name, student_path(student) %></td>
+  <td class="name">
+    <%= render "student_link", locals: {connected: connected, student: student } %>
+  </td>
   <td class="skills"><%= student.skills %></td>
   <td class="courses">
     <ul>
@@ -13,15 +16,5 @@
       <% end %>
     </ul>
   </td>
-
-  <% unless current_user.admin? %>
-    <td><% if current_user.has_contacted? student %>
-        <button class="btn disabled">Pending</button>
-      <% else %>
-        <%= button_to "Contact",
-          { controller: "relationships", action: "create", student_id: student.id },
-          class: "btn btn-primary", form_class: "contact-button" %>
-      <% end %>
-    </td>
-  <% end %>
+  <%= render "student_actions", locals: {connected: connected, student: student } %>
 </tr>
