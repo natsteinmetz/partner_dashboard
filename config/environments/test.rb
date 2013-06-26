@@ -40,6 +40,4 @@ PartnerDashboard::Application.configure do
     :host => 'localhost:3000'
   }
 
-  ENV["ADMIN_EMAIL"] = "admin@codefellows.com"
-
 end

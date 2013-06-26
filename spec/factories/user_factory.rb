@@ -14,8 +14,9 @@ FactoryGirl.define do
 
       factory :admin_user do
         admin true
-        email ENV["ADMIN_EMAIL"].dup
+        email "admin@codefellows.com"
         partner nil
+        get_invite_requests true
       end
     end
   end

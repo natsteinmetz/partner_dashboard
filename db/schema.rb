@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130625214956) do
+ActiveRecord::Schema.define(:version => 20130626212952) do
 
   create_table "courses", :force => true do |t|
     t.string   "title"
@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(:version => 20130625214956) do
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
+    t.boolean  "get_invite_requests"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

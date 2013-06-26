@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
 
   validates :partner, presence: true, unless: :admin?
 
+  # get_invite_requests can't be true unless admin
+  validates :get_invite_requests, exclusion: { in: [true],
+    message: "Only admin users can receive invite requests" }, unless: :admin?
+
 
   devise :invitable, :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable,
