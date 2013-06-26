@@ -6,7 +6,6 @@ gem 'rails', '3.2.13'
 gem 'devise', '~> 2.2.4'
 gem 'devise_invitable', '~> 1.1.0'
 
-gem 'sqlite3'
 gem 'dynamic_form', '~> 1.1.4'
 
 gem 'bootstrap-sass', '~> 2.3.1.0'
@@ -24,7 +23,16 @@ end
 
 gem 'jquery-rails'
 
+group :production do
+  gem 'pg'
+end
+
+group :production, :development do
+  gem 'unicorn'
+end
+
 group :development, :test do
+  gem 'sqlite3'
   gem 'rspec-rails', '~> 2.0'
   gem 'shoulda-matchers', '~> 2.1.0'
   gem 'pry-rails'
