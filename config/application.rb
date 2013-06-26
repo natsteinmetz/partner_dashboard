@@ -64,5 +64,8 @@ module PartnerDashboard
     config.generators do |g|
         g.factory_girl :dir => 'spec/support'
     end
+
+    # for heroku
+    config.assets.initialize_on_precompile = false
   end
 end
