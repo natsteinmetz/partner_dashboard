@@ -40,7 +40,6 @@ PartnerDashboard::Application.configure do
     :host => 'localhost:3000'
   }
 
-  #TODO, move these constants to a seperate file, have this file load them
-  ADMIN_EMAIL = "admin@codefellows.com"
+  ENV["ADMIN_EMAIL"] = "admin@codefellows.com"
 
 end

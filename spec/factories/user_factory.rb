@@ -14,7 +14,7 @@ FactoryGirl.define do
 
       factory :admin_user do
         admin true
-        email ADMIN_EMAIL
+        email ENV["ADMIN_EMAIL"].dup
         partner nil
       end
     end
