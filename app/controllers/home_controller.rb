@@ -8,7 +8,7 @@ class HomeController < ApplicationController
     elsif current_user.admin?
       redirect_to admin_professionals_path
     else
-      redirect_to students_path
+      redirect_to dashboard_path
     end
   end
 end

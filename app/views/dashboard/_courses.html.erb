@@ -1,0 +1,24 @@
+<% if @courses.empty? %>
+  <span>
+    Sorry, there aren't any courses yet...
+  </span>
+<% else %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          Title
+        </th>
+        <th>
+          Start Date
+        </th>
+        <th>
+          End Date
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @courses %>
+    </tbody>
+  </table>
+<% end %>

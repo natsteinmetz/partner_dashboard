@@ -1,0 +1,56 @@
+<div class="row-fluid">
+  <div class="span6">
+    <div class="row-fluid" id="courses_tabs">
+      <h2>Courses</h2>
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a href="#" data-toggle="tab">Current</a>
+        </li>
+        <li>
+          <a href="#" data-toggle="tab">Past</a>
+        </li>
+        <li>
+          <a href="#" data-toggle="tab">Upcoming</a>
+        </li>
+      </ul>
+    </div>
+    <div class="row-fluid" id="courses_container">
+      <%= render "courses" %>
+    </div>
+  </div>
+  <div class="span6">
+    <div class="row-fluid" id="students_tabs">
+      <h2>Students</h2>
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a href="#" data-toggle="tab">Contacted</a>
+        </li>
+        <li>
+          <a href="#" data-toggle="tab">Pending</a>
+        </li>
+      </ul>
+    </div>
+    <div class="row-fluid" id="students_container">
+
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready( function(){
+    //Assign a click event to courses nav tabs
+    $('#courses_tabs ul li a').click( function(e){
+      var data= { scope: $(this).text() }
+      $.ajax({
+        url: "/dashboard/courses",
+        data: data,
+        dataType: "script"
+      })
+      console.log("in courses")
+    });
+    //Assign a click event to students nav tab
+    $('#students_tabs ul li a').click( function(e){
+      console.log("in students")
+    });
+  });
+</script>

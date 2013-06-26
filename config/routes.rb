@@ -6,6 +6,9 @@ PartnerDashboard::Application.routes.draw do
   match "/invite_requests/new", to: "invite_requests#new", via: :get, as: :new_invite_request
   #TODO: I don't want this send invite path to be public
   match "/invite_requests", to: "invite_requests#create", via: :post, as: :invite_requests
+  match "/dashboard", to: "dashboard#dash", via: :get, as: :dashboard
+  match "/dashboard/courses", to: "dashboard#courses", via: :get, as: :dashboard_courses
+  match "/dashboard/students", to: "dashboard#students", via: :get, as: :dashboard_students
 
   resources :relationships, only: :create
   resources :students, only: [:index, :show]

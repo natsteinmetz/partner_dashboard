@@ -80,9 +80,6 @@
         partner_id: $("#user_partner_id option:selected").val(),
         email: $("#user_email").val()
       }
-
-      var email = {
-      }
       $.ajax({
         url: "/admin/users/invitation/new_professional",
         data: data,
