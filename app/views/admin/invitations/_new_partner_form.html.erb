@@ -1,12 +1,12 @@
 <h2>Create Partner</h2>
-<%= form_for @partner, url: admin_users_invitation_create_partner_path, remote: true do |f| %>
+<%= form_for partner, url: admin_users_invitation_create_partner_path, remote: true do |f| %>
 
-  <% if @partner.errors.any? %>
+  <% if partner.errors.any? %>
     <div id="error_explanation" class="alert">
-      <h3><%= pluralize(@partner.errors.count, "error") %>
+      <h3><%= pluralize(partner.errors.count, "error") %>
         prohibited this partner from being saved:</h3>
       <ul>
-      <% @partner.errors.full_messages.each do |msg| %>
+      <% partner.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
