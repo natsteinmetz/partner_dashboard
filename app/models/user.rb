@@ -21,10 +21,11 @@ class User < ActiveRecord::Base
   def connected?(student)
     if self.admin?
       true
-    elsif self.partner.relationships.where("student_id = ? AND contact_allowed = ?", student.id, true).empty?
-      false
+    elsif self.partner.students.include? student
+      #TODO: Can't figure out how to make this line not hit the database, even if i eager load relationships.
+      self.partner.relationships.find_by_student_id(student.id).contact_allowed ? true : false
     else
-      true
+      false
     end
   end
 end

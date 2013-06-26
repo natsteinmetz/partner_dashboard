@@ -4,12 +4,10 @@ class StudentsController < ApplicationController
   before_filter :confirm_relationship, only: :show
 
   def index
-
     # Eager load students to check relationship status
     unless current_user.admin?
       current_user.partner = Partner.includes(:students).find(current_user.partner.id)
     end
-
     @students = Student.includes(:courses).order("name")
   end
 
