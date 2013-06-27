@@ -9,6 +9,8 @@
 admin = User.create(email: "admin@codefellows.com", password: "password")
 admin.confirm!
 admin.update_attribute(:admin, true)
+admin.get_invite_requests = true
+admin.save
 
 #Create some partners
 

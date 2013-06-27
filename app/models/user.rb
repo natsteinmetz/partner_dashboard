@@ -12,7 +12,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :partner_id
+  attr_accessible :email, :password, :password_confirmation, :remember_me,
+                  :partner_id, :get_invite_requests
 
   def has_contacted?(student)
     if self.admin?
