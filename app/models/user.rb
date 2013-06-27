@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   belongs_to :partner
 
+  # non-admins must have a partner
   validates :partner, presence: true, unless: :admin?
 
   # get_invite_requests can't be true unless admin
