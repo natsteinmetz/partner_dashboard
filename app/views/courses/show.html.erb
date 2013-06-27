@@ -1,0 +1,35 @@
+<div class="row-fluid">
+  <div class="span2">
+    <!-- Add Course logo here -->
+    <%= gravatar_image_tag "blah@blah.com", alt: "blah@blah.com" %>
+  </div>
+  <div class="span6">
+    <h2>
+      <%= @course.title %>
+    </h2>
+    <table class="course_info">
+      <tr>
+        <th scope="row" style="text-align: left">Start Date</th>
+        <td><%= @course.start_date %></td>
+      </tr>
+      <tr>
+        <th scope="row" style="text-align: left">End Date</th>
+        <td><%= @course.end_date %></td>
+      </tr>
+      <tr>
+        <th scope="row" style="text-align: left">Students Enrolled</th>
+        <td><%= @course.students.count %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span8">
+    <h3>Details</h3>
+    <p><%= @course.details %></p>
+
+    <h3>Enrollment</h3>
+    <%= students_table %>
+  </div>
+</div>
