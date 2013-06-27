@@ -23,3 +23,6 @@ td.for-hire {
 tbody>tr:nth-child(odd){ background-color:#ffe; }
 tbody>tr:nth-child(even){ background-color:#fff; }
 
+#error_explanation li {
+	color: $red;
+}
