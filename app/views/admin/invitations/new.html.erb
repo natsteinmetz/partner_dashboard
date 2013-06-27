@@ -19,25 +19,28 @@
           <%= f.text_field field, value: resource.email  %>
         <% end %>
 
-        <%= render "select_partner_form" %>
+        <%= f.check_box :admin %> Admin
 
-        <% if @invite_request %>
-          <span id="add_partner_link">
-            <%= link_to "Partner not listed?", {
-              controller: "invitations",
-              action: "new_partner",
-              partner_name: @invite_request.company,
-              remote: true }%>
-          </span>
-        <% else %>
-          <span id="add_partner_link">
-            <%= link_to "Partner not listed?", {
-              controller: "invitations",
-              action: "new_partner",
-              remote: true }%>
-          </span>
-        <% end %>
+        <div id="partner-controls">
+          <%= render "select_partner_form" %>
 
+          <% if @invite_request %>
+            <span id="add_partner_link">
+              <%= link_to "Partner not listed?", {
+                controller: "invitations",
+                action: "new_partner",
+                partner_name: @invite_request.company,
+                remote: true }%>
+            </span>
+          <% else %>
+            <span id="add_partner_link">
+              <%= link_to "Partner not listed?", {
+                controller: "invitations",
+                action: "new_partner",
+                remote: true }%>
+            </span>
+          <% end %>
+        </div>
 
         <div id="add_professional_button" style ="display:none">
           <button class="btn btn-primary">Add as Professional</button>
@@ -87,6 +90,15 @@
       });
 
       return false;
+    });
+
+    // don't show partner select when user is admin
+    $('#user_admin').on('click', function(event){
+      if ($(this).is(':checked')) {
+        $('#partner-controls').hide();
+      } else {
+        $('#partner-controls').show();
+      }
     });
   });
 </script>

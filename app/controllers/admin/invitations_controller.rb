@@ -15,6 +15,14 @@ class Admin::InvitationsController < Devise::InvitationsController
     end
   end
 
+  def create
+    # record whether or not user should be admin, but remove from params for now
+    make_admin = true ? resource_params.delete(:admin) == "1" : false
+    super
+    # actually save user as admin
+    resource.update_attribute(:admin, true) if make_admin
+  end
+
   def new_partner
     if params[:partner_name]
       @partner = Partner.new(name: params[:partner_name])
