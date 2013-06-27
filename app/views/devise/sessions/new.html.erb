@@ -1,14 +1,16 @@
-  <div class="row-fluid">
-    <div class="hero-unit span8">
-      <h1>Connect With Code Fellows!</h1>
-      <p></p>
-      <p>Tired of finding the right match for your company?  The Partner Dashboard allows you to easily connect with graduates and current students of Code Fellows that meet
-        the requirements for your job opening.</p>
-      <%= link_to "Request Invitation", new_invite_request_path, class: "btn btn-primary" %>
-    </div>
-    <div class="span4"><%= render "sign_in" %></div>
-  </div>
-
-  <div class="row-fluid">
+<div class="row-fluid">
+  <div class="hero-unit landing">
+    <h1>Connect With Code Fellows!</h1>
+    <p></p>
+    <p>Tired of finding the right match for your company?  The Partner Dashboard allows you to easily connect with graduates and current students of Code Fellows that meet
+      the requirements for your job opening.</p>
+    <%= link_to "Request Invitation", new_invite_request_path, class: "btn btn-primary" %>
+    <%= render "sign_in" %>
     <%= render "devise/shared/links" %>
   </div>
+</div>
+
+<script>
+  $("#wide_background").css("background", "url(/assets/partners.jpg) no-repeat 50%")
+    $("#wide_background").css("background-size", "cover")
+</script>

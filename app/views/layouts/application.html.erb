@@ -10,16 +10,16 @@
 <body>
 
 <%= render 'layouts/navbar' %>
-
-<div class="container">
-    <% flash.each do |key, value| %>
-      <div class="alert <%= key == :alert ? "alert-error" : "alert-info" %>">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <%= value %>
-      </div>
-    <% end %>
-	<%= yield %>
-</div>
-
+  <div id="wide_background">
+    <div class="base container">
+        <% flash.each do |key, value| %>
+          <div class="alert <%= key == :alert ? "alert-error" : "alert-info" %>">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <%= value %>
+          </div>
+        <% end %>
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>

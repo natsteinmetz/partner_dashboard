@@ -8,7 +8,7 @@ button.fadeOut( ()->
 
 #Add flash message
 student_name = "<%= j Student.find(params[:student_id]).name %>"
-alert = "<div id='contact_alert' class='alert alert-success' style='display: none'>You successfully requested contact with #{student_name}.</div>"
+alert = "<div id='contact_alert' class='alert alert-success' style='display: none'><span>You successfully requested contact with #{student_name}.</span></div>"
 $(".navbar.navbar-fixed-top").append(alert)
 $("#contact_alert").slideDown()
 setTimeout ->

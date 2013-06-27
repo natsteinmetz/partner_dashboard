@@ -1,5 +1,5 @@
-
-<div class="navbar navbar-fixed-top">
+<div class="navbar navbar-fixed-top navbar-inverse">
+  <%= image_tag "cf_logo.png", id: "corner_logo" %>
   <% if user_signed_in? %>
     <%= render 'layouts/navbar_account' %>
   <% end %>

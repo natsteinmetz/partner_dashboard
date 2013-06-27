@@ -1,5 +1,4 @@
 #Controller used for public actions
-
 class HomeController < ApplicationController
   def index
     flash.keep

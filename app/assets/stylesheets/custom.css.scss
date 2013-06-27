@@ -5,7 +5,11 @@ $sansFontFamily: 'Open Sans', Helvetica, Arial, sans-serif;
 @import "font-awesome";
 
 body {
-  padding-top: 60px;
+  padding-top: 40px;
+}
+
+.base.container{
+  padding-top: 20px;
 }
 
 .contact-button {
@@ -25,4 +29,23 @@ tbody>tr:nth-child(even){ background-color:#fff; }
 
 #error_explanation li {
 	color: $red;
+}
+
+#corner_logo{
+  padding-top: 3px;
+  position: absolute;
+  padding-left: 20px !important;
+  height: 90px;
+}
+
+.navbar-inverse .brand{
+  color: $white;
+}
+.alert span{
+  margin-left: 100px
+}
+
+.landing{
+  background-color: rgba(0, 0, 0, 0.8);
+  color: $white;
 }
