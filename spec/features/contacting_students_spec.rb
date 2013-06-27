@@ -8,11 +8,12 @@ feature "Contacting students" do
 
     before do
       sign_in_and_visit_students_as user
-      click_button "Contact"
+      click_link "Contact"
     end
 
-    scenario "requesting contact with a particular student" do
+    scenario "requesting contact with a particular student", js: true do
       page.current_path.should == students_path
+      puts page.body
       page.should have_content("You successfully requested contact with #{student.name}.")
     end
 

@@ -5,8 +5,14 @@ class RelationshipsController < ApplicationController
   #TODO: Add conditional to make sure a contact cannot be requestd twice
   def create
     Relationship.pending!(current_user.partner.id, params[:student_id])
-    flash[:notice] = "You successfully requested contact with #{Student.find(params[:student_id]).name}."
-    redirect_to students_path
+    respond_to do |format|
+      format.html {
+        redirect_to students_path
+      }
+      format.js {
+        render 'create'
+      }
+    end
   end
 
   #TODO: Add destroy relationship
