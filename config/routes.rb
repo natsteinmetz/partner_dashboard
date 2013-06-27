@@ -22,7 +22,13 @@ PartnerDashboard::Application.routes.draw do
     resources :relationships, except: [:show, :edit]
    end
 
-  devise_for :users, :skip => :invitations
+  devise_for :users, :skip => [:invitations, :registrations]
+
+  # only allow editing registrations, not creating them
+  as :user do
+    get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
+    put 'users' => 'devise/registrations#update', :as => 'user_registration'
+  end
 
   #TODO, maybe you can yank some of the admin specific routes in here and put them above in the admin namespace block?
   devise_scope :user do

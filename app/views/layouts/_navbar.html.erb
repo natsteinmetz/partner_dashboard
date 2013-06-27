@@ -1,5 +1,8 @@
 
 <div class="navbar navbar-fixed-top">
+  <% if user_signed_in? %>
+    <%= render 'layouts/navbar_account' %>
+  <% end %>
   <div class="navbar-inner">
     <div class="container">
     <ul class="nav">
@@ -10,7 +13,6 @@
       <% else %>
         <%= render 'layouts/navbar_links' %>
       <% end %>
-      <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => "btn-btn-navbar" %></li>
     <% end %>
     </div>
   </div>

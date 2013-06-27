@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
     message: "Only admin users can receive invite requests" }, unless: :admin?
 
 
-  devise :invitable, :database_authenticatable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
 
