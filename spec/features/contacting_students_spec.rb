@@ -13,7 +13,6 @@ feature "Contacting students" do
 
     scenario "requesting contact with a particular student", js: true do
       page.current_path.should == students_path
-      puts page.body
       page.should have_content("You successfully requested contact with #{student.name}.")
     end
 
