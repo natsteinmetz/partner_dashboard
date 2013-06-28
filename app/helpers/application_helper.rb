@@ -16,9 +16,7 @@ module ApplicationHelper
           <th>
             Courses
           </th>
-          <th>
-            Status
-          </th>
+          #{'<th>Status</th>' unless current_user.admin?}
         </tr>
       </thead>
       <tbody class='list'>
