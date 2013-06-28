@@ -10,12 +10,26 @@
 		<thead>
 			<tr>
 				<th>For Hire</th>
-				<th class="sort" data-sort="name">Name</th>
-				<th>Skills</th>
-				<th>Courses</th>
-				<th class="input-prepend">
-					<span class="add-on"><i class="icon-filter"></i></span>
-					<input id="student-filter" type="text" class="search input-medium" placeholder="Filter Students" />
+				<th class="sort" data-sort="name">
+					<div>Name</div>
+					<div class="input-prepend">
+						<span class="add-on"><i class="icon-filter"></i></span>
+						<input id="name-filter" type="text" class="search input-medium" placeholder="Filter by name" />
+					</div>
+				</th>
+				<th>
+					<div>Skills</div>
+					<div class="input-prepend">
+						<span class="add-on"><i class="icon-filter"></i></span>
+						<input id="skills-filter" type="text" class="search input-medium" placeholder="Filter by skills" />
+					</div>
+				</th>
+				<th>
+					<div>Courses</div>
+					<div class="input-prepend">
+						<span class="add-on"><i class="icon-filter"></i></span>
+						<input id="courses-filter" type="text" class="search input-medium" placeholder="Filter by courses" />
+					</div>
 				</th>
 			</tr>
 		</thead>
@@ -27,9 +41,39 @@
 </div>
 
 <script>
-	var options = {
-	  valueNames: ['name', 'skills']
-	};
+	var studentsList;
 
-	var studentsList = new List('students', options);
+	function MultiFilter(searchClasses) {
+		return function(e) {
+			studentsList.filter(function(item){
+
+				var keepItem = true;
+				searchClasses.forEach(function(searchClass){
+					var cellText = $(item.elm).find('td.' + searchClass).text().toLowerCase();
+					var searchString = $('#' + searchClass + '-filter').val().toLowerCase();
+					if(cellText.search(searchString) === -1) {
+						keepItem = false;
+            return;
+					}
+				});
+				console.log(keepItem);
+				return keepItem;
+			});
+		}
+	}
+
+	$(document).ready(function(){
+		var listOptions = {
+			valueNames: ['name'],
+			searchClass: 'search-stuff'
+		}
+		studentsList = new List('students', listOptions);
+
+		var filter = MultiFilter(['name', 'skills', 'courses']);
+
+		$('#name-filter').on('input', filter);
+		$('#skills-filter').on('input', filter);
+		$('#courses-filter').on('input', filter);
+
+		});
 </script>

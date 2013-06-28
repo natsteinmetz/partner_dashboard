@@ -44,7 +44,7 @@ feature "Viewing students" do
     end
 
     scenario "only showing students with a particular skill", :js => true do
-      fill_in "student-filter", with: student_werner.skills
+      fill_in "skills-filter", with: student_werner.skills
       page.should have_content student_werner.name
       page.should_not have_content student_albert.name
     end
