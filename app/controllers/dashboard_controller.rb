@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
     #Load current courses
     @courses = Course.where(":todays_date >= start_date AND :todays_date <= end_date", {todays_date: Date.today})
     #Load connected students
-    @students = current_user.partner.students.all(joins: :relationships, conditions: {"relationships.connection_allowed" => true})
+    @students = Student.joins(:relationships).where("relationships.partner_id" => 1, "relationships.connection_allowed" => true)
   end
 
   def courses
@@ -23,9 +23,9 @@ class DashboardController < ApplicationController
 
   def students
     if params[:scope] == "Connected"
-      @students = current_user.partner.students.all(joins: :relationships, conditions: {"relationships.connection_allowed" => true})
+      @students = Student.joins(:relationships).where("relationships.partner_id" => 1, "relationships.connection_allowed" => true)
     elsif params[:scope] == "Pending"
-      @students = current_user.partner.students.all(joins: :relationships, conditions: {"relationships.connection_allowed" => false})
+      @students = Student.joins(:relationships).where("relationships.partner_id" => 1, "relationships.connection_allowed" => false)
     else
       render :dash
     end
