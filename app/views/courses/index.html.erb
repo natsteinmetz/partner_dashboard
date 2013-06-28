@@ -6,10 +6,12 @@
 	<% if @courses.empty? %>
 	Sorry, there aren't any courses here yet...
 	<% else %>
-	<table id="courses" class="table">
+	<table id="courses" class="table index">
 		<thead>
 			<tr>
 				<th>Title</th>
+				<th>Start Date</th>
+				<th>End Date</th>
 		</thead>
 		<tbody class="list">
 			<%= render @courses %>

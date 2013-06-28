@@ -24,8 +24,10 @@
     <%= f.text_field :role %>
 
     <%= f.label :message, "Message to Admin" %>
-    <%= f.text_area :message, size: "60x12" %>
+    <%= f.text_area :message, size: "30x6" %>
 
-    <%= f.submit "Submit" %>
+    <p>
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+    </p>
   <% end %>
 </div>

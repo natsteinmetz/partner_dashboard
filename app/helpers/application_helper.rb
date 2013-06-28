@@ -1,7 +1,7 @@
 module ApplicationHelper
   def students_table
     """
-    <table class='table'>
+    <table class='table index'>
       <thead>
         <tr>
           <th>

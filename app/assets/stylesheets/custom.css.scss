@@ -24,8 +24,8 @@ td.for-hire {
 	width: 3em;
 }
 
-tbody>tr:nth-child(odd){ background-color:#ffe; }
-tbody>tr:nth-child(even){ background-color:#fff; }
+table.index tbody>tr:nth-child(odd){ background-color:#ffe; }
+table.index tbody>tr:nth-child(even){ background-color:#fff; }
 
 #error_explanation li {
 	color: $red;

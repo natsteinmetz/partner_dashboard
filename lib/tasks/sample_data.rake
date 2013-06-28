@@ -41,14 +41,16 @@ namespace :db do
         email = "#{name.emailize}@gmail.com"
         phone_number = Faker::PhoneNumber.phone_number
         #Find a better way to do this
-        skills = possible_skills.sample + ', ' + possible_skills.sample + ', ' + possible_skills.sample
-        course.students.create(name: name,
-                       email: email,
-                       phone_number: phone_number,
-                       skills: skills,
-                       for_hire: [true, false].sample,
-                     bio: Faker::Lorem.paragraphs(3).join,
-                     links: "https://github.com/#{name.emailize}")
+        skills = []
+        3.times {skills.push possible_skills.sample}
+        skills.uniq!
+        course.students.create( name: name,
+                                email: email,
+                                phone_number: phone_number,
+                                skills: skills.join(", "),
+                                for_hire: [true, false].sample,
+                                bio: Faker::Lorem.paragraphs(3).join,
+                                links: "https://github.com/#{name.emailize}")
       end
     end
 

@@ -10,11 +10,11 @@
     <table class="course_info">
       <tr>
         <th scope="row" style="text-align: left">Start Date</th>
-        <td><%= @course.start_date %></td>
+        <td><%= @course.start_date.to_formatted_s(:verbose) %></td>
       </tr>
       <tr>
         <th scope="row" style="text-align: left">End Date</th>
-        <td><%= @course.end_date %></td>
+        <td><%= @course.end_date.to_formatted_s(:verbose) %></td>
       </tr>
       <tr>
         <th scope="row" style="text-align: left">Students Enrolled</th>
