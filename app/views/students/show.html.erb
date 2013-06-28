@@ -22,7 +22,7 @@
         <th scope="row" style="text-align: left">Links</th>
         <td>
           <% @student.links.split(",").each do |link| %>
-            <%= link_to(link) %><br>
+            <%= link_to(link, link) %><br>
           <% end %>
         </td>
       </tr>
