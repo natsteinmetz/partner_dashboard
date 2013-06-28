@@ -8,7 +8,7 @@ feature "Connecting with students" do
 
     before do
       sign_in_and_visit_students_as user
-      click_link "Connect"
+      click_button "Connect"
     end
 
     scenario "requesting connection with a particular student", js: true do

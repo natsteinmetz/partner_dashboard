@@ -10,7 +10,7 @@ PartnerDashboard::Application.routes.draw do
   match "/dashboard/courses", to: "dashboard#courses", via: :get, as: :dashboard_courses
   match "/dashboard/students", to: "dashboard#students", via: :get, as: :dashboard_students
   #TODO:
-  match "/relationships(.:format)", to: "relationships#create", via: :get, as: :relationships
+  match "/relationships(.:format)", to: "relationships#create", via: :post, as: :relationships
 
   resources :students, only: [:index, :show]
   resources :courses, only: [:index, :show]

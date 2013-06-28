@@ -6,13 +6,9 @@ module StudentsHelper
       elsif current_user.requested_connection? student
         "<button class='btn disabled' id='connect_button_student[#{student.id}]'>Pending</button>".html_safe
       else
-        #TODO: This is using a "GET" request and it should be a "POST"
-        link_to("Connect", {controller: "relationships",
-                            action: "create",
-                            student_id: student.id,
-                            remote: true},
-                            id: "connect_button_student[#{student.id}]",
-                            class: "btn btn-primary").html_safe
+        button_to("Connect",
+               { controller: "relationships", action: "create", student_id: student.id },
+               remote: true, class: "btn btn-primary", id: "connect_button_student[#{student.id}]")
       end
     end
   end
