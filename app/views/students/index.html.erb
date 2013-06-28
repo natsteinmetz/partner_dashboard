@@ -10,25 +10,25 @@
     <thead>
       <tr>
         <th>For Hire</th>
-        <th class="sort" data-sort="name">
-          <div>Name</div>
-          <div class="input-prepend">
+        <th>
+          <div>Name <i id="name-filter-toggle" class="icon-filter toggle"></i></div>
+          <div id="name-filter" class="filter input-prepend">
             <span class="add-on"><i class="icon-filter"></i></span>
-            <input id="name-filter" type="text" class="search input-medium" placeholder="Filter by name" />
+            <input type="text" class="search input-medium" placeholder="Filter by name" />
           </div>
         </th>
         <th>
-          <div>Skills</div>
-          <div class="input-prepend">
+          <div>Skills <i id="skills-filter-toggle" class="icon-filter toggle"></i></div>
+          <div id="skills-filter" class="filter input-prepend">
             <span class="add-on"><i class="icon-filter"></i></span>
-            <input id="skills-filter" type="text" class="search input-medium" placeholder="Filter by skills" />
+            <input type="text" class="search input-medium" placeholder="Filter by skills" />
           </div>
         </th>
         <th>
-          <div>Courses</div>
-          <div class="input-prepend">
+          <div>Courses <i id="courses-filter-toggle" class="icon-filter toggle"></i></div>
+          <div id="courses-filter" class="filter input-prepend">
             <span class="add-on"><i class="icon-filter"></i></span>
-            <input id="courses-filter" type="text" class="search input-medium" placeholder="Filter by courses" />
+            <input type="text" class="search input-medium" placeholder="Filter by courses" />
           </div>
         </th>
       </tr>
@@ -50,7 +50,7 @@
         var keepItem = true;
         searchClasses.forEach(function(searchClass){
           var cellText = $(item.elm).find('td.' + searchClass).text().toLowerCase();
-          var searchString = $('#' + searchClass + '-filter').val().toLowerCase();
+          var searchString = $('#' + searchClass + '-filter input').val().toLowerCase();
           if(cellText.search(searchString) === -1) {
             keepItem = false;
             return;
@@ -69,11 +69,26 @@
     }
     studentsList = new List('students', listOptions);
 
-    var filter = MultiFilter(['name', 'skills', 'courses']);
+    var filterAll = MultiFilter(['name', 'skills', 'courses']);
 
-    $('#name-filter').on('input', filter);
-    $('#skills-filter').on('input', filter);
-    $('#courses-filter').on('input', filter);
+    var $nameFilter = $('#name-filter');
+    var $skillsFilter = $('#skills-filter');
+    var $coursesFilter = $('#courses-filter');
 
+    $nameFilter.find('input').on('input', filterAll);
+    $skillsFilter.find('input').on('input', filterAll);
+    $coursesFilter.find('input').on('input', filterAll);
+
+    $('#name-filter-toggle').on('click', function(){
+      $nameFilter.toggle();
     });
+    $('#skills-filter-toggle').on('click', function(){
+      console.log("skills");
+      $skillsFilter.toggle();
+    });
+    $('#courses-filter-toggle').on('click', function(){
+      $coursesFilter.toggle();
+    });
+
+  });
 </script>
