@@ -9,13 +9,14 @@ feature 'viewing professionals' do
 
     before { sign_in_as!(admin) }
 
-    scenario "user is redirected to professionals index upon signing in" do
-      page.should have_content("Code Fellows Company Professionals")
+    scenario "user is redirected to manager relationships page upon signing in" do
+      page.should have_content("Manage Connections")
     end
 
     scenario "there is a message when there are no professionals" do
       Professional.destroy_all
       visit "/"
+      click_link "Professionals Index"
 
       page.should_not have_content("Professional Name")
       page.should have_content("Sorry, there aren't any professionals here yet...")
