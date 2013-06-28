@@ -10,25 +10,31 @@
     <thead>
       <tr>
         <th>For Hire</th>
-        <th>
-          <div>Name <i id="name-filter-toggle" class="icon-filter toggle"></i></div>
-          <div id="name-filter" class="filter input-prepend">
-            <span class="add-on"><i class="icon-filter"></i></span>
-            <input type="text" class="search input-medium" placeholder="Filter by name" />
+        <th>Name
+          <button id="name-filter-show" class="btn btn-info btn-mini">
+            <i class="icon-filter toggle"></i>
+          </button>
+          <div id="name-filter" class="filter input-append">
+            <input type="text" class="search input-small" placeholder="Filter by name" />
+            <button id="clear-name" class="btn"><i class="icon-remove"></i></button>
           </div>
         </th>
-        <th>
-          <div>Skills <i id="skills-filter-toggle" class="icon-filter toggle"></i></div>
-          <div id="skills-filter" class="filter input-prepend">
-            <span class="add-on"><i class="icon-filter"></i></span>
+        <th>Skills
+            <button id="skills-filter-show" class="btn btn-info btn-mini">
+              <i class="icon-filter toggle"></i>
+            </button>
+          <div id="skills-filter" class="filter input-append">
             <input type="text" class="search input-medium" placeholder="Filter by skills" />
+            <button id="clear-skills" class="btn"><i class="icon-remove"></i></button>
           </div>
         </th>
-        <th>
-          <div>Courses <i id="courses-filter-toggle" class="icon-filter toggle"></i></div>
-          <div id="courses-filter" class="filter input-prepend">
-            <span class="add-on"><i class="icon-filter"></i></span>
+        <th>Courses
+          <button id="courses-filter-show" class="btn btn-info btn-mini">
+            <i class="icon-filter toggle"></i>
+          </button>
+          <div id="courses-filter" class="filter input-append">
             <input type="text" class="search input-medium" placeholder="Filter by courses" />
+            <button id="clear-courses" class="btn"><i class="icon-remove"></i></button>
           </div>
         </th>
       </tr>
@@ -79,16 +85,38 @@
     $skillsFilter.find('input').on('input', filterAll);
     $coursesFilter.find('input').on('input', filterAll);
 
-    $('#name-filter-toggle').on('click', function(){
-      $nameFilter.toggle();
+    // Callbacks for showing filter input box
+    $('#name-filter-show').on('click', function(){
+      $(this).hide();
+      $nameFilter.slideDown(300);
     });
-    $('#skills-filter-toggle').on('click', function(){
-      console.log("skills");
-      $skillsFilter.toggle();
+    $('#skills-filter-show').on('click', function(){
+      $(this).hide();
+      $skillsFilter.slideDown(300);
     });
-    $('#courses-filter-toggle').on('click', function(){
-      $coursesFilter.toggle();
+    $('#courses-filter-show').on('click', function(){
+      $(this).hide();
+      $coursesFilter.slideDown(300);
     });
 
+    // Callbacks for clearning inputs
+    $('#clear-name').on('click', function(){
+      $nameFilter.find('input').val('');
+      $nameFilter.find('input').trigger('input');
+      $nameFilter.slideUp(300);
+      $('#name-filter-show').show();
+    });
+    $('#clear-skills').on('click', function(){
+      $skillsFilter.find('input').val('');
+      $skillsFilter.find('input').trigger('input');
+      $skillsFilter.slideUp(300);
+      $('#skills-filter-show').show();
+    });
+    $('#clear-courses').on('click', function(){
+      $coursesFilter.find('input').val('');
+      $coursesFilter.find('input').trigger('input');
+      $coursesFilter.slideUp(300);
+      $('#courses-filter-show').show();
+    });
   });
 </script>
