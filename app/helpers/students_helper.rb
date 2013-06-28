@@ -2,16 +2,16 @@ module StudentsHelper
   def action_cell(student)
     unless current_user.admin?
       if current_user.connected? student
-        "<button class='btn btn-success btn-disabled' id='contact_button_student[#{student.id}]'>Connected</button>".html_safe
-      elsif current_user.has_contacted? student
-        "<button class='btn disabled' id='contact_button_student[#{student.id}]'>Pending</button>".html_safe
+        "<button class='btn btn-success btn-disabled' id='connect_button_stude t[#{student.id}]'>Connected</button>".html_safe
+      elsif current_user.requested_connection? student
+        "<button class='btn disabled' id='connect_button_student[#{student.id}]'>Pending</button>".html_safe
       else
         #TODO: This is using a "GET" request and it should be a "POST"
-        link_to("Contact", {controller: "relationships",
+        link_to("Connect", {controller: "relationships",
                             action: "create",
                             student_id: student.id,
                             remote: true},
-                            id: "contact_button_student[#{student.id}]",
+                            id: "connect_button_student[#{student.id}]",
                             class: "btn btn-primary").html_safe
       end
     end

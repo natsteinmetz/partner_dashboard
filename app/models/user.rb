@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :partner_id, :get_invite_requests
 
-  def has_contacted?(student)
+  def requested_connection?(student)
     if self.admin?
       false
     else
@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
       true
     elsif self.partner.students.include? student
       #TODO: Can't figure out how to make this line not hit the database, even if i eager load relationships.
-      self.partner.relationships.find_by_student_id(student.id).contact_allowed ? true : false
+      self.partner.relationships.find_by_student_id(student.id).connection_allowed ? true : false
     else
       false
     end

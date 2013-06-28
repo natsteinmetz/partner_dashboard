@@ -12,7 +12,7 @@ class Admin::RelationshipsController < Admin::BaseController
   def update
     #Get Relationship
     @relationship = Relationship.find(params[:id])
-    @relationship.update_attribute(:contact_allowed, true)
+    @relationship.update_attribute(:connection_allowed, true)
   end
 
   def destroy
