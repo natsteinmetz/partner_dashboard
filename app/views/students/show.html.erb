@@ -16,11 +16,15 @@
       </tr>
       <tr>
         <th scope="row" style="text-align: left">Email</th>
-        <td><%= @student.email %></td>
+        <td><%= mail_to @student.email %></td>
       </tr>
       <tr>
         <th scope="row" style="text-align: left">Links</th>
-        <td><%= @student.links %></td>
+        <td>
+          <% @student.links.split(",").each do |link| %>
+            <%= link_to(link) %><br>
+          <% end %>
+        </td>
       </tr>
     </table>
   </div>
