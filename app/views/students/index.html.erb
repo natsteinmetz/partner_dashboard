@@ -89,14 +89,17 @@
     $('#name-filter-show').on('click', function(){
       $(this).hide();
       $nameFilter.slideDown(300);
+      $nameFilter.find('input').focus();
     });
     $('#skills-filter-show').on('click', function(){
       $(this).hide();
       $skillsFilter.slideDown(300);
+      $skillsFilter.find('input').focus();
     });
     $('#courses-filter-show').on('click', function(){
       $(this).hide();
       $coursesFilter.slideDown(300);
+      $coursesFilter.find('input').focus();
     });
 
     // Callbacks for clearning inputs
