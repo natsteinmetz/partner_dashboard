@@ -34,7 +34,9 @@ feature "Connecting with students" do
     end
 
     scenario "admin users don't have a link to connect with students" do
-      page.should_not have_content("Connect")
+      within('#students') do
+        page.should_not have_content("Connect")
+      end
     end
 
     scenario "admin can approve connection" do

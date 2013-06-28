@@ -9,7 +9,7 @@ feature "Managing Relationships:" do
   before do
     sign_in_as!(admin)
     visit '/'
-    click_link "Manage Relationships"
+    click_link "Manage Connections"
   end
 
   scenario "admin can view all relationships" do
