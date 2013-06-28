@@ -1,6 +1,6 @@
 class Admin::RelationshipsController < Admin::BaseController
   def index
-    @relationships = Relationship.all
+    @relationships = Relationship.order("connection_allowed ASC")
   end
 
   def new
