@@ -1,3 +1,3 @@
-# Partner Dashboard [![Build Status](https://travis-ci.org/seanirby/partner_dashboard.png?branch=master)](https://travis-ci.org/seanirby/partner_dashboard) [![Code Climate](https://codeclimate.com/github/seanirby/partner_dashboard.png)](https://codeclimate.com/github/seanirby/partner_dashboard)
+# Partner Dashboard 
 
-Partner Dashboard is the final Code Fellows class project created by Sean Irby and James Adney.
+Partner Dashboard was the final Code Fellows class project created by Sean Irby and James Adney. It's been followed up with another Code Fellows class project by Kangie Chan, Nathalie Steinmetz and Danielle Tucker.
