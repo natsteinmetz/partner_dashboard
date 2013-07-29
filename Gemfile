@@ -48,6 +48,7 @@ end
 group :development do
   gem 'better_errors'
   gem 'meta_request'
+  gem 'rails-erd' #visualize erd
 end
 
 group :test do
