@@ -10,7 +10,7 @@ When you try to run 'bundle install' on the project, you will run into an error.
 
 You will also need to install a library for visualization of the ERD for the rails-erd gem. This gem is dependent upon Graphviz and install instructions can be found at the Rails ERD [Install Page](http://rails-erd.rubyforge.org/install.html) 
 
-After installing Qt and Graphviz, run 'bundle install' as usual.
+After installing Qt and Graphviz, run `bundle install` as usual.
 
 Then run `db:setup` [1], and you should be good to go! Have a look in the db/seeds.rb for the development login credentials.
 
