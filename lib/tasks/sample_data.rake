@@ -1,5 +1,6 @@
 namespace :db do
   desc "Fill database with sample data"
+  #to populate your db:  rake db:populate
   task populate: :environment do
 
     #Create some "real" students
