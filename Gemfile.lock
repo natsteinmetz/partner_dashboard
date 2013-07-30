@@ -120,6 +120,7 @@ GEM
     multi_json (1.7.3)
     nokogiri (1.5.9)
     orm_adapter (0.4.0)
+    pg (0.16.0)
     polyglot (0.3.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
@@ -242,6 +243,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   meta_request
+  pg
   pry-debugger
   pry-doc
   pry-rails

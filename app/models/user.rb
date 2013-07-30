@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_one :profile
+
   belongs_to :partner
 
   # non-admins must have a partner

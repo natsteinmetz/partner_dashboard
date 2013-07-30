@@ -14,6 +14,7 @@ PartnerDashboard::Application.routes.draw do
 
   resources :students, only: [:index, :show]
   resources :courses, only: [:index, :show]
+  resources :profiles, only: [:show]
 
   namespace :admin do
     root :to => "base#index"
