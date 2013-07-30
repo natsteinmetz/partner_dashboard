@@ -1,28 +1,29 @@
 <div class="row-fluid">
   <div class="span2">
-    <%= gravatar_image_tag @student.email, alt: @student.name %>
+    <%= gravatar_image_tag @profile.email, alt: @profile.last_name %>
   </div>
   <div class="span6">
     <h2>
-      <%= @student.name %>
-      <% if @student.for_hire %>
+      <%= @profile.first_name %> <%= @profile.last_name %>
+      <% if @profile.for_hire %>
         <span class="label label-success">For Hire!</span>
       <% end %>
     </h2>
     <table class="profile_contact_info">
       <tr>
         <th scope="row" style="text-align: left">Phone Number</th>
-        <td><%= @student.phone_number %></td>
+        <td><%= @profile.phone_number %></td>
       </tr>
       <tr>
         <th scope="row" style="text-align: left">Email</th>
-        <td><%= mail_to @student.email %></td>
+        <td><%= mail_to @profile.email %></td>
       </tr>
       <tr>
         <th scope="row" style="text-align: left">Links</th>
         <td>
-          <% @student.links.split(",").each do |link| %>
-            <%= link_to(link, link) %><br>
+          <%= link_to @profile.linkedin_link, @profile.linkedin_link %><br>
+          <%= link_to @profile.github_link, @profile.github_link %><br>
+          <%= link_to @profile.personal_website_link, @profile.personal_website_link %><br>
           <% end %>
         </td>
       </tr>
@@ -34,19 +35,19 @@
   <div class="span8">
     <h3>Skills</h3>
     <p>
-      <%= @student.skills %>
+      <%= @profile.skills %>
     </p>
-    <% if @student.courses.size != 0 %>
+    <% if @profile.courses.size != 0 %>
       <h3>Courses</h3>
       <ul>
-        <% @student.courses.each do |course| %>
+        <% @profile.courses.each do |course| %>
           <li><%= link_to course.title, course_path(course) %></li>
         <% end %>
       </ul>
     <% end %>
     <h3>Bio</h3>
     <p>
-      <%= @student.bio %>
+      <%= @profile.summary %>
     </p>
   </div>
 </div>
