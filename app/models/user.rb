@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   belongs_to :partner
-
+  belongs_to :student
+  
   # non-admins must have a partner
   validates :partner, presence: true, unless: :admin?
 
