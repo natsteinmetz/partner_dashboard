@@ -27,13 +27,14 @@ FOR_HIRE_ICON_XPATH = [
 feature "Viewing students" do
   let!(:student_albert) { FactoryGirl.create(:student,
                                              name: "Albert Einstein",
+                                             email: "albert@example.com",
                                              skills: "relativity",
                                              for_hire: true) }
   let!(:student_werner) { FactoryGirl.create(:student,
                                              name: "Werner Heisenberg",
                                              skills: "quantum mechanics") }
 
-  context "as a normal user" do
+  context "as a normal professional/partner user" do
     before do
       user = FactoryGirl.create(:confirmed_user)
       sign_in_and_visit_students_as user
@@ -77,6 +78,25 @@ feature "Viewing students" do
 
     scenario "viewing students on students index" do
       should_have_students student_albert, student_werner
+    end
+  end
+
+  context "as a student" do
+    before do
+      student_user = FactoryGirl.create(:student_user, email: student_albert.email, student_id: student_albert.id)
+      sign_in_as! student_user
+    end
+
+    scenario "can view own student profile" do
+      page.should have_content("Albert")
+      page.should have_content(student_albert.email)
+    end
+
+    scenario "can view other student's profiles but not personal contact information" do
+      click_link "Courses"
+      click_link student_werner.courses[0].title
+      page.should have_content("Werner Heisenberg")
+      click_link 
     end
   end
 end
