@@ -12,13 +12,14 @@ PartnerDashboard::Application.routes.draw do
   #TODO:
   match "/relationships(.:format)", to: "relationships#create", via: :post, as: :relationships
 
-  resources :students, only: [:index, :show]
+  resources :students, only: [:index, :show, :edit, :update]
   resources :courses, only: [:index, :show]
-  resources :profiles, only: [:show]
+#  resources :profiles, only: [:show]
+  resources :partners, only: :index
 
   namespace :admin do
     root :to => "base#index"
-    resources :partners, only: :index
+    
     resources :professionals, only: :index
     resources :students, only: :index
     resources :relationships, except: [:show, :edit]
