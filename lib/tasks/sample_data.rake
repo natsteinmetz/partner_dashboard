@@ -83,8 +83,9 @@ namespace :db do
                 password_confirmation: "password")
 
     example_user.confirm!
-
     example_user.partner = Partner.first
     example_user.save
+
+
   end
 end

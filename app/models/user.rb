@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
   belongs_to :partner
   belongs_to :student
-  
+
   # non-admins must have a partner
-  validates :partner, presence: true, unless: :admin?
+#  validates :partner, presence: true, unless: :admin?
 
   # get_invite_requests can't be true unless admin
   validates :get_invite_requests, exclusion: { in: [true],
@@ -15,10 +15,10 @@ class User < ActiveRecord::Base
          :confirmable
 
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :partner_id, :get_invite_requests
+                  :partner_id, :get_invite_requests, :student_id
 
   def requested_connection?(student)
-    if self.admin?
+    if self.admin? || self.partner.nil?
       false
     else
       self.partner.students.include? student
@@ -28,6 +28,8 @@ class User < ActiveRecord::Base
   def connected?(student)
     if self.admin?
       true
+    elsif self.partner.nil?
+      false
     elsif self.partner.students.include? student
       #TODO: Can't figure out how to make this line not hit the database, even if i eager load relationships.
       self.partner.relationships.find_by_student_id(student.id).connection_allowed ? true : false

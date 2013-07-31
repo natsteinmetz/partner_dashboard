@@ -1,7 +1,7 @@
 class StudentsController < ApplicationController
   before_filter :authenticate_user!
   #TODO: Add before filter to ensure user's partner has a relationship
-  before_filter :confirm_relationship, only: :show
+  #before_filter :confirm_relationship, only: :show FIX ME
 
   def index
     # Eager load students to check relationship status
@@ -12,6 +12,7 @@ class StudentsController < ApplicationController
   end
 
   def show
+    @student = Student.find(params[:id])
   end
 
 private
