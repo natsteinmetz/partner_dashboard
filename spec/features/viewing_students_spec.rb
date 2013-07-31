@@ -92,11 +92,11 @@ feature "Viewing students" do
       page.should have_content(student_albert.email)
     end
 
-    scenario "can view other student's profiles but not personal contact information" do
+    pending scenario "can view other student's profiles but not personal contact information" do
       click_link "Courses"
       click_link student_werner.courses[0].title
       page.should have_content("Werner Heisenberg")
-      click_link 
+      click_link
     end
   end
 end
