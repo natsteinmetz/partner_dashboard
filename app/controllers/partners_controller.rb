@@ -5,10 +5,12 @@ class PartnersController < ApplicationController
     @partners = Partner.all
   end
 
-  def show    
+  def show
+    @professionals = @partner.professionals    
   end
 
   def edit
+    @professionals = @partner.professionals       
   end
 
   def update

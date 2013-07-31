@@ -58,10 +58,12 @@ ActiveRecord::Schema.define(:version => 20130731222526) do
   create_table "partners", :force => true do |t|
     t.string   "name"
     t.string   "kind"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.string   "size"
     t.string   "website"
+    t.string   "technologies"
+    t.text     "about"
   end
 
   create_table "professionals", :force => true do |t|
