@@ -5,7 +5,7 @@ class Professional < ActiveRecord::Base
   has_many :students, :through => :mentorships
   has_many :mentorships
 
-  attr_accessible :email, :name, :phone_number, :employments_attributes
+  attr_accessible :email, :name, :phone_number, :employments_attributes, :bio, :links
 
   accepts_nested_attributes_for :employments
 
