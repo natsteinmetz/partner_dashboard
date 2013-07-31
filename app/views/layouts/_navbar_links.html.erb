@@ -1,6 +1,6 @@
 <!-- PUT LINK TO CURRENT USERS PARTNER IF ANY -->
-<li><%#= link_to "Partner", partner_path(current_user.partner) %></li>
 <li><%= link_to "Courses", courses_path, :class => "btn-btn-navbar" %></li>
 <% if !current_user.partner.nil? %>
   <li><%= link_to "Students", students_path, :class => "btn-btn-navbar" %></li>
 <% end %>
+<li><%#= link_to "Profile", profile_path, :class => "btn-btn-navbar" %></li>

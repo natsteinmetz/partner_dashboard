@@ -1,4 +1,5 @@
 class Student < ActiveRecord::Base
+
   has_many :professionals, :through => :mentorships
   has_many :mentorships
 

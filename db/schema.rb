@@ -70,6 +70,19 @@ ActiveRecord::Schema.define(:version => 20130730232207) do
     t.string   "phone_number"
   end
 
+  create_table "profiles", :force => true do |t|
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "phone_number"
+    t.text     "summary"
+    t.string   "linkedin_link"
+    t.string   "github_link"
+    t.string   "personal_website_link"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
   create_table "relationships", :force => true do |t|
     t.integer  "partner_id"
     t.integer  "student_id"
