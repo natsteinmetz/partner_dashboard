@@ -10,7 +10,7 @@ feature "Viewing profiles" do
     click_link "Profile"
   end
 
-  scenario "see user profile page"
+  scenario "see user profile page" do
     page.should have_content("Profile")
   end
 end
