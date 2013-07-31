@@ -1,5 +1,6 @@
 class Partner < ActiveRecord::Base
-  attr_accessible :kind, :name, :professionals_attributes, :employments_attributes
+  attr_accessible :kind, :name, :professionals_attributes, :employments_attributes,
+    :size, :website
   has_many :professionals, :through => :employments
   has_many :employments
 
@@ -9,7 +10,6 @@ class Partner < ActiveRecord::Base
   has_many :users
 
   accepts_nested_attributes_for :professionals, :employments
-
 
 
   validates :name, :kind, presence: true
