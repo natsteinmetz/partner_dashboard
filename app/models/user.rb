@@ -19,8 +19,20 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :partner_id, :get_invite_requests, :student_id
 
+  def is_admin?
+    self.admin?
+  end
+
+  def is_student?
+    !self.student_id.nil?
+  end
+
+  def is_partner?
+    !self.partner_id.nil?
+  end
+
   def requested_connection?(student)
-    if self.admin? || self.partner.nil?
+    if self.admin?
       false
     else
       self.partner.students.include? student

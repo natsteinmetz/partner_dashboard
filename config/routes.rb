@@ -19,7 +19,7 @@ PartnerDashboard::Application.routes.draw do
 
   namespace :admin do
     root :to => "base#index"
-    
+    resources :partners, only: :index   
     resources :professionals, only: :index
     resources :students, only: :index
     resources :relationships, except: [:show, :edit]

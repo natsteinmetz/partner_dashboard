@@ -3,7 +3,7 @@ class StudentsController < ApplicationController
   #TODO: Add before filter to ensure user's partner has a relationship
   #before_filter :confirm_relationship, only: :show FIX ME
 
-  def indexin
+  def index
     @students = Student.includes(:courses).order("name")
   end
 
