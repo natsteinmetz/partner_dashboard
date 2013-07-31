@@ -11,6 +11,21 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
   end
 
+  def edit
+    @student = Student.find(params[:id])
+  end
+
+  def update
+    @student = Student.find(params[:id])
+    if @student.update_attributes(params[:student])
+      flash[:notice] = "Profile has been updated."
+      redirect_to @student
+    else
+      flash[:alert] = "Profile has not been updated."
+      render action: "edit"
+    end
+  end
+
 private
   def confirm_relationship
     @student = Student.find(params[:id])
