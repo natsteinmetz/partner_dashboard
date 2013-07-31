@@ -18,6 +18,11 @@ FactoryGirl.define do
         partner nil
         get_invite_requests true
       end
+
+      factory :student_user do
+        partner nil
+        student 
+      end
     end
   end
 end

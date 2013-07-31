@@ -22,8 +22,7 @@ feature "Connecting with students" do
       end
     end
 
-    scenario "users see when their connection request is accepted" do
-    end
+    scenario "users see when their connection request is accepted" 
   end
 
   context "as an admin user" do

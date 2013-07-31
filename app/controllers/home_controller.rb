@@ -6,8 +6,13 @@ class HomeController < ApplicationController
       redirect_to new_user_session_path
     elsif current_user.admin?
       redirect_to admin_relationships_path
-    else
+    elsif current_user.partner_id.is_a? Integer
+      #user is a partner
       redirect_to dashboard_path
+    else
+      #user is a student
+      @student = Student.find(current_user.student_id)
+      redirect_to student_path(@student)
     end
   end
 end

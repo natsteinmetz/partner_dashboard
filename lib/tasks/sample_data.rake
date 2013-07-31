@@ -4,7 +4,7 @@ namespace :db do
   task populate: :environment do
 
     #Create some "real" students
-    Student.create(name: "Sean Irby",
+    sean = Student.create(name: "Sean Irby",
                    email: "sean.t.irby@gmail.com",
                    phone_number: "206-794-9466",
                    skills: "Ruby, Rails, Javascript, SQL",
@@ -83,8 +83,14 @@ namespace :db do
                 password_confirmation: "password")
 
     example_user.confirm!
-
     example_user.partner = Partner.first
     example_user.save
+
+    #create some student users
+    student_user = User.create(email: sean.email,
+                               password: "password",
+                               password_confirmation: "password",
+                               student_id: sean.id)
+    student_user.confirm!
   end
 end
