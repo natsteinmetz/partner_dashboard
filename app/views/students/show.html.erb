@@ -10,6 +10,8 @@
       <% end %>
     </h2>
     <table class="profile_contact_info">
+      <% if (current_user.is_student? && (current_user.student.id == @student.id)) ||
+            (current_user.connected? (@student)) %>
       <tr>
         <th scope="row" style="text-align: left">Phone Number</th>
         <td><%= @student.phone_number %></td>
@@ -18,6 +20,7 @@
         <th scope="row" style="text-align: left">Email</th>
         <td><%= mail_to @student.email %></td>
       </tr>
+      <% end -%>
       <tr>
         <th scope="row" style="text-align: left">Links</th>
         <td>

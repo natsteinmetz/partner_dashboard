@@ -3,6 +3,7 @@ FactoryGirl.define do
     kinds = ["Big Co", "Startup", "Hiring Agency"]
     sequence(:name) {|n| "Company#{n}"}
     kind { kinds.sample }
+    about "This company saves the world on a daily basis.  You should totally work here!"
 
     factory :partner_with_professional do
       after(:create) do |partner|

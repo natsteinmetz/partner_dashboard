@@ -83,8 +83,8 @@ feature "Viewing students" do
 
   context "as a student" do
     before do
-      student_user = FactoryGirl.create(:student_user, email: student_albert.email, student_id: student_albert.id)
-      sign_in_as! student_user
+      albert_user = FactoryGirl.create(:student_user, email: student_albert.email, student_id: student_albert.id)
+      sign_in_as! albert_user
     end
 
     scenario "can view own student profile" do
@@ -92,11 +92,13 @@ feature "Viewing students" do
       page.should have_content(student_albert.email)
     end
 
-    pending scenario "can view other student's profiles but not personal contact information" do
+    scenario "can view other student's profiles but not personal contact information" do
       click_link "Courses"
       click_link student_werner.courses[0].title
       page.should have_content("Werner Heisenberg")
-      click_link
+      click_link "Werner Heisenberg"
+      page.should_not have_content student_werner.email
+      page.should_not have_content student_werner.phone_number
     end
   end
 end

@@ -1,8 +1,10 @@
 require 'spec_helper'
 
 feature 'viewing professionals' do
-  let!(:professional_one) { FactoryGirl.create(:partner_with_professional, name: "Acme", kind: "BigCo").professionals.first }
-  let!(:professional_two) { FactoryGirl.create(:partner_with_professional, name: "Facebook", kind: "Startup").professionals.first }
+  let!(:professional_one) { FactoryGirl.create(:partner_with_professional, 
+    name: "Acme", kind: "BigCo").professionals.first }
+  let!(:professional_two) { FactoryGirl.create(:partner_with_professional, 
+    name: "Facebook", kind: "Startup").professionals.first }
 
   context "as an admin user" do
     let!(:admin) { FactoryGirl.create(:admin_user) }
@@ -47,4 +49,5 @@ feature 'viewing professionals' do
 
     scenario "user can sort professionals by ____"
   end
+
 end
