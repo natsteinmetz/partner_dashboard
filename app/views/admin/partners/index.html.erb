@@ -20,7 +20,7 @@
     <tbody class="list">
       <% @partners.each do |partner| %>
         <tr>
-          <td class="name"><%= partner.name %></td>
+          <td class="name"><%= link_to partner.name, partner_path(partner) %></td>
           <td class="kind"><%= partner.kind %></td>
         </tr>
       <% end %>
