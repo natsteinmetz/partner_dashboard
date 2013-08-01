@@ -11,7 +11,6 @@
       <th><%= model_class.human_attribute_name(:phone_number) %></th>
       <th><%= model_class.human_attribute_name(:bio) %></th>
       <th><%= model_class.human_attribute_name(:links) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -24,7 +23,6 @@
         <td><%= professional.phone_number %></td>
         <td><%= professional.bio %></td>
         <td><%= professional.links %></td>
-        <td><%=l professional.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_professional_path(professional), :class => 'btn btn-mini' %>

@@ -23,6 +23,21 @@
       <%= f.text_field :website, :class => 'text_field' %>
     </div>
   </div>
+  <div class="control-group">
+    <%= f.label :technologies, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :technologies, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :about, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :about, :class => 'text_field' %>
+    </div>
+  </div>
+
+
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>

@@ -99,7 +99,7 @@ namespace :db do
 
     #Create some users, should probably put this under partners and professionals
     professional = Professional.new(name: "KC", phone_number: Faker::PhoneNumber.phone_number, email: "example@example.com", bio: "Whatever", links: "http://somelink.com")
-    partner = Partner.create(name: "partnerkc", kind: "somekind")
+    partner = Partner.find(1)
     professional.employments.build(role: "Hiring Manager",
                                    partner_id: partner.id)
     professional.save

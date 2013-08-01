@@ -20,12 +20,18 @@
   <div class="span8">
     <h3>Technologies</h3>
     <p>
+    <% if @partner.technologies.nil? || @partner.technologies.empty? %>
+      None provided....
+    <% else %>
       <%= @partner.technologies %>
+    <% end -%>
     </p>
+    <% unless (@partner.about.nil? || @partner.about.empty?) %>
     <h3>About</h3>
     <p>
       <%= @partner.about %>
     </p>
+    <% end %>
   </div>
 </div>
 
@@ -54,9 +60,10 @@
       <% @professionals.each do |professional| %>
         <tr>
           <td class="name"><%= link_to professional.name, professional_path(professional) %></td>
-          <% if !current_user.is_partner? %>
-            <td class="actions"><%= action_cell professional %></td>
-          <% end %>
+          
+          <!--- BAD CODE..WE KNOW!!! -->
+            <td class="actions"><%= professional.partners.first.employments.find_by_professional_id(professional.id).role %></td>
+        
         </tr>
       <% end %>
     </tbody>

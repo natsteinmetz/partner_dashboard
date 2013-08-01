@@ -56,6 +56,8 @@
 
 <div class="row-fluid">
   <button class="btn btn-primary">Download Resume</button>
-  <%= link_to "Edit Profile", edit_student_path(@student), class: "btn btn-primary" %>
+  <% if current_user.is_admin? || (current_user.is_student? && current_user.student_id == @student.id) %>
+    <%= link_to "Edit Profile", edit_student_path(@student), class: "btn btn-primary" %>
+  <% end -%>
 </div>
 
