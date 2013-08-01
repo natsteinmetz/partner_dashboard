@@ -19,22 +19,38 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :partner_id, :get_invite_requests, :student_id
 
-  def requested_connection?(student)
-    if self.admin? || self.partner.nil?
+  def is_admin?
+    self.admin?
+  end
+
+  def is_student?
+    !self.student_id.nil?
+  end
+
+  def is_partner?
+    !self.partner_id.nil?
+  end
+
+  def requested_connection?(person)
+    if self.admin?
       false
+    elsif self.is_partner?
+      self.partner.students.include? person
+    elsif self.is_student?
+      self.student.partners.include? person
     else
-      self.partner.students.include? student
+      "NEVER"
     end
   end
 
-  def connected?(student)
+  def connected?(person)
     if self.admin?
       true
-    elsif self.partner.nil?
-      false
-    elsif self.partner.students.include? student
+    elsif self.is_partner? && (self.partner.students.include? person)
+      self.partner.relationships.find_by_student_id(person.id).connection_allowed
+    elsif self.is_student? && (self.student.partners.include? person)
       #TODO: Can't figure out how to make this line not hit the database, even if i eager load relationships.
-      self.partner.relationships.find_by_student_id(student.id).connection_allowed ? true : false
+      self.student.relationships.find_by_partner_id(person.id).connection_allowed
     else
       false
     end

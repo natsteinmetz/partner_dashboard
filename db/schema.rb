@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130730232207) do
+ActiveRecord::Schema.define(:version => 20130731233251) do
 
   create_table "courses", :force => true do |t|
     t.string   "title"
@@ -58,8 +58,12 @@ ActiveRecord::Schema.define(:version => 20130730232207) do
   create_table "partners", :force => true do |t|
     t.string   "name"
     t.string   "kind"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "size"
+    t.string   "website"
+    t.string   "technologies"
+    t.text     "about"
   end
 
   create_table "professionals", :force => true do |t|
@@ -68,6 +72,8 @@ ActiveRecord::Schema.define(:version => 20130730232207) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.string   "phone_number"
+    t.text     "bio"
+    t.string   "links"
   end
 
   create_table "profiles", :force => true do |t|
@@ -119,7 +125,6 @@ ActiveRecord::Schema.define(:version => 20130730232207) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                                              :null => false
     t.datetime "updated_at",                                              :null => false
-    t.integer  "partner_id"
     t.boolean  "admin",                                :default => false
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
@@ -133,13 +138,13 @@ ActiveRecord::Schema.define(:version => 20130730232207) do
     t.string   "invited_by_type"
     t.boolean  "get_invite_requests"
     t.integer  "student_id"
+    t.integer  "partner_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["invitation_token"], :name => "index_users_on_invitation_token", :unique => true
   add_index "users", ["invited_by_id", "invited_by_type"], :name => "index_users_on_invited_by_id_and_invited_by_type"
   add_index "users", ["invited_by_id"], :name => "index_users_on_invited_by_id"
-  add_index "users", ["partner_id"], :name => "index_users_on_partner_id"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

@@ -9,6 +9,7 @@ gem 'devise_invitable', '~> 1.1.0'
 gem 'dynamic_form', '~> 1.1.4'
 
 gem 'bootstrap-sass', '~> 2.3.1.0'
+gem 'twitter-bootstrap-rails'
 gem 'font-awesome-sass-rails'
 
 gem 'faker', '~>1.0.1'

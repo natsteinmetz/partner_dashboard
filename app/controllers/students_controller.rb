@@ -4,15 +4,26 @@ class StudentsController < ApplicationController
   #before_filter :confirm_relationship, only: :show FIX ME
 
   def index
-    # Eager load students to check relationship status
-    unless current_user.admin?
-      current_user.partner = Partner.includes(:students).find(current_user.partner.id)
-    end
     @students = Student.includes(:courses).order("name")
   end
 
   def show
     @student = Student.find(params[:id])
+  end
+
+  def edit
+    @student = Student.find(params[:id])
+  end
+
+  def update
+    @student = Student.find(params[:id])
+    if @student.update_attributes(params[:student])
+      flash[:notice] = "Profile has been updated."
+      redirect_to @student
+    else
+      flash[:alert] = "Profile has not been updated."
+      render action: "edit"
+    end
   end
 
 private
