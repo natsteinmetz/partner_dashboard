@@ -16,7 +16,7 @@ module ApplicationHelper
           <th>
             Courses
           </th>
-          #{'<th>Status</th>' unless current_user.admin?}
+          #{'<th>Status</th>' if current_user.is_partner?}
         </tr>
       </thead>
       <tbody class='list'>

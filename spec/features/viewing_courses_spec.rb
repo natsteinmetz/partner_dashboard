@@ -21,7 +21,22 @@ feature "Viewing courses" do
   end
 
   context "as a student user" do
-    scenario "can view all courses on courses index"
-    scenario "can view details of a course and all students who took the course but cannot connect"
+    before do
+      student = FactoryGirl.create(:student)
+      student_user = FactoryGirl.create(:student_user, email: student.email, student: student)
+      sign_in_as!(student_user)
+      visit '/'
+      click_link "Courses"
+    end
+
+    scenario "can view all courses on courses index" do
+      page.should have_content(course_one.title)
+      page.should have_content(course_two.title)     
+    end
+
+    scenario "can view details of a course and all students who took the course but cannot connect" do
+      click_link course_one.title
+      page.should_not have_content("Status")
+    end
   end
 end
