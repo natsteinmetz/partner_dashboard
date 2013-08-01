@@ -23,8 +23,8 @@
       <% @professionals.each do |professional| %>
         <% professional.partners.each do |partner| %>
           <tr>
-            <td class="partner_name"><%= partner.name %></td>
-            <td class="professional_name"><%= professional.name %></td>
+            <td class="partner_name"><%= link_to partner.name, partner_path(partner) %></td>
+            <td class="professional_name"><%= link_to professional.name, professional_path(professional) %></td>
             <td class="professional_email"><%= professional.email %></td>
             <td class="professional_phone"><%= professional.phone_number %></td>
           </tr>

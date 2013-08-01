@@ -29,9 +29,11 @@
   </div>
 </div>
 
+<% if current_user.is_admin? || current_user.is_partner? %>
 <div class="row-fluid">
   <%= link_to "Edit Profile", edit_partner_path(@partner), class: "btn btn-primary" %>
 </div>
+<% end %>
 
 <div class="row-fluid">
   <% if @professionals.empty? %>
@@ -52,7 +54,9 @@
       <% @professionals.each do |professional| %>
         <tr>
           <td class="name"><%= link_to professional.name, professional_path(professional) %></td>
-          <td class="actions"><%= action_cell professional %></td>
+          <% if !current_user.is_partner? %>
+            <td class="actions"><%= action_cell professional %></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
