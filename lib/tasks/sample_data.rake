@@ -62,7 +62,7 @@ namespace :db do
 
     #Create some partners and professionals
     possible_kinds = ["Startup", "BigCo", "Hiring Agency"]
-    25.times do |n|
+    10.times do |n|
       name = Faker::Company.name
       kind = possible_kinds.sample
       size = rand(900)
@@ -73,7 +73,7 @@ namespace :db do
       technologies = skills.join(", ")
       about = Faker::Lorem.paragraphs(3).join
       partner = Partner.create(name: name, kind: kind, website: website, size: size, technologies: technologies, about: about)
-      (1..rand(2..5)).to_a.each do |i|
+      (1..rand(1..3)).to_a.each do |i|
         name = Faker::Name.name
         phone_number = Faker::PhoneNumber.phone_number
         email = "#{name.emailize}@#{partner.name.emailize}.com"
