@@ -1,6 +1,6 @@
 class Partner < ActiveRecord::Base
   attr_accessible :kind, :name, :professionals_attributes, :employments_attributes,
-    :size, :website, :technologies
+    :size, :website, :technologies, :about
   has_many :professionals, :through => :employments
   has_many :employments
 
