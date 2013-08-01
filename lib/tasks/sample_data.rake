@@ -98,12 +98,18 @@ namespace :db do
     end
 
     #Create some users, should probably put this under partners and professionals
+    professional = Professional.new(name: "KC", phone_number: Faker::PhoneNumber.phone_number, email: "example@example.com", bio: "Whatever", links: "http://somelink.com")
+    partner = Partner.create(name: "partnerkc", kind: "somekind")
+    professional.employments.build(role: "Hiring Manager",
+                                   partner_id: partner.id)
+    professional.save
+
     example_user = User.create(email: "example@example.com",
                 password: "password",
                 password_confirmation: "password")
 
     example_user.confirm!
-    example_user.partner = Partner.first
+    example_user.partner = partner
     example_user.save
 
     #create some student users
