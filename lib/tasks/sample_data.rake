@@ -45,13 +45,18 @@ namespace :db do
         skills = []
         3.times {skills.push possible_skills.sample}
         skills.uniq!
-        course.students.create( name: name,
+        student = course.students.create( name: name,
                                 email: email,
                                 phone_number: phone_number,
                                 skills: skills.join(", "),
                                 for_hire: [true, false].sample,
                                 bio: Faker::Lorem.paragraphs(3).join,
                                 links: "https://github.com/#{name.emailize}")
+        user = User.create(email: email,
+                    password: "password",
+                    password_confirmation: "password",
+                    student_id: student.id)
+        user.confirm!
       end
     end
 
@@ -60,15 +65,30 @@ namespace :db do
     25.times do |n|
       name = Faker::Company.name
       kind = possible_kinds.sample
-      partner = Partner.create(name: name, kind: kind)
+      size = rand(900)
+      website = "https://linkedin.com/#{name}"
+      skills = []
+      3.times {skills.push possible_skills.sample}
+      skills.uniq!
+      technologies = skills.join(", ")
+      about = Faker::Lorem.paragraphs(3).join
+      partner = Partner.create(name: name, kind: kind, website: website, size: size, technologies: technologies, about: about)
       (1..rand(2..5)).to_a.each do |i|
         name = Faker::Name.name
         phone_number = Faker::PhoneNumber.phone_number
         email = "#{name.emailize}@#{partner.name.emailize}.com"
-        professional = Professional.new(name: name, phone_number: phone_number, email: email)
+        bio = Faker::Lorem.paragraphs(3).join,
+        links = "https://github.com/#{name.emailize}"
+        professional = Professional.new(name: name, phone_number: phone_number, email:email, bio: bio, links: links)
         professional.employments.build(role: "Hiring Manager",
                                        partner_id: partner.id)
         professional.save
+        user = User.create(email: email,
+                    password: "password",
+                    password_confirmation: "password",
+                    partner_id: partner.id)
+        user.partner = partner
+        user.confirm!
       end
     end
 
