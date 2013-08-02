@@ -7,6 +7,7 @@
       <%= @professional.name %>
     </h2>
     <table class="profile_contact_info">
+      <% unless current_user.is_student? && (current_user.connected? @professional.partners.first ) %>
       <tr>
         <th scope="row" style="text-align: left">Phone Number</th>
         <% if @professional.phone_number.nil? || @professional.phone_number.empty? %>
@@ -19,6 +20,7 @@
         <th scope="row" style="text-align: left">Email</th>
         <td><%= mail_to @professional.email %></td>
       </tr>
+      <% end -%>
       <% unless (@professional.links.nil? || @professional.links.empty?) %>
       <tr>
         <th scope="row" style="text-align: left">Links</th>

@@ -4,10 +4,10 @@ feature "editing professional details" do
   before do
     @professional_user = FactoryGirl.create(:confirmed_user)
     @professional = Professional.create(name: "Lady Gaga", 
-      email: professional_user.email, phone_number: Faker::phone_number)
+      email: @professional_user.email, phone_number: Faker::PhoneNumber.phone_number)
     @partner = FactoryGirl.create(:partner)
-    professional.employments.build(partner_id: @partner.id, role: "Contact")
-    professional.save
+    @professional.employments.build(partner_id: @partner.id, role: "Contact")
+    @professional.save
 
   end
 
@@ -29,7 +29,7 @@ feature "editing professional details" do
 
     scenario "cannot edit information for other professionals in own company" do
       professional_two = Professional.create(name: "Captain Crunch",
-        email: "captain.crunch@yum.me", phone_number: Faker::phone_number)
+        email: "captain.crunch@yum.me", phone_number: Faker::PhoneNumber.phone_number)
       professional.employments.build(partner_id: @partner.id, role: "Contact")
       click_link professional_two
       page.should have_content(professional_two.email)

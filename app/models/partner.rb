@@ -12,6 +12,6 @@ class Partner < ActiveRecord::Base
   accepts_nested_attributes_for :professionals, :employments
 
 
-  validates :name, :kind, presence: true
+  validates :name, :kind, :website, presence: true
   validates :name, uniqueness: true
 end

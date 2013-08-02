@@ -4,6 +4,7 @@ FactoryGirl.define do
     sequence(:name) {|n| "Company#{n}"}
     kind { kinds.sample }
     about "This company saves the world on a daily basis.  You should totally work here!"
+    website "http://www.#{:name}.com"  
 
     factory :partner_with_professional do
       after(:create) do |partner|
