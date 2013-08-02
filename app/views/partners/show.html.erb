@@ -42,7 +42,7 @@
 </div>
 
 <div class="actions">
-<%  unless current_user.admin? %>
+<%  if current_user.is_student? %>
   <% if current_user.connected? @partner %>
     <button class='btn btn-success btn-disabled' id='connect_button_partner[#{@partner.id}]'>Connected</button>
   <% elsif current_user.requested_connection? @partner %>

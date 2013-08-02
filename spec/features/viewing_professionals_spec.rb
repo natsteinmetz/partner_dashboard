@@ -16,7 +16,7 @@ feature "viewing professional details" do
       click_link "My Company"
     end
 
-    scenario "can view own contact information" do
+    pending scenario "can view own contact information" do
       click_link @professional.name
       page.should have_content(@professional.email)
       page.should have_content(@professional.phone_number)
