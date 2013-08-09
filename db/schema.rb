@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130731233251) do
+ActiveRecord::Schema.define(:version => 20130809193541) do
 
   create_table "courses", :force => true do |t|
     t.string   "title"
@@ -74,19 +74,6 @@ ActiveRecord::Schema.define(:version => 20130731233251) do
     t.string   "phone_number"
     t.text     "bio"
     t.string   "links"
-  end
-
-  create_table "profiles", :force => true do |t|
-    t.string   "email"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "phone_number"
-    t.text     "summary"
-    t.string   "linkedin_link"
-    t.string   "github_link"
-    t.string   "personal_website_link"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
   end
 
   create_table "relationships", :force => true do |t|
