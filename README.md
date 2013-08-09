@@ -1,6 +1,6 @@
 ### Partner Dashboard 
 
-**Partner Dashboard** is a course project for bootcamp students of [Code Fellows](www.codefellows.org) to solve a particular business need.  This application serves to connect Codefellow partner companies and contacts with students.  It enables companies to find and request introductions to CodeFellows students who fit open development roles and in the same way allows students to request introductions to partners.  Student, Partner Companies and Professional contacts all have profiles which help facillitate admin introductions.
+**Partner Dashboard** is a course project for bootcamp students of [Code Fellows](http://www.codefellows.org) to solve a particular business need.  This application serves to connect Codefellow partner companies and contacts with students.  It enables companies to find and request introductions to CodeFellows students who fit open development roles and in the same way allows students to request introductions to partners.  Student, Partner Companies and Professional contacts all have profiles which help facillitate admin introductions.
 
 ## Show Me
 
@@ -46,13 +46,13 @@ send us a pull request.
 ## Authors
 
 This Extension of the Original By: 
-* [Nathalie Steinmetz](www.linkedin.com/in/nathaliesteinmetz)
-* [Danielle Tucker](www.linkedin.com/in/dqtucker), and 
-* [Kangie Chan](www.linkedin.com/in/kangiechan/)
+* [Nathalie Steinmetz](http://www.linkedin.com/in/nathaliesteinmetz)
+* [Danielle Tucker](http://www.linkedin.com/in/dqtucker), and 
+* [Kangie Chan](http://www.linkedin.com/in/kangiechan/)
 
 Original Implemenation By: 
-* [Sean Irby](www.linkedin.com/pub/sean-irby/71/b8/5aa) and 
-* [James Adney](www.linkedin.com/in/jamesadney).* Your Name (Your Github URL goes here)
+* [Sean Irby](http://www.linkedin.com/pub/sean-irby/71/b8/5aa) and 
+* [James Adney](http://www.linkedin.com/in/jamesadney).
 
 ## Contributing
 
