@@ -37,3 +37,6 @@ doc/
 
 # RVM loader
 .rvmrc
+
+# Brakeman report
+brakeman_report.html
