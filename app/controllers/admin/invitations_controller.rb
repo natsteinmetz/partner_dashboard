@@ -51,20 +51,23 @@ class Admin::InvitationsController < Devise::InvitationsController
     #TODO, testing if there are params in the URL, there needs to be a cleaner way.
     if get_referer_params("invite_request[first_name]")
       #TODO, add phone number to invite request and new professional form
-      @professional = Professional.new(name: get_referer_params("invite_request[first_name]").capitalize + " " +
-                                                         get_referer_params("invite_request[last_name]").capitalize,
-                                       email: get_referer_params("invite_request[email]"))
-      @professional.employments.build(role: get_referer_params("invite_request[role]"),
+ #     @professional = User.new(name: get_referer_params("invite_request[first_name]").capitalize + " " +
+  #                                                       get_referer_params("invite_request[last_name]").capitalize,
+   #                                    email: get_referer_params("invite_request[email]"))
+      @professional = User.new(email: get_referer_params("invite_request[email]"))
+      @professional.employments.build(title: get_referer_params("invite_request[role]"),
                                       partner_id: params[:partner_id])
     else
-      @professional = Professional.new(email: params[:email])
+      @professional = User.new(email: params[:email])
       @professional.employments.build(partner_id: params[:partner_id])
     end
   end
 
   def create_professional
-    @professional = Professional.new(params[:professional])
+    @professional = User.new(params[:professional])
     if @professional.save
+      @professional.add_role :professional
+      @professional.employments.build(partner_id: params[:partner_id], title: get_referer_params("invite_request[role]"))
       render "create_professional"
     else
       render "new_professional"

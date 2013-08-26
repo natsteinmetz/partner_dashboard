@@ -4,7 +4,7 @@ class RelationshipsController < ApplicationController
   #TODO: Use ajax?
   #TODO: Add conditional to make sure a connection be requested twice
   def create
-    if current_user.is_partner?
+    if current_user.has_role? :professional
       Relationship.pending!(current_user.partner.id, params[:student_id])
       respond_to do |format|
         format.html {

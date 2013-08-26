@@ -2,6 +2,6 @@ class Employment < ActiveRecord::Base
   belongs_to :partner
   belongs_to :user
 
-  attr_accessible :role, :partner_id
-  validates :role, presence: true
+  attr_accessible :title, :partner_id
+  validates :title, presence: true
 end

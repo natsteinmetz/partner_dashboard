@@ -8,7 +8,7 @@ class Partner < ActiveRecord::Base
   has_many :students, :through => :relationships, source: :user
   has_many :relationships
 
-#  accepts_nested_attributes_for :users, :employments
+  # accepts_nested_attributes_for :user, :employments
 
   validates :name, :kind, :website, presence: true
   validates :name, uniqueness: true

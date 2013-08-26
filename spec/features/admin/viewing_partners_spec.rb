@@ -27,6 +27,7 @@ feature "Viewing Partners" do
 
     scenario "they can see the partners", js: true do
       visit "/"
+      # save_and_open_page
       click_link "Partners"
       click_link "Partners Index"
       page.should have_content partner_one.name

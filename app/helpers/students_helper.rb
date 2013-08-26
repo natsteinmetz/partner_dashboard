@@ -1,6 +1,6 @@
 module StudentsHelper
   def action_cell(student)
-    if current_user.is_partner?
+    if current_user.has_role? :professional
       if current_user.connected? student
         "<button class='btn btn-success btn-disabled' id='connect_button_student[#{student.id}]'>Connected</button>".html_safe
       elsif current_user.requested_connection? student

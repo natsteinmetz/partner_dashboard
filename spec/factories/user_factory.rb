@@ -5,7 +5,7 @@ FactoryGirl.define do
     password "password"
     password_confirmation "password"
 
-    partner
+#    partner
 
     factory :confirmed_user do
       after(:create) do |user|
@@ -13,16 +13,27 @@ FactoryGirl.define do
       end
 
       factory :admin_user do
-        admin true
         email "admin@codefellows.com"
-        partner nil
-        get_invite_requests true
+
+        after(:create) do |user|
+          user.add_role :admin
+          user.update_attributes(get_invite_requests: true)
+          user.save
+        end
       end
 
       factory :student_user do
-        partner nil
-        student 
+        after(:create) do |user|
+          user.add_role :student
+        end
+      end
+
+      factory :professional_user do
+        after(:create) do |user|
+          user.add_role :professional
+        end
       end
     end
+
   end
 end

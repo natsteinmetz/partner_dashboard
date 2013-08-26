@@ -4,13 +4,13 @@
   </div>
   <div class="span6">
     <h2>
-      <%= @student.name %>
+      <%= @student.name%>
       <% if @student.for_hire %>
         <span class="label label-success">For Hire!</span>
       <% end %>
     </h2>
     <table class="profile_contact_info">
-      <% if (current_user.is_student? && (current_user.student.id == @student.id)) ||
+      <% if (current_user.has_role? :student && (current_user.student.id == @student.id)) ||
             (current_user.connected? (@student)) %>
       <tr>
         <th scope="row" style="text-align: left">Phone Number</th>

@@ -16,7 +16,7 @@ module ApplicationHelper
           <th>
             Courses
           </th>
-          #{'<th>Status</th>' if current_user.is_partner?}
+          #{'<th>Status</th>' if current_user.has_role? :professional}
         </tr>
       </thead>
       <tbody class='list'>

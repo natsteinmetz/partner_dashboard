@@ -17,6 +17,7 @@ PartnerDashboard::Application.routes.draw do
 #  resources :profiles, only: [:show]
   resources :partners, only: [:index, :show, :edit, :update] 
   resources :professionals, only: [:show, :edit, :update]
+#  resources :users
 
   namespace :admin do
     root :to => "base#index"

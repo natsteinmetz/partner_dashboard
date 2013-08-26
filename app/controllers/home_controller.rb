@@ -3,16 +3,17 @@ class HomeController < ApplicationController
   def index
     flash.keep
     if current_user.nil?
-      redirect_to new_user_session_path
-    elsif current_user.admin?
+      redirect_to new_user_session_path     
+    elsif current_user.has_role? :admin
       redirect_to admin_relationships_path
-    elsif current_user.partner_id.is_a? Integer
-      #user is a partner
-      redirect_to dashboard_path
-    else
-      #user is a student
-      @student = Student.find(current_user.student_id)
-      redirect_to student_path(@student)
+    else #check if user has a profile
+      redirect_to edit_user_registration_path(current_user)
+      # if current_user.has_role? :professional
+      # redirect_to dashboard_path
+      # else
+      # #user is a student
+      # redirect_to student_path(current_user)
+      # end
     end
   end
 end

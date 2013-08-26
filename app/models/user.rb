@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   #has_one :profile
+  rolify
 
   has_many :courses, through: :enrollments
   has_many :enrollments
@@ -15,7 +16,7 @@ class User < ActiveRecord::Base
 
   # get_invite_requests can't be true unless admin
   validates :get_invite_requests, exclusion: { in: [true],
-    message: "Only admin users can receive invite requests" }, unless: :admin?
+    message: "Only admin users can receive invite requests" }, unless: :is_admin?
 
 
   devise :invitable, :database_authenticatable, :registerable,
@@ -23,7 +24,8 @@ class User < ActiveRecord::Base
          :confirmable
 
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :partner_id, :get_invite_requests,
+                  :partner_id, :get_invite_requests
+
 
   # def requested_connection?(person)
   #   if self.has_role? :admin
@@ -49,4 +51,11 @@ class User < ActiveRecord::Base
   #     false
   #   end
   # end
+
+private
+  # hack to make the validation work for get_invite_requests
+  def is_admin?
+    self.has_role? :admin
+  end
+
 end
