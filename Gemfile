@@ -5,6 +5,7 @@ ruby "2.0.0"
 gem 'rails', '3.2.13'
 gem 'devise', '~> 2.2.4'
 gem 'devise_invitable', '~> 1.1.0'
+gem 'rolify'
 
 gem 'dynamic_form', '~> 1.1.4'
 

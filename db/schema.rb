@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20130826171124) do
     t.integer  "partner_id"
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
+  
     t.boolean  "connection_allowed", :default => false
     t.integer  "user_id"
   end
