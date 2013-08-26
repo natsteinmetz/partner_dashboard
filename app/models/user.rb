@@ -1,8 +1,14 @@
 class User < ActiveRecord::Base
-  has_one :profile
+  #has_one :profile
 
-  belongs_to :partner
-  belongs_to :student
+  has_many :courses, through: :enrollments
+  has_many :enrollments
+
+  has_many :partners, :through => :relationships
+  has_many :relationships
+
+  has_many :partners, :through => :employments
+  has_many :employments
 
   # non-admins must have a partner
 #  validates :partner, presence: true, unless: :admin?
