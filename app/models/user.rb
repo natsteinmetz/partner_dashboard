@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
          :confirmable
 
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :partner_id, :get_invite_requests, :student_id
+                  :partner_id, :get_invite_requests,
 
   def is_admin?
     self.admin?
