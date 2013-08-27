@@ -1,16 +1,16 @@
 <div class="row-fluid">
   <div class="span2">
-    <%= gravatar_image_tag @student.email, alt: @student.name %>
+    <%= gravatar_image_tag @student.email, alt: @student.profile.name %>
   </div>
   <div class="span6">
     <h2>
-      <%= @student.name%>
-      <% if @student.for_hire %>
+      <%= @student.profile.name%>
+      <% if @student.profile.for_hire %>
         <span class="label label-success">For Hire!</span>
       <% end %>
     </h2>
     <table class="profile_contact_info">
-      <% if (current_user.has_role? :student && (current_user.student.id == @student.id)) ||
+      <% if (current_user.has_role? :student && (current_user.id == @student.id)) ||
             (current_user.connected? (@student)) %>
       <tr>
         <th scope="row" style="text-align: left">Phone Number</th>
@@ -20,13 +20,13 @@
         <th scope="row" style="text-align: left">Email</th>
         <td><%= mail_to @student.email %></td>
       </tr>
-      <% end -%>
+      <% end %>
       <tr>
         <th scope="row" style="text-align: left">Links</th>
         <td>
-          <% @student.links.split(",").each do |link| %>
-            <%= link_to(link, link) %><br>
-          <% end %>
+          <%= link_to @student.profile.linkedin_link, @student.profile.linkedin_link %><br>
+          <%= link_to @student.profile.github_link, @student.profile.github_link %><br>
+          <%= link_to @student.profile.personal_website_link, @student.profile.personal_website_link %><br>
         </td>
       </tr>
     </table>
@@ -37,7 +37,7 @@
   <div class="span8">
     <h3>Skills</h3>
     <p>
-      <%= @student.skills %>
+      <%= @student.profile.skills %>
     </p>
     <% if @student.courses.size != 0 %>
       <h3>Courses</h3>
@@ -47,16 +47,16 @@
         <% end %>
       </ul>
     <% end %>
-    <h3>Bio</h3>
+    <h3>Summary</h3>
     <p>
-      <%= @student.bio %>
+      <%= @student.profile.summary %>
     </p>
   </div>
 </div>
 
 <div class="row-fluid">
   <button class="btn btn-primary">Download Resume</button>
-  <% if current_user.is_admin? || (current_user.is_student? && current_user.student_id == @student.id) %>
+  <% if (current_user.has_role? :admin) || ((current_user.has_role? :student) && current_user.id == @student.id) %>
     <%= link_to "Edit Profile", edit_student_path(@student), class: "btn btn-primary" %>
   <% end -%>
 </div>

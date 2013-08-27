@@ -28,30 +28,32 @@ class User < ActiveRecord::Base
                   :partner_id, :get_invite_requests
 
 
-  # def requested_connection?(person)
-  #   if self.has_role? :admin
-  #     false
-  #   elsif self.has_role? :professional
-  #     all_self.partners.first.users.include? person
-  #   elsif self.has_role? :student
-  #     self.partners.include? person
-  #   else
-  #     "NEVER"
-  #   end
-  # end
+  def requested_connection?(entity)
+    if self.has_role? :admin
+      false
+    elsif self.has_role? :professional
+      self.partner.students.include? entity
+    elsif self.has_role? :student
+      self.company_connections.include? entity
+    else
+      "NEVER"
+    end
+  end
 
-  # def connected?(person)
-  #   if self.admin?
-  #     true
-  #   elsif self.is_partner? && (self.partner.students.include? person)
-  #     self.partner.relationships.find_by_student_id(person.id).connection_allowed
-  #   elsif self.is_student? && (self.student.partners.include? person)
-  #     #TODO: Can't figure out how to make this line not hit the database, even if i eager load relationships.
-  #     self.student.relationships.find_by_partner_id(person.id).connection_allowed
-  #   else
-  #     false
-  #   end
-  # end
+  def connected?(entity)
+    if self.has_role? :admin
+      true
+    # self is a professional user, entity is a student user
+    elsif (self.has_role? :professional) && (self.partner.students.include? entity)
+      self.partner.relationships.where(user_id: entity.id).first.connection_allowed
+    # self is a student user, entity is a partner company
+    elsif (self.has_role? :student) && (self.company_connections.include? entity)
+      #TODO: Can't figure out how to make this line not hit the database, even if i eager load relationships.
+      self.relationships.find_by_partner_id(entity.id).connection_allowed
+    else
+      false
+    end
+  end
 
 private
   # hack to make the validation work for get_invite_requests

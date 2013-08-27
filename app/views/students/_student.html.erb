@@ -1,14 +1,14 @@
 <% connected = current_user.connected?(student) %>
 <tr>
   <td class="for-hire">
-    <% if student.for_hire? %>
+    <% if student.profile.for_hire? %>
       <i class="icon-ok icon-large"></i>
     <% end %>
   </td>
   <td class="name">
     <%= name_cell student %>
   </td>
-  <td class="skills"><%= student.skills %></td>
+  <td class="skills"><%= student.profile.skills %></td>
   <td class="courses">
     <ul>
       <% student.courses.each do |course| %>
