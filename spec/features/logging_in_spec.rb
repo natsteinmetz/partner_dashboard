@@ -9,15 +9,14 @@ feature "Log In" do
   end
 
   scenario "student can log in and land on Student Profile page" do
-    student = FactoryGirl.create(:student)
-    user = FactoryGirl.create(:student_user, student: student, email: student.email)
+    user = FactoryGirl.create(:student_user)
     sign_in_as!(user)
-    current_path == "/student/#{user.student_id}"
-    page.should have_content(user.student.name)
+    current_path == "/student/#{user.id}"
+    page.should have_content(user.profile.name)
   end
 
   scenario "partner can log in and land on Dashboard page" do
-    user = FactoryGirl.create(:confirmed_user)
+    user = FactoryGirl.create(:professional_user)
     sign_in_as!(user)
     curent_path = "/dashboard"
     page.should have_content("Courses")
