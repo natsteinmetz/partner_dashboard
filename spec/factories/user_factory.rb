@@ -38,6 +38,7 @@ FactoryGirl.define do
       factory :professional_user do
         after(:create) do |user|
           user.add_role :professional
+          user.partner = create(:partner)
         end
       end
     end

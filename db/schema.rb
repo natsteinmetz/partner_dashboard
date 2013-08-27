@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130827171954) do
+ActiveRecord::Schema.define(:version => 20130827175238) do
 
   create_table "courses", :force => true do |t|
     t.string   "title"
@@ -53,8 +53,11 @@ ActiveRecord::Schema.define(:version => 20130827171954) do
     t.string   "linkedin_link"
     t.string   "github_link"
     t.string   "personal_website_link"
+    t.boolean  "for_hire"
+    t.text     "admin_notes"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+    t.integer  "user_id"
   end
 
   create_table "relationships", :force => true do |t|

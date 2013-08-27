@@ -9,6 +9,8 @@ class CreateProfile2 < ActiveRecord::Migration
       t.string :linkedin_link
       t.string :github_link
       t.string :personal_website_link
+      t.boolean :for_hire
+      t.text :admin_notes
 
       t.timestamps
     end
