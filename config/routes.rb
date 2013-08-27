@@ -14,14 +14,12 @@ PartnerDashboard::Application.routes.draw do
 
   resources :students, only: [:index, :show, :edit, :update]
   resources :courses, only: [:index, :show]
-#  resources :profiles, only: [:show]
-  resources :partners, only: [:index, :show, :edit, :update] 
+  resources :partners, only: [:index, :show, :edit, :update]
   resources :professionals, only: [:show, :edit, :update]
-#  resources :users
 
   namespace :admin do
     root :to => "base#index"
-    resources :partners, only: :index   
+    resources :partners, only: :index
     resources :professionals, only: :index
     resources :students, only: :index
     resources :relationships, except: [:show, :edit]

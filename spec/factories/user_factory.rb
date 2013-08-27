@@ -25,20 +25,26 @@ FactoryGirl.define do
       factory :student_user do
         after(:create) do |user|
           user.add_role :student
+          user.profile = FactoryGirl.create(:profile)
+          user.save
         end
       end
 
       factory :student_user_with_courses do
         after(:create) do |user|
           user.add_role :student
-          user.course(FactoryGirl.new(:course))
+          user.course = FactoryGirl.create(:course)
+          user.profile = FactoryGirl.create(:profile)
+          user.save
         end
       end
 
       factory :professional_user do
         after(:create) do |user|
           user.add_role :professional
-          user.partner = create(:partner)
+          user.partner = FactoryGirl.create(:partner)
+          user.profile = FactoryGirl.create(:profile)
+          user.save
         end
       end
     end

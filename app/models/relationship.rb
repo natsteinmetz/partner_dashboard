@@ -12,7 +12,11 @@ class Relationship < ActiveRecord::Base
   end
 
   def self.pending!(partner_id, student_id)
-    pending(partner_id, user_id).save
+    pending(partner_id, student_id).save
+  end
+
+  def self.pending?
+    !connection_allowed
   end
 
   #Make a connected relationship between a partner and user
@@ -26,7 +30,4 @@ class Relationship < ActiveRecord::Base
     connection_allowed(partner_id, student_id).save
   end
 
-  def pending?
-    self.connection_allowed? ? false : true
-  end
 end

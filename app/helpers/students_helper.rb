@@ -7,7 +7,7 @@ module StudentsHelper
         "<button class='btn disabled' id='connect_button_student[#{student.id}]'>Pending</button>".html_safe
       else
         button_to("Connect",
-               { controller: "relationships", action: "create", student_id: student.id },
+               { controller: "relationships", action: "create", user_id: student.id },
                remote: true, class: "btn btn-primary", id: "connect_button_student[#{student.id}]")
       end
     end
@@ -15,7 +15,7 @@ module StudentsHelper
 
   def name_cell(student)
     # if current_user.connected? student
-      link_to(student.name, student_path(student)).html_safe
+      link_to(student.profile.name, student_path(student)).html_safe
     # else
     #   student.name
     # end

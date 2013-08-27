@@ -1,5 +1,5 @@
 $("#connection_alert").remove()
-button = $("#connect_button_student\\[<%= params[:student_id] %>\\]")
+button = $("#connect_button_student\\[<%= params[:user_id] %>\\]")
 button.fadeOut( ()->
   $(this).attr("class", "btn disabled")
   $(this).text("Pending")
@@ -8,7 +8,7 @@ button.fadeOut( ()->
   )
 
 #Add flash message
-student_name = "<%= j Student.find(params[:student_id]).name %>"
+student_name = "<%= j User.find(params[:user_id]).profile.name %>"
 alert = "<div id='connection_alert' class='alert alert-success' style='display: none'><span>You successfully requested connection with #{student_name}.</span></div>"
 $(".navbar.navbar-fixed-top").append(alert)
 $("#connection_alert").slideDown()
