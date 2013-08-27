@@ -2,7 +2,7 @@ class ProfessionalsController < ApplicationController
   before_filter :find_professional, only: [:show, :edit, :update]
 
   def index
-    @professionals = Professional.includes(:partners).all
+    @professionals = User.with_role(:professional).includes(:partners)
   end
 
   def show
@@ -22,8 +22,8 @@ class ProfessionalsController < ApplicationController
   end
 
   private
-  
+
   def find_professional
-    @professional = Professional.find(params[:id])
+    @professional = User.find(params[:id])
   end
 end
