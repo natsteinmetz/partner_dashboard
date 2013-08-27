@@ -77,7 +77,7 @@ namespace :db do
       name = Faker::Company.name
       kind = possible_kinds.sample
       size = rand(500)
-      website = "https://linkedin.com/#{name}"
+      website = "https://linkedin.com/#{name.emailize}"
       skills = []
       3.times {skills.push possible_skills.sample}
       skills.uniq!

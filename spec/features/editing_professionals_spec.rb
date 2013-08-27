@@ -21,7 +21,8 @@ feature "editing professional details" do
       click_link "Edit Profile"
       save_and_open_page
       fill_in "Name", with: "Lady Gaga the Great"
-      click_link "Submit"
+      save_and_open_page
+      click_button "Update Profile"
       page.should have_content "Lady Gaga the Great"
     end
 

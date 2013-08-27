@@ -1,4 +1,5 @@
-<%= form_for @professional, :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for @professional, as: :professional, url: professional_path, html: { :class => 'form-horizontal' } do |professional_form| %>
+  <%= professional_form.fields_for :profile do |f| %>
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>
     <div class="controls">
@@ -8,7 +9,7 @@
   <div class="control-group">
     <%= f.label :email, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :email, :class => 'text_field' %>
+      <%= @professional.email %>
     </div>
   </div>
   <div class="control-group">
@@ -18,15 +19,21 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label "Links (Separated by commas)", :class => 'control-label' %>
+    <%= f.label "LinkedIn", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :links, :class => 'input-xxlarge' %>
+      <%= f.text_field :linkedin_link, :class => 'input-xxlarge' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :bio, :class => 'control-label' %>
+    <%= f.label "Personal Website", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_area :bio, :class => 'input-xxlarge' %>
+      <%= f.text_field :personal_website_link, :class => 'input-xxlarge' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :summary, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :summary, :class => 'input-xxlarge' %>
     </div>
   </div>
   <div class="form-actions">
@@ -34,4 +41,5 @@
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 professional_path(@professional), :class => 'btn' %>
   </div>
+  <% end %>
 <% end %>
