@@ -64,6 +64,7 @@ namespace :db do
                                 github_link: "https://github.com/#{name.emailize}")
         user.save
         user.add_role :student
+        student_ids.push(user.id)
         course.users << user
       end
     end

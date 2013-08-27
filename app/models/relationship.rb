@@ -3,6 +3,7 @@ class Relationship < ActiveRecord::Base
   belongs_to :user
 
   attr_accessible :connection_allowed, :partner_id, :user_id
+  validates_uniqueness_of :partner_id, scope: :user_id
 
   #Make a pending relationship between a partner and user
   def self.pending(partner_id, student_id)
