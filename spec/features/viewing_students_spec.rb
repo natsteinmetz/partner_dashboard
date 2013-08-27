@@ -25,12 +25,12 @@ FOR_HIRE_ICON_XPATH = [
 ].join
 
 feature "Viewing students" do
-  let!(:student_albert) { FactoryGirl.create(:student,
+  let!(:student_albert) { FactoryGirl.create(:student_user_with_courses,
                                              name: "Albert Einstein",
                                              email: "albert@example.com",
                                              skills: "relativity",
                                              for_hire: true) }
-  let!(:student_werner) { FactoryGirl.create(:student,
+  let!(:student_werner) { FactoryGirl.create(:student_user_with_courses,
                                              name: "Werner Heisenberg",
                                              skills: "quantum mechanics") }
 

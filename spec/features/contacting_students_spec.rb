@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 feature "Connecting with students" do
-  let!(:student) { FactoryGirl.create(:student) }
+  let!(:student) { FactoryGirl.create(:student_user) }
 
   context "as a normal user" do
     let(:user) { FactoryGirl.create(:confirmed_user) }
@@ -22,7 +22,7 @@ feature "Connecting with students" do
       end
     end
 
-    scenario "users see when their connection request is accepted" 
+    scenario "users see when their connection request is accepted"
   end
 
   context "as an admin user" do

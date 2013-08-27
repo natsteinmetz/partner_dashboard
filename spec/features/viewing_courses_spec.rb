@@ -22,16 +22,15 @@ feature "Viewing courses" do
 
   context "as a student user" do
     before do
-      student = FactoryGirl.create(:student)
-      student_user = FactoryGirl.create(:student_user, email: student.email, student: student)
-      sign_in_as!(student_user)
+      student = FactoryGirl.create(:student_user)
+      sign_in_as!(student)
       visit '/'
       click_link "Courses"
     end
 
     scenario "can view all courses on courses index" do
       page.should have_content(course_one.title)
-      page.should have_content(course_two.title)     
+      page.should have_content(course_two.title)
     end
 
     scenario "can view details of a course and all students who took the course but cannot connect" do

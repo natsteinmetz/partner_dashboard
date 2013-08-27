@@ -28,6 +28,13 @@ FactoryGirl.define do
         end
       end
 
+      factory :student_user_with_courses do
+        after(:create) do |user|
+          user.add_role :student
+          user.course(FactoryGirl.new(:course))
+        end
+      end
+
       factory :professional_user do
         after(:create) do |user|
           user.add_role :professional

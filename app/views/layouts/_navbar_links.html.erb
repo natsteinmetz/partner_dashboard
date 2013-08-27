@@ -2,9 +2,10 @@
 <li><%= link_to "Courses", courses_path, :class => "btn-btn-navbar" %></li>
 <% if current_user.has_role? :professional %>
   <li><%= link_to "Students", students_path, :class => "btn-btn-navbar" %></li>
-  <li><%= link_to "My Company", partner_path(current_user.employers.first) %></li>
+  <% binding.pry %>
+  <li><%= link_to "My Company", partner_path(current_user.partner) %></li>
 <% end %>
 <% if current_user.has_role? :student %>
   <li><%= link_to "Partners", partners_path, :class => "btn-btn-navbar" %></li>
-  <li><%= link_to "My Profile", student_path(current_user.student) %></li>
+  <li><%= link_to "My Profile", student_path(current_user) %></li>
 <% end %>

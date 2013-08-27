@@ -8,8 +8,9 @@ class User < ActiveRecord::Base
   has_many :company_connections, :through => :relationships, source: :partner
   has_many :relationships
 
-  has_many :employers, :through => :employments, source: :partner
-  has_many :employments
+  belongs_to :partner
+
+  has_one :profile
 
   # non-admins must have a partner
 #  validates :partner, presence: true, unless: :admin?
