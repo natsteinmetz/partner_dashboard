@@ -1,0 +1,22 @@
+<% connected = current_user.connected?(user) %>
+<tr>
+  <td class="for-hire">
+    <% if user.profile.for_hire? %>
+      <i class="icon-ok icon-large"></i>
+    <% end %>
+  </td>
+  <td class="name">
+    <%= name_cell user %>
+  </td>
+  <td class="skills"><%= user.profile.skills %></td>
+  <td class="courses">
+    <ul>
+      <% user.courses.each do |course| %>
+        <li><%= link_to course.title, course_path(course) %></li>
+      <% end %>
+    </ul>
+  </td>
+  <td class="actions">
+    <%= action_cell user %>
+  </td>
+</tr>

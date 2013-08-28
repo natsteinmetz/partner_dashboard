@@ -10,11 +10,11 @@
       <% end %>
     </h2>
     <table class="profile_contact_info">
-      <% if (current_user.has_role? :student && (current_user.id == @student.id)) ||
-            (current_user.connected? (@student)) %>
+      <% if (current_user.has_role?(:student) && (current_user.id == @student.id)) ||
+            (current_user.connected?(@student)) %>
       <tr>
         <th scope="row" style="text-align: left">Phone Number</th>
-        <td><%= @student.phone_number %></td>
+        <td><%= @student.profile.phone_number %></td>
       </tr>
       <tr>
         <th scope="row" style="text-align: left">Email</th>
