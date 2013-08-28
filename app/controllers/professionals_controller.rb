@@ -14,7 +14,7 @@ class ProfessionalsController < ApplicationController
   def update
     if @professional.update_attributes(params[:professional])
       flash[:notice] = "Profile has been updated"
-      redirect_to @professional
+      redirect_to professional_path(@professional)
     else
       flash[:alert] = "Profile has not been updated"
       render :action => "edit"

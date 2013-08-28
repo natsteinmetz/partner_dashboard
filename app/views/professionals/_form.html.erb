@@ -1,9 +1,15 @@
 <%= form_for @professional, as: :professional, url: professional_path, html: { :class => 'form-horizontal' } do |professional_form| %>
   <%= professional_form.fields_for :profile do |f| %>
   <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
+    <%= f.label :first_name, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :name, :class => 'text_field' %>
+      <%= f.text_field :first_name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :last_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :last_name, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">

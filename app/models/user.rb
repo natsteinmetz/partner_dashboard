@@ -12,8 +12,6 @@ class User < ActiveRecord::Base
 
   has_one :profile
   accepts_nested_attributes_for :profile
-  # non-admins must have a partner
-#  validates :partner, presence: true, unless: :admin?
 
   # get_invite_requests can't be true unless admin
   validates :get_invite_requests, exclusion: { in: [true],
@@ -25,7 +23,7 @@ class User < ActiveRecord::Base
          :confirmable
 
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :partner_id, :get_invite_requests
+                  :partner_id, :get_invite_requests, :profile_attributes
 
 
   def requested_connection?(entity)
