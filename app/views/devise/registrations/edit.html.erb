@@ -7,10 +7,15 @@
 
     <%= devise_error_messages! %>
 
+    <div>
+      Please import your LinkedIn profile:
+      <%= link_to (image_tag("linkedin_importer_button.gif", :alt => "Import Your LinkedIn Profile")), user_omniauth_authorize_path(:linkedin) %>
+      <br><br>
+    </div>
     <div class="control-group">
       <%= f.label :email, class: "control-label" %>
       <div class="controls">
-        <%= f.email_field :email, :autofocus => true %>
+        <%= f.email_field :email %>
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
           <div class="text-success">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>

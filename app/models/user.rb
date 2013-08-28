@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
     message: "Only admin users can receive invite requests" }, unless: :is_admin?
 
 
-  devise :invitable, :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
 
@@ -51,6 +51,12 @@ class User < ActiveRecord::Base
     else
       false
     end
+  end
+
+  def add_omniauth_info(auth)
+    self.provider = auth.provider
+    self.token = auth.credentials.token
+    self.save
   end
 
 private

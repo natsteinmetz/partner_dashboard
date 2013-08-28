@@ -17,6 +17,8 @@ gem 'faker', '~>1.0.1'
 
 gem 'gravatar_image_tag'
 
+gem 'omniauth-linkedin-oauth2'
+
 # Needs to be outside of assets because we have some dynamically
 # generated coffeescript.
 gem 'coffee-rails', '~> 3.2.1'
