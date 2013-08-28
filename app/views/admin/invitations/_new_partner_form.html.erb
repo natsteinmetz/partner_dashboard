@@ -13,13 +13,18 @@
     </div>
   <% end %>
   <p>
-    <%= f.label :name %>
+    <%= f.label :name, "Company Name" %>
     <%= f.text_field :name %>
   </p>
 
   <p>
-    <%= f.label :kind %>
+    <%= f.label :kind, "Type of Company (Startup, Agency, etc.)" %>
     <%= f.text_field :kind %>
+  </p>
+
+  <p>
+    <%= f.label :website %>
+    <%= f.text_field :website %>
   </p>
 
   <p>

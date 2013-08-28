@@ -3,7 +3,7 @@
   <% if @professional.errors.any? %>
     <div id="error_explanation" class="alert">
       <h3><%= pluralize(@professional.errors.count, "error") %>
-        prohibited this professional from being saved:</h3>
+        prohibited this user from being saved:</h3>
       <ul>
       <% @professional.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -11,6 +11,7 @@
       </ul>
     </div>
   <% end %>
+
   <%= f.hidden_field :email %>
   <%= f.label :name  %>
   <%= f.text_field :name  %>
@@ -21,8 +22,9 @@
   <% end %>
 
   <p>
-    <%= f.submit "Add Professional", class: "btn btn-primary" %>
+    <%= f.submit "Add User", class: "btn btn-primary" %>
   </p>
 <% end %>
 
 <button id="go_back_button" class="btn btn-primary">Go Back</button>
+
