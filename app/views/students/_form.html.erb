@@ -1,14 +1,21 @@
-<%= form_for @student, :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for @student, as: :student, url: student_path, :html => { :class => 'form-horizontal' } do |student_form| %>
+  <%= student_form.fields_for :profile do |f| %>
   <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
+    <%= f.label :first_name, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :name, :class => 'text_field' %>
+      <%= f.text_field :first_name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :last_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :last_name, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :email, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :email, :class => 'text_field' %>
+      <%= @student.email %>
     </div>
   </div>
   <div class="control-group">
@@ -30,15 +37,27 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :bio, :class => 'control-label' %>
+    <%= f.label :summary, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_area :bio, :class => 'input-xxlarge' %>
+      <%= f.text_area :summary, :class => 'input-xxlarge' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :links, :class => 'control-label' %>
+    <%= f.label "LinkedIn", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :links, :class => 'input-xxlarge'%>
+      <%= f.text_field :linkedin_link, :class => 'input-xxlarge' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label "Github", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :github_link, :class => 'input-xxlarge' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label "Personal Website", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :personal_website_link, :class => 'input-xxlarge' %>
     </div>
   </div>
 
@@ -47,4 +66,5 @@
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 students_path, :class => 'btn' %>
   </div>
+  <% end %>
 <% end %>
