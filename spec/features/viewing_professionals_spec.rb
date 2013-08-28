@@ -55,6 +55,12 @@ feature "viewing professional details" do
 
     scenario "can view contact info for connected professional" do
       partner.students << @student
+      partner.relationships.each do |rel|
+        if (rel.user_id == @student.id)
+          rel.connection_allowed = true
+          rel.save
+        end
+      end
       partner.save
       click_link professional.profile.name
       page.should have_content(professional.email)
