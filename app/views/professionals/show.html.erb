@@ -7,8 +7,8 @@
       <%= @professional.profile.name %>
     </h2>
     <table class="profile_contact_info">
-      <% if (current_user.has_role? :admin) || (current_user.has_role? :professional) ||
-        ((current_user.has_role? :student) && (current_user.connected? @professional.partner )) %>
+      <% if current_user.has_role?(:admin) || current_user.has_role?(:professional) ||
+        (current_user.has_role?(:student) && current_user.connected?(@professional.partner)) %>
       <tr>
         <th scope="row" style="text-align: left">Phone Number</th>
         <% if @professional.profile.phone_number.nil? || @professional.profile.phone_number.empty? %>
