@@ -22,6 +22,39 @@ namespace :db do
     sean_user.save
     sean_user.add_role :student
 
+    danielle_user = User.create(email:"danielle@tuckerlabs.com",
+                            password: "password",
+                            password_confirmation: "password")
+    danielle_user.confirm!
+    danielle_profile = Profile.create(first_name: "Danielle",
+                          last_name: "Tucker",
+                          phone_number: "206-222-2222",
+                          skills: "Ruby, Rails, jQuery, Javascript, Java",
+                          for_hire: true,
+                          summary: Faker::Lorem.paragraphs(2).join,
+                          github_link: "https://github.com/tuckerd",
+                          linkedin_link: "http://www.linkedin.com/in/dqtucker")
+    danielle_user.profile = danielle_profile
+    danielle_user.save
+    danielle_user.add_role :student
+
+    nathalie_user = User.create(email:"nathalie.steinmetz@gmail.com",
+                            password: "password",
+                            password_confirmation: "password")
+    nathalie_user.confirm!
+    nathalie_profile = Profile.create(first_name: "Nathalie",
+                          last_name: "Steinmetz",
+                          phone_number: "206-777-7777",
+                          skills: "Ruby, Rails, jQuery, Javascript, Java",
+                          for_hire: true,
+                          summary: Faker::Lorem.paragraphs(2).join,
+                          github_link: "https://github.com/natsteinmetz",
+                          linkedin_link: "http://www.linkedin.com/in/nathaliesteinmetz",
+                          personal_website_link: "http://nathaliesteinmetz.net")
+    nathalie_user.profile = nathalie_profile
+    nathalie_user.save
+    nathalie_user.add_role :student
+
     #Create some fake students
     possible_skills = ["C++", "Java", "Ruby", "Rails", "HTML5", "CSS3", "Javascript", "jQuery", "C", "OOP", "Backend Development", "Frontend Development", "Sysadmin", "iOS", "Android", "Go", "Python", "Haskell", "Ember.js", "Node.js", "Java", "Backbone.js", "Angular.js"]
     course_titles = ["iOS Development", "Rails Bootcamp", "Python Night Class", "Javascript Beginnings", "Erlang Reunited", "Data Structures 101"]
