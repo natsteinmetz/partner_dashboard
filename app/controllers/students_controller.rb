@@ -1,7 +1,5 @@
 class StudentsController < ApplicationController
   before_filter :authenticate_user!
-  #TODO: Add before filter to ensure user's partner has a relationship
-  #before_filter :confirm_relationship, only: :show FIX ME
 
   def index
     @students = User.with_role :student
@@ -23,15 +21,6 @@ class StudentsController < ApplicationController
     else
       flash[:alert] = "Profile has not been updated."
       render action: "edit"
-    end
-  end
-
-private
-  def confirm_relationship
-    @student = User.find(params[:id])
-    unless current_user.connected?(@student)
-      flash[:alert] = "You do not have permission to view this user"
-      redirect_to students_path
     end
   end
 end
