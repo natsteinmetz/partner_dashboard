@@ -4,22 +4,22 @@ class StudentsController < ApplicationController
   #before_filter :confirm_relationship, only: :show FIX ME
 
   def index
-    @students = Student.includes(:courses).order("name")
+    @students = User.with_role :student
   end
 
   def show
-    @student = Student.find(params[:id])
+    @student = User.find(params[:id])
   end
 
   def edit
-    @student = Student.find(params[:id])
+    @student = User.find(params[:id])
   end
 
   def update
-    @student = Student.find(params[:id])
+    @student = User.find(params[:id])
     if @student.update_attributes(params[:student])
       flash[:notice] = "Profile has been updated."
-      redirect_to @student
+      redirect_to student_path(@student)
     else
       flash[:alert] = "Profile has not been updated."
       render action: "edit"
@@ -28,7 +28,7 @@ class StudentsController < ApplicationController
 
 private
   def confirm_relationship
-    @student = Student.find(params[:id])
+    @student = User.find(params[:id])
     unless current_user.connected?(@student)
       flash[:alert] = "You do not have permission to view this user"
       redirect_to students_path

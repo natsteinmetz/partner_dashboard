@@ -1,5 +1,5 @@
 class Admin::ProfessionalsController < Admin::BaseController
   def index
-    @professionals = Professional.includes(:partners).all
+    @professionals = User.with_role(:professional)
   end
 end

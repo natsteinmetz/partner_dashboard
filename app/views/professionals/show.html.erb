@@ -1,20 +1,20 @@
 <div class="row-fluid">
   <div class="span2">
-    <%= gravatar_image_tag @professional.email, alt: @professional.name %>
+    <%= gravatar_image_tag @professional.email, alt: @professional.profile.name %>
   </div>
   <div class="span6">
     <h2>
-      <%= @professional.name %>
+      <%= @professional.profile.name %>
     </h2>
     <table class="profile_contact_info">
-      <% if current_user.is_admin? || current_user.is_partner? || 
-        (current_user.is_student? && (current_user.connected? @professional.partners.first )) %>
+      <% if current_user.has_role?(:admin) || current_user.has_role?(:professional) ||
+        (current_user.has_role?(:student) && current_user.connected?(@professional.partner)) %>
       <tr>
         <th scope="row" style="text-align: left">Phone Number</th>
-        <% if @professional.phone_number.nil? || @professional.phone_number.empty? %>
+        <% if @professional.profile.phone_number.nil? || @professional.profile.phone_number.empty? %>
           <td>None</td>
         <% else %>
-          <td><%= @professional.phone_number %></td>
+          <td><%= @professional.profile.phone_number %></td>
         <% end %>
       </tr>
       <tr>
@@ -22,16 +22,13 @@
         <td><%= mail_to @professional.email %></td>
       </tr>
       <% end -%>
-      <% unless (@professional.links.nil? || @professional.links.empty?) %>
       <tr>
         <th scope="row" style="text-align: left">Links</th>
           <td>
-            <% @professional.links.split(",").each do |link| %>
-              <%= link_to(link, link) %><br>
-            <% end %>
+            <%= link_to @professional.profile.linkedin_link, @professional.profile.linkedin_link %><br>
+            <%= link_to @professional.profile.personal_website_link, @professional.profile.personal_website_link %><br>
           </td>
       </tr>
-      <% end %>
     </table>
   </div>
 </div>
@@ -40,16 +37,15 @@
   <div class="span8">
     <h3>Bio</h3>
     <p>
-      <% if (@professional.bio.empty? || @professional.bio.nil?) %>
+      <% if @professional.profile.summary.blank? %>
         None provided...
       <% else %>
-        <%= @professional.bio %>
+        <%= @professional.profile.summary %>
       <% end %>
     </p>
   </div>
 </div>
-
-<% if current_user.is_admin? || (current_user.is_partner? && (@professional.email == current_user.email)) %>
+<% if (current_user.has_role? :admin) || ((current_user.has_role? :professional) && (@professional.email == current_user.email)) %>
   <div class="row-fluid">
     <%= link_to "Edit Profile", edit_professional_path(@professional), class: "btn btn-primary" %>
   </div>

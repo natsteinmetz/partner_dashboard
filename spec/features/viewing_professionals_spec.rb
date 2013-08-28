@@ -1,52 +1,77 @@
 require "spec_helper"
 
 feature "viewing professional details" do
+  let!(:professional) { FactoryGirl.create(:professional_user) }
+  let!(:professional_two) { FactoryGirl.create(:professional_user) }
+  let!(:partner) { FactoryGirl.create(:partner) }
 
-  context "as a professional/partner" do
+  before do
+    professional.profile = FactoryGirl.create(:profile)
+    professional.partner = partner
+    professional.save
+
+    professional_two.partner = partner
+    professional_two.profile = FactoryGirl.create(:profile)
+    professional_two.save
+  end
+
+  context "as a professional user" do
     before do
-      @professional_user = FactoryGirl.create(:confirmed_user)
-      @professional = Professional.create(name: "Lady Gaga", 
-        email: @professional_user.email, phone_number: Faker::PhoneNumber.phone_number)
-      @partner = FactoryGirl.create(:partner)
-      @professional.employments.build(partner_id: @partner.id, role: "Contact")
-      @professional.save
-      @professional_user.partner = @partner
-      @professional_user.save
-      sign_in_as!(@professional_user)
+      sign_in_as!(professional)
+    end
+
+    scenario "can view own contact information" do
       click_link "My Company"
+      click_link professional.profile.name
+      page.should have_content(professional.email)
+      page.should have_content(professional.profile.phone_number)
     end
 
-    pending scenario "can view own contact information" do
-      click_link @professional.name
-      page.should have_content(@professional.email)
-      page.should have_content(@professional.phone_number)
+    scenario "can view contact information for professionals in own company" do
+      click_link "My Company"
+
+      click_link professional_two.profile.name
+      page.should have_content(professional_two.profile.name)
+      page.should have_content(professional_two.profile.phone_number)
+      page.should have_content(professional_two.email)
     end
 
-    pending scenario "can view contact information for professionals in own company" do
-      #Can't quite get the test to work but it works in project
-      professional_user_two = FactoryGirl.create(:confirmed_user)
-      professional_two = Professional.create(name: "Captain Crunch", 
-        email: professional_user_two.email, phone_number: Faker::PhoneNumber.phone_number)
-      professional_two.employments.build(partner_id: @partner.id, role: "Contact")
-      professional_two.save
-      professional_user_two.partner = @partner
-      professional_user_two.save
-
-      # professional_two = Professional.create(name: "Captain Crunch",
-      #   email: "captain.crunch@yum.me", phone_number: Faker::PhoneNumber.phone_number)
-      # professional_two.employments.build(partner_id: @partner.id, role: "Contact")
-      # @partner.professionals << @professional_two
-      # @partner.save
-      # professional_two.save
-      binding.pry
-      save_and_open_page
-      click_link professional_two.name
-      page.should have_content(professional_user_two.email)
+    scenario "cannot view other company partners" do
+      page.should_not have_content("Partners")
     end
   end
 
   context "as a student" do
-    scenario "can view contact info for connected professional"
-    scenario "cannot view contact info for non-connected professional"
+    before do
+      @student = FactoryGirl.create(:student_user)
+      sign_in_as!(@student)
+      click_link "Partners"
+      page.should have_content(partner.name)
+      click_link partner.name
+
+      page.should have_content(professional.profile.name)
+      page.should have_content(professional_two.profile.name)
+    end
+
+    scenario "can view contact info for connected professional" do
+      partner.students << @student
+      partner.relationships.each do |rel|
+        if (rel.user_id == @student.id)
+          rel.connection_allowed = true
+          rel.save
+        end
+      end
+      partner.save
+      click_link professional.profile.name
+      page.should have_content(professional.email)
+      page.should have_content(professional.profile.phone_number)
+    end
+
+    scenario "cannot view contact info for non-connected professional" do
+      click_link professional.profile.name
+      page.should_not have_content(professional.email)
+      page.should_not have_content(professional.profile.phone_number)
+    end
+
   end
 end

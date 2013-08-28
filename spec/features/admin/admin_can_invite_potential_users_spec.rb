@@ -63,8 +63,8 @@ feature "Inviting potential users:" do
     fill_in "Password confirmation", :with => invitee_password
     click_button "Set my password"
     invited_user = User.find_by_email(invitee_email)
-    assert(partner == invited_user.partner, "The invited user is not associated with the correct partner.
-                                             User's partner is : #{invited_user.partner.name}
+    assert(invited_user.partner == partner, "The invited user is not associated with the correct partner.
+                                             User's partner is : #{invited_user.partner}
                                              and the test partner is: #{partner.name}")
   end
 

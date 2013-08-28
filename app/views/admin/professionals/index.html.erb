@@ -21,14 +21,13 @@
     </thead>
     <tbody class="list">
       <% @professionals.each do |professional| %>
-        <% professional.partners.each do |partner| %>
-          <tr>
-            <td class="partner_name"><%= link_to partner.name, partner_path(partner) %></td>
-            <td class="professional_name"><%= link_to professional.name, professional_path(professional) %></td>
-            <td class="professional_email"><%= professional.email %></td>
-            <td class="professional_phone"><%= professional.phone_number %></td>
-          </tr>
-        <% end %>
+        <tr>
+          <td class="partner_name"><%= link_to professional.partner.name, partner_path(professional.partner) %></td>
+          <%# needs to be updated after profiles are created %>
+          <td class="professional_name"><%= link_to professional.profile.name, professional_path(professional) %></td>
+          <td class="professional_email"><%= professional.email %></td>
+          <td class="professional_phone"><%= professional.profile.phone_number %></td>
+        </tr>
       <% end %>
     </tbody>
   </table>

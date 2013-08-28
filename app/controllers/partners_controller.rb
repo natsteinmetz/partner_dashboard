@@ -6,11 +6,11 @@ class PartnersController < ApplicationController
   end
 
   def show
-    @professionals = @partner.professionals    
+    @professionals = @partner.users
   end
 
   def edit
-    @professionals = @partner.professionals       
+    @professionals = @partner.users
   end
 
   def update

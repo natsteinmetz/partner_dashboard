@@ -4,9 +4,7 @@ module ApplicationHelper
     <table class='table index'>
       <thead>
         <tr>
-          <th>
-            For Hire
-          </th>
+          #{"<th>For Hire</th>" unless current_user.has_role? :student}
           <th>
             Name
           </th>
@@ -16,11 +14,11 @@ module ApplicationHelper
           <th>
             Courses
           </th>
-          #{'<th>Status</th>' if current_user.is_partner?}
+          #{"<th>Status</th>" if current_user.has_role? :professional }
         </tr>
       </thead>
       <tbody class='list'>
-        #{render @students}
+        #{render partial: "students/student", collection: @students}
       </tbody>
     </table>
     """.html_safe

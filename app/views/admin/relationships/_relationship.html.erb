@@ -2,7 +2,8 @@
   <% connection_allowed = relationship.connection_allowed? %>
   <td class="status_label"><%= render "status", locals: {connection_allowed: connection_allowed} %></td>
   <td><%= link_to relationship.partner.name, partner_path(relationship.partner) %></td>
-  <td><%= link_to relationship.student.name, student_path(relationship.student)  %></td>
+  <%# modify when user profiles are created %>
+  <td><%= link_to "Dummy", student_path(relationship.user)  %></td>
   <% if relationship.connection_allowed? %>
     <td><%= link_to "Destroy", admin_relationship_path(relationship),
               method: "delete",

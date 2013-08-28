@@ -8,7 +8,7 @@
     <ul class="nav">
     <%= link_to "Partner Dashboard", root_path, class: "brand" %>
     <% if user_signed_in? %>
-      <% if current_user.admin? %>
+      <% if current_user.has_role? :admin %>
         <%= render 'layouts/navbar_admin_links' %>
       <% else %>
         <%= render 'layouts/navbar_links' %>

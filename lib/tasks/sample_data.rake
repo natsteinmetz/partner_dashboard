@@ -1,33 +1,35 @@
 namespace :db do
   desc "Fill database with sample data"
-  #to populate your db:  rake db:populate
+  #to populate your db use command  rake db:populate
   task populate: :environment do
+    puts "Starting creation of sample data...this may take a while..."
 
-    #Create some "real" students
-    sean = Student.create(name: "Sean Irby",
-                   email: "sean.t.irby@gmail.com",
-                   phone_number: "206-794-9466",
-                   skills: "Ruby, Rails, Javascript, SQL",
-                   for_hire: true,
-                   bio: Faker::Lorem.paragraphs(3).join,
-                   links: "https://github.com/seanirby"
-                  )
-    Student.create(name: "James Adney",
-                   email: "jfadney@gmail.com",
-                   phone_number: "206-794-9466",
-                   skills: "Ruby, Rails, Javascript, Go, Python, Django",
-                   for_hire: true,
-                   bio: Faker::Lorem.paragraphs(3).join,
-                   links: "https://github.com/jamesadney"
-                  )
+
+    #create some "real" student users
+    puts "Creating demo student email: student@codefellows.com with password: password"
+    sean_user = User.create(email:"student@codefellows.com",
+                            password: "password",
+                            password_confirmation: "password")
+    sean_user.confirm!
+    sean_profile = Profile.create(first_name: "Sean",
+                          last_name: "Irby",
+                          phone_number: "206-794-9466",
+                          skills: "Ruby, Rails, Javascript, SQL",
+                          for_hire: true,
+                          summary: Faker::Lorem.paragraphs(2).join,
+                          github_link: "https://github.com/seanirby")
+    sean_user.profile = sean_profile
+    sean_user.save
+    sean_user.add_role :student
 
     #Create some fake students
-    possible_skills = ["C++", "Java", "Ruby", "Rails", "HTML5", "CSS3", "Javascript", "jQuery", "C", "OOP", "Backend Development", "Frontend Development", "Sysadmin",
-                       "iOS", "Android", "Go", "Python", "Haskell", "Ember.js", "Node.js"]
-    course_titles = ["iOS June 2013", "Rails August 2013", "Python September 2014", "Javascript January 2014", "Erlang March 2016"]
-    course_topics = ["iOS", "Rails", "Python", "Javascript", "Erlang"]
+    possible_skills = ["C++", "Java", "Ruby", "Rails", "HTML5", "CSS3", "Javascript", "jQuery", "C", "OOP", "Backend Development", "Frontend Development", "Sysadmin", "iOS", "Android", "Go", "Python", "Haskell", "Ember.js", "Node.js", "Java", "Backbone.js", "Angular.js"]
+    course_titles = ["iOS Development", "Rails Bootcamp", "Python Night Class", "Javascript Beginnings", "Erlang Reunited", "Data Structures 101"]
+    course_topics = ["iOS", "Rails", "Python", "Javascript", "Erlang", "Fundamentals"]
 
     # create courses with students
+    puts "Creating courses with students."
+    student_ids = [] #used later for creating pending relationships
     5.times do |n|
       start_date = Date.today >> n
       end_date = start_date.next_month
@@ -38,85 +40,103 @@ namespace :db do
                              end_date: end_date)
 
       10.times do
-        name = Faker::Name.name
-        email = "#{name.emailize}@gmail.com"
+        name = Faker::Name.first_name
+        last = Faker::Name.last_name
+        full = name + " " + last
+        email = "#{full.emailize}@gmail.com"
         phone_number = Faker::PhoneNumber.phone_number
         #Find a better way to do this
         skills = []
         3.times {skills.push possible_skills.sample}
         skills.uniq!
-        student = course.students.create( name: name,
-                                email: email,
+
+        user = User.create(email: email,
+                    password: "password",
+                    password_confirmation: "password")
+        user.confirm!
+
+        user.profile = Profile.create(first_name: name,
+                                last_name: last,
                                 phone_number: phone_number,
                                 skills: skills.join(", "),
                                 for_hire: [true, false].sample,
-                                bio: Faker::Lorem.paragraphs(3).join,
-                                links: "https://github.com/#{name.emailize}")
-        user = User.create(email: email,
-                    password: "password",
-                    password_confirmation: "password",
-                    student_id: student.id)
-        user.confirm!
+                                summary: Faker::Lorem.paragraphs(2).join,
+                                github_link: "https://github.com/#{name.emailize}")
+        user.save
+        user.add_role :student
+        student_ids.push(user.id)
+        course.users << user
       end
     end
 
+    puts "Creating partner companies with professionals."
     #Create some partners and professionals
     possible_kinds = ["Startup", "BigCo", "Hiring Agency"]
+    partner_ids = [] #used later for relationships
     10.times do |n|
       name = Faker::Company.name
       kind = possible_kinds.sample
-      size = rand(900)
-      website = "https://linkedin.com/#{name}"
+      size = rand(500)
+      website = "https://linkedin.com/#{name.emailize}"
       skills = []
       3.times {skills.push possible_skills.sample}
       skills.uniq!
       technologies = skills.join(", ")
       about = Faker::Lorem.paragraphs(3).join
       partner = Partner.create(name: name, kind: kind, website: website, size: size, technologies: technologies, about: about)
+      partner_ids.push(partner.id)
+
+      #create professionals in this company
       (1..rand(1..3)).to_a.each do |i|
-        name = Faker::Name.name
-        phone_number = Faker::PhoneNumber.phone_number
-        email = "#{name.emailize}@#{partner.name.emailize}.com"
-        bio = Faker::Lorem.paragraphs(3).join,
+        name = Faker::Name.first_name
+        last = Faker::Name.last_name
+        full = name + " " + last
+        email = "#{name}@#{partner.name.emailize}.com"
         links = "https://github.com/#{name.emailize}"
-        professional = Professional.new(name: name, phone_number: phone_number, email:email, bio: bio, links: links)
-        professional.employments.build(role: "Hiring Manager",
-                                       partner_id: partner.id)
-        professional.save
-        user = User.create(email: email,
+        professional_user = User.create(email: email,
                     password: "password",
-                    password_confirmation: "password",
-                    partner_id: partner.id)
-        user.partner = partner
-        user.confirm!
+                    password_confirmation: "password")
+        professional_user.confirm!
+        professional_user.add_role :professional
+        professional_user.partner = partner
+        professional_profile = Profile.create(
+                    first_name: name,
+                    last_name: last,
+                    phone_number: Faker::PhoneNumber.phone_number,
+                    summary: Faker::Lorem.paragraphs(3).join,
+                    github_link: links)
+        professional_user.profile = professional_profile
+        professional_user.save
       end
     end
 
-    #Create some pending relationships
-    (1..10).each do |n|
-      Relationship.create(partner_id: Partner.find(n).id, student_id: Student.find(n).id)
-    end
-
-    #Create some users, should probably put this under partners and professionals
-    professional = Professional.new(name: "KC", phone_number: Faker::PhoneNumber.phone_number, email: "example@example.com", bio: "Whatever", links: "http://somelink.com")
-    partner = Partner.find(1)
-    professional.employments.build(role: "Hiring Manager",
-                                   partner_id: partner.id)
-    professional.save
-
-    example_user = User.create(email: "example@example.com",
+    #Create a test professional
+    puts "Creating a demo professional email: professional@codefellows.com with password: password"
+    professional_user = User.create(email: "professional@codefellows.com",
                 password: "password",
                 password_confirmation: "password")
+    professional_user.confirm!
+    professional_user.add_role :professional
+    professional_user.partner = Partner.all.first
+    name = Faker::Name.first_name
+    professional_profile = Profile.create(
+                first_name: name,
+                last_name: Faker::Name.last_name,
+                phone_number: Faker::PhoneNumber.phone_number,
+                summary: Faker::Lorem.paragraphs(3).join,
+                github_link: "https://github.com/#{name}")
+    professional_user.profile = professional_profile
+    professional_user.save
 
-    example_user.confirm!
-    example_user.partner = partner
-    example_user.save
 
-    #create some student users
-    student_user = User.create(email: sean.email,
-                               password: "password",
-                               password_confirmation: "password",
-                               student_id: sean.id)
-    student_user.confirm!
+    #Create some pending relationships
+    puts "Creating some pending relationships"
+    (1..10).each do |n|
+      partner_id = partner_ids.sample
+      student_id = student_ids.sample
+      Relationship.create(partner_id: partner_id, user_id: student_id)
+    end
+
+    puts "All done!"
   end
 end
