@@ -1,10 +1,12 @@
 <% connected = current_user.connected?(student) %>
 <tr>
-  <td class="for-hire">
-    <% if student.profile.for_hire? %>
-      <i class="icon-ok icon-large"></i>
-    <% end %>
-  </td>
+  <% unless current_user.has_role? :student %>
+    <td class="for-hire">
+      <% if student.profile.for_hire? %>
+        <i class="icon-ok icon-large"></i>
+      <% end %>
+    </td>
+  <% end %>
   <td class="name">
     <%= name_cell student %>
   </td>
