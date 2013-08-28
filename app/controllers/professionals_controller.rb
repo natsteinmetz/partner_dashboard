@@ -1,10 +1,6 @@
 class ProfessionalsController < ApplicationController
   before_filter :find_professional, only: [:show, :edit, :update]
 
-  def index
-    @professionals = User.with_role(:professional).includes(:partners)
-  end
-
   def show
   end
 

@@ -1,4 +1,4 @@
-TITLES = ["Rails June 2013", "Javascript August 2013", "iOS July 2014"]
+TITLES = ["Rails Bootcamp", "Javascript Night Class", "iOS Bootcamp"]
 
 FactoryGirl.define do
   factory :course do

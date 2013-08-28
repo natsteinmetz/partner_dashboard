@@ -34,6 +34,7 @@ FactoryGirl.define do
         after(:create) do |user|
           user.add_role :student
           user.course = FactoryGirl.create(:course)
+          user.course = FactoryGirl.create(:course)
           user.profile = FactoryGirl.create(:profile)
           user.save
         end
