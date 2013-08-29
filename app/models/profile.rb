@@ -31,13 +31,12 @@ class Profile < ActiveRecord::Base
 
   def build_nested_elements(response)
     set_skills(response)
-    get_all_skills_as_string
     set_positions(response)
-    set_educations(response)
-    set_certifications(response)
-    set_publications(response)
-    set_patents(response)
-    set_volunteers(response)
+#    set_educations(response)
+    # set_certifications(response)
+    # set_publications(response)
+    # set_patents(response)
+    # set_volunteers(response)
   end
 
   # check to see whether LinkedIn profile has changed,
@@ -51,9 +50,9 @@ class Profile < ActiveRecord::Base
   end
 
   # convenience method for the view
-  def get_all_skills_as_string
+  def get_all_skills
     skills = ""
-    Skill.all.each do |skill|
+    self.skills.each do |skill|
       if skills != "" then skills << ", " end
       skills << skill.name
     end
@@ -98,23 +97,43 @@ private
   end
 
   def set_skills(response)
+    existing_skills = Skill.where("linkedin_id = ? and profile_id = ?", response["id"], self.id)
+    unless existing_skills.blank?
+      existing_skills.each do |skill|
+        skill.destroy
+      end
+    end
     response["person"]["skills"]["skill"].each do |t|
       self.skills << Skill.create(linkedin_id: t["id"], name: t["skill"]["name"])
     end
   end
 
   def set_positions(response)
+    set_current_positions(response)
+    set_past_positions(response)
+  end
+
+  def set_current_positions(response)
     response["person"]["three_current_positions"]["position"].each do |t|
       pos = Position.where("linkedin_id = ? and profile_id = ?", t["id"], self.id)
       pos.first.destroy unless pos.blank?
       start_d = Date.new(t["start_date"]["year"].to_i, t["start_date"]["month"].to_i,1)
       self.positions << Position.create(linkedin_id: t["id"], title: t["title"], summary: t["summary"], start_date: start_d, company: t["company"]["name"] )
     end
-    binding.pry
+  end
+
+  def set_past_positions(response)
+    response["person"]["three_past_positions"]["position"].each do |t|
+      pos = Position.where("linkedin_id = ? and profile_id = ?", t["id"], self.id)
+      pos.first.destroy unless pos.blank?
+      start_d = Date.new(t["start_date"]["year"].to_i, t["start_date"]["month"].to_i,1)
+      self.positions << Position.create(linkedin_id: t["id"], title: t["title"], summary: t["summary"], start_date: start_d, company: t["company"]["name"] )
+    end
   end
 
   def set_educations(response)
     #:school_name, :field, :start_date, :end_date, :degree
+
 
   end
 
