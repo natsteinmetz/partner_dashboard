@@ -37,7 +37,9 @@ feature "Inviting potential users:" do
       page.should have_button "Send an invitation"
     end
 
-    scenario "Admin can create a new partner on the form and assign the invitee to it." do
+    pending scenario "Admin can create a new partner on the form and assign the invitee to it.", js: true do
+      follow_invite_request_link(admin)
+      click_link "Partner not listed?"
     end
   end
 

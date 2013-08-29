@@ -3,9 +3,6 @@ class StudentsController < ApplicationController
   before_filter :find_student, only: [:show, :edit, :update]
   before_filter :check_profile_timestamp, only: [:show, :edit]
 
-  #TODO: Add before filter to ensure user's partner has a relationship
-  #before_filter :confirm_relationship, only: :show FIX ME
-
   def index
     @students = User.with_role :student
   end
@@ -43,5 +40,4 @@ private
   def check_profile_timestamp
     @student.profile.check_profile_timestamp(@student)
   end
-
 end
