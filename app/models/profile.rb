@@ -30,7 +30,8 @@ class Profile < ActiveRecord::Base
   end
 
   def build_nested_elements(response)
-    skills.set_skills(response)
+    set_skills(response)
+    get_all_skills_as_string
     positions.set_positions(response)
     publications.set_publications(response)
     patents.set_patents(response)
@@ -47,6 +48,15 @@ class Profile < ActiveRecord::Base
     if date != self.last_modified_timestamp
       build_profile
     end
+  end
+
+  def get_all_skills_as_string
+    skills = ""
+    Skill.all.each do |skill|
+      if skills != "" then skills << ", " end
+      skills << skill.name
+    end
+    skills
   end
 
 private
@@ -84,6 +94,12 @@ private
 
   def set_timestamp(response)
     self.last_modified_timestamp = DateTime.strptime(response["person"]["last_modified_timestamp"], '%s')
+  end
+
+  def set_skills(response)
+    response["person"]["skills"]["skill"].each do |t|
+      Skill.create(name: t["skill"]["name"].to_s)
+    end
   end
 
 end
