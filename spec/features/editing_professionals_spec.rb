@@ -52,7 +52,6 @@ feature "editing professional details" do
       admin = FactoryGirl.create(:admin_user)
       sign_in_as!(admin)
       click_link "Partners"
-      click_link "Partners Index"
       click_link @partner.name
       page.should have_content(@partner.about)
       page.should have_content("Edit Profile")

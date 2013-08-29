@@ -23,12 +23,13 @@ feature "Viewing Partners" do
 
   context "as an admin user" do
     let!(:admin) { FactoryGirl.create(:admin_user) }
-    before { sign_in_as!(admin) }
-
-    scenario "they can see the partners", js: true do
+    before do
+      sign_in_as!(admin)
       visit "/"
       click_link "Partners"
-      click_link "Partners Index"
+    end
+
+    scenario "they can see the partners", js: true do
       page.should have_content partner_one.name
       page.should have_content partner_one.kind
 
@@ -40,21 +41,19 @@ feature "Viewing Partners" do
       Partner.destroy_all
       visit "/"
       click_link "Partners"
-      click_link "Partners Index"
       page.should_not have_content("Partner Name")
       page.should have_content("Sorry, there aren't any partners here yet...")
     end
 
     scenario "only showing partners of a particular type", js: true do
-      visit "/"
-      click_link "Partners"
-      click_link "Partners Index"
       fill_in "partner-filter", with: partner_one.kind
       page.should have_content partner_one.kind
       page.should_not have_content partner_two.kind
     end
 
-    scenario "admin can sort partners"
-  end
+    scenario "admin can sort partners", js: true do
+      fill_in "partner-filter", with: partner
+    end
 
+  end
 end

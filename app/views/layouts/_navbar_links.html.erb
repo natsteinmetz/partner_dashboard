@@ -1,4 +1,3 @@
-<!-- PUT LINK TO CURRENT USERS PARTNER IF ANY -->
 <li><%= link_to "Courses", courses_path, :class => "btn-btn-navbar" %></li>
 <% if current_user.has_role? :professional %>
   <li><%= link_to "Students", students_path, :class => "btn-btn-navbar" %></li>

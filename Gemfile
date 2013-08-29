@@ -58,7 +58,7 @@ group :test do
   gem 'capybara-webkit', '~> 1.0.0'
   gem 'database_cleaner', '~> 1.0.1'
   gem 'launchy'
-  gem 'simplecov', :require => false
+#  gem 'simplecov', :require => false
   gem 'factory_girl_rails', '~> 4.0'
   gem 'email_spec', '1.2.1'
 end
