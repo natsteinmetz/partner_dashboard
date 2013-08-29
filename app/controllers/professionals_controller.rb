@@ -25,6 +25,6 @@ class ProfessionalsController < ApplicationController
   end
 
   def check_profile_timestamp
-    @professional.profile.check_profile_timestamp
+    @professional.profile.check_profile_timestamp(@professional)
   end
 end

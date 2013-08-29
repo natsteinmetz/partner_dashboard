@@ -25,13 +25,24 @@ class Profile < ActiveRecord::Base
     set_headline(response)
     set_languages(response)
     set_timestamp(response)
+    build_nested_elements(response)
     self.save
+  end
+
+  def build_nested_elements(response)
+    skills.set_skills(response)
+    positions.set_positions(response)
+    publications.set_publications(response)
+    patents.set_patents(response)
+    educations.set_educations(response)
+    volunteers.set_volunteers(response)
+    certifications.set_certifications(response)
   end
 
   # check to see whether LinkedIn profile has changed,
   # if yes, rebuild profile
-  def check_profile_timestamp
-    response = check_timestamp_call
+  def check_profile_timestamp(user)
+    response = check_timestamp_call(user)
     date = DateTime.strptime(response["person"]["last_modified_timestamp"], '%s')
     if date != self.last_modified_timestamp
       build_profile
@@ -41,17 +52,17 @@ class Profile < ActiveRecord::Base
 private
   def full_profile_call
     fields = ":(headline,summary,skills,three-current-positions,three-past-positions,volunteer,educations,certifications,patents,publications,languages,last-modified-timestamp)"
-    api_call(fields)
+    api_call(fields, user.token)
   end
 
-  def check_timestamp_call
+  def check_timestamp_call(checked_user)
     fields = ":(last-modified-timestamp)"
-    api_call(fields)
+    api_call(fields, checked_user.token)
   end
 
   # LinkedIn API call
-  def api_call(fields)
-    api_url = "https://api.linkedin.com/v1/people/~"+fields+"?oauth2_access_token="+user.token
+  def api_call(fields, token)
+    api_url = "https://api.linkedin.com/v1/people/~"+fields+"?oauth2_access_token="+token
     response = HTTParty.get(api_url)
   end
 

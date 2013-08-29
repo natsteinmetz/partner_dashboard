@@ -41,7 +41,7 @@ private
   end
 
   def check_profile_timestamp
-    @student.profile.check_profile_timestamp
+    @student.profile.check_profile_timestamp(@student)
   end
 
 end
