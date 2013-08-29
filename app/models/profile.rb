@@ -99,14 +99,16 @@ private
 
   def set_skills(response)
     response["person"]["skills"]["skill"].each do |t|
-      self.skills << Skill.create(name: t["skill"]["name"])
+      self.skills << Skill.create(linkedin_id: t["id"], name: t["skill"]["name"])
     end
   end
 
   def set_positions(response)
     response["person"]["three_current_positions"]["position"].each do |t|
+      pos = Position.where("linkedin_id = ? and profile_id = ?", t["id"], self.id)
+      pos.first.destroy unless pos.blank?
       start_d = Date.new(t["start_date"]["year"].to_i, t["start_date"]["month"].to_i,1)
-      self.positions << Position.create(title: t["title"], summary: t["summary"], start_date: start_d, company: t["company"]["name"] )
+      self.positions << Position.create(linkedin_id: t["id"], title: t["title"], summary: t["summary"], start_date: start_d, company: t["company"]["name"] )
     end
     binding.pry
   end
