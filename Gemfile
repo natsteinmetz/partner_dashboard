@@ -19,7 +19,6 @@ gem 'gravatar_image_tag'
 
 gem 'omniauth-linkedin-oauth2'
 gem 'httparty'
-gem 'json'
 
 # Needs to be outside of assets because we have some dynamically
 # generated coffeescript.

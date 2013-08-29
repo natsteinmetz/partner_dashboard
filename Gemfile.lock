@@ -273,7 +273,6 @@ DEPENDENCIES
   gravatar_image_tag
   httparty
   jquery-rails
-  json
   launchy
   meta_request
   omniauth-linkedin-oauth2
