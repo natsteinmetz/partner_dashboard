@@ -32,7 +32,7 @@ class Profile < ActiveRecord::Base
   def build_nested_elements(response)
     set_skills(response)
     set_positions(response)
-#    set_educations(response)
+    # set_educations(response)
     # set_certifications(response)
     # set_publications(response)
     # set_patents(response)
@@ -77,6 +77,7 @@ private
   end
 
   def set_summary(response)
+    return if response["person"]["summary"] == nil
     self.summary = response["person"]["summary"]
   end
 
@@ -86,6 +87,7 @@ private
 
   def set_languages(response)
     self.languages = ""
+    return if response["person"]["languages"] == nil
     response["person"]["languages"]["language"].each do |t|
       if self.languages != "" then self.languages << ", " end
       self.languages << t["language"]["name"]
@@ -97,6 +99,7 @@ private
   end
 
   def set_skills(response)
+    return if response["person"]["skills"] == nil
     existing_skills = Skill.where("linkedin_id = ? and profile_id = ?", response["id"], self.id)
     unless existing_skills.blank?
       existing_skills.each do |skill|
@@ -114,6 +117,7 @@ private
   end
 
   def set_current_positions(response)
+    return if response["person"]["three_current_positions"] == nil
     response["person"]["three_current_positions"]["position"].each do |t|
       pos = Position.where("linkedin_id = ? and profile_id = ?", t["id"], self.id)
       pos.first.destroy unless pos.blank?
@@ -123,6 +127,7 @@ private
   end
 
   def set_past_positions(response)
+    return if response["person"]["three_past_positions"] == nil
     response["person"]["three_past_positions"]["position"].each do |t|
       pos = Position.where("linkedin_id = ? and profile_id = ?", t["id"], self.id)
       pos.first.destroy unless pos.blank?
@@ -133,8 +138,16 @@ private
 
   def set_educations(response)
     #:school_name, :field, :start_date, :end_date, :degree
+    return if response["person"]["educations"] == nil
+    response["person"]["educations"]["education"].each do |t|
+      edu = Education.where("linkedin_id = ? and profile_id = ?", t["id"], self.id)
+      edu.first.destroy unless edu.blank?
+      start_d = Date.new(t["start_date"]["year"].to_i, t["start_date"]["month"].to_i,1)
+      binding.pry
+      self.positions << Education.create(linkedin_id: t["id"], school_name: t[""], field: t["field"], start_date: start_d, degree: t["degree"] )
+    end
 
-
+    binding.pry
   end
 
   def set_certifications(response)
