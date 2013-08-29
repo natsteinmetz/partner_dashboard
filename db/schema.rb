@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130829062724) do
+ActiveRecord::Schema.define(:version => 20130829190046) do
+
+  create_table "certifications", :force => true do |t|
+    t.string   "name"
+    t.string   "authority"
+    t.date     "date"
+    t.integer  "profile_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "courses", :force => true do |t|
     t.string   "title"
@@ -21,6 +30,17 @@ ActiveRecord::Schema.define(:version => 20130829062724) do
     t.text     "details"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "educations", :force => true do |t|
+    t.string   "school_name"
+    t.string   "field"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.string   "degree"
+    t.integer  "profile_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "enrollments", :force => true do |t|
@@ -55,6 +75,28 @@ ActiveRecord::Schema.define(:version => 20130829062724) do
     t.text     "about"
   end
 
+  create_table "patents", :force => true do |t|
+    t.string   "title"
+    t.text     "summary"
+    t.date     "date"
+    t.string   "url"
+    t.string   "inventors"
+    t.integer  "profile_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "positions", :force => true do |t|
+    t.string   "title"
+    t.text     "summary"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.string   "string"
+    t.integer  "profile_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "professionals", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -84,6 +126,18 @@ ActiveRecord::Schema.define(:version => 20130829062724) do
     t.datetime "last_modified_timestamp"
   end
 
+  create_table "publications", :force => true do |t|
+    t.string   "title"
+    t.string   "publisher"
+    t.string   "authors"
+    t.date     "date"
+    t.string   "url"
+    t.text     "summary"
+    t.integer  "profile_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "relationships", :force => true do |t|
     t.integer  "partner_id"
     t.datetime "created_at",                            :null => false
@@ -105,6 +159,13 @@ ActiveRecord::Schema.define(:version => 20130829062724) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "skills", :force => true do |t|
+    t.string   "name"
+    t.integer  "profile_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "students", :force => true do |t|
     t.string   "name"
@@ -161,5 +222,13 @@ ActiveRecord::Schema.define(:version => 20130829062724) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
+
+  create_table "volunteers", :force => true do |t|
+    t.string   "role"
+    t.string   "organization"
+    t.integer  "profile_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
 end

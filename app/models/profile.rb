@@ -4,6 +4,14 @@ class Profile < ActiveRecord::Base
 
   belongs_to :user
 
+  has_many :skills
+  has_many :positions
+  has_many :publications
+  has_many :patents
+  has_many :educations
+  has_many :volunteers
+  has_many :certifications
+
   validates :first_name, :last_name, presence: true
 
   def name
@@ -17,7 +25,6 @@ class Profile < ActiveRecord::Base
     set_headline(response)
     set_languages(response)
     set_timestamp(response)
-    binding.pry
     self.save
   end
 
