@@ -50,10 +50,5 @@ feature "Viewing Partners" do
       page.should have_content partner_one.kind
       page.should_not have_content partner_two.kind
     end
-
-    scenario "admin can sort partners", js: true do
-      fill_in "partner-filter", with: partner
-    end
-
   end
 end
