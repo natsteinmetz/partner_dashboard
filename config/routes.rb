@@ -25,7 +25,7 @@ PartnerDashboard::Application.routes.draw do
     resources :relationships, except: [:show, :edit]
    end
 
-  devise_for :users, :skip => [:invitations, :registrations]
+  devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}, :skip => [:invitations, :registrations]
 
   # only allow editing registrations, not creating them
   as :user do

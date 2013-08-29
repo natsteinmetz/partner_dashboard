@@ -1,5 +1,6 @@
 class ProfessionalsController < ApplicationController
   before_filter :find_professional, only: [:show, :edit, :update]
+  before_filter :check_profile_timestamp, only: [:show, :edit]
 
   def show
   end
@@ -21,5 +22,9 @@ class ProfessionalsController < ApplicationController
 
   def find_professional
     @professional = User.find(params[:id])
+  end
+
+  def check_profile_timestamp
+    @professional.profile.check_profile_timestamp(@professional)
   end
 end
