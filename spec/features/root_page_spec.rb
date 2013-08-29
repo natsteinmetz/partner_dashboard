@@ -20,5 +20,4 @@ feature "Root page" do
     page.should_not have_content I18n.t("devise.failure.already_authenticated")
   end
 
-  scenario "Root page has links to other codefellows sites and the about page"
 end

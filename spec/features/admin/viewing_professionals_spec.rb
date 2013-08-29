@@ -26,7 +26,7 @@ feature 'viewing professionals index' do
         prof.destroy
       end
       visit "/"
-      click_link "Professionals Index"
+      click_link "Professionals"
 
       page.should_not have_content("Professional Name")
       page.should have_content("Sorry, there aren't any professionals here yet...")
@@ -45,8 +45,7 @@ feature 'viewing professionals index' do
       partner_2.users.first.profile = FactoryGirl.create(:profile)
 
       visit '/'
-      click_link "Partners"
-      click_link "Professionals Index"
+      click_link "Professionals"
       fill_in "professional-filter", with: professional.partner.name
 
       page.should have_content professional.profile.name
@@ -55,8 +54,7 @@ feature 'viewing professionals index' do
 
     scenario "can filter professionals by name", js: true do
       visit '/'
-      click_link "Partners"
-      click_link "Professionals Index"
+      click_link "Professionals"
       fill_in "professional-filter", with: professional.profile.name
 
       page.should have_content professional.profile.name
@@ -65,8 +63,7 @@ feature 'viewing professionals index' do
 
     scenario "can filter professionals by email", js: true do
       visit '/'
-      click_link "Partners"
-      click_link "Professionals Index"
+      click_link "Professionals"
       fill_in "professional-filter", with: professional.email[0..6]
 
       page.should have_content professional.profile.name
