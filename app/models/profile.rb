@@ -32,12 +32,12 @@ class Profile < ActiveRecord::Base
   def build_nested_elements(response)
     set_skills(response)
     get_all_skills_as_string
-    positions.set_positions(response)
-    publications.set_publications(response)
-    patents.set_patents(response)
-    educations.set_educations(response)
-    volunteers.set_volunteers(response)
-    certifications.set_certifications(response)
+    set_positions(response)
+    set_educations(response)
+    set_certifications(response)
+    set_publications(response)
+    set_patents(response)
+    set_volunteers(response)
   end
 
   # check to see whether LinkedIn profile has changed,
@@ -50,6 +50,7 @@ class Profile < ActiveRecord::Base
     end
   end
 
+  # convenience method for the view
   def get_all_skills_as_string
     skills = ""
     Skill.all.each do |skill|
@@ -98,8 +99,32 @@ private
 
   def set_skills(response)
     response["person"]["skills"]["skill"].each do |t|
-      Skill.create(name: t["skill"]["name"].to_s)
+      self.skills << Skill.create(name: t["skill"]["name"])
     end
+  end
+
+  def set_positions(response)
+    #:title, :summary, :start_date, :end_date, :company
+    response["person"]["three_current_positions"]["position"].each do |t|
+      start_d = Date.new(t["start_date"]["year"].to_i, t["start_date"]["month"].to_i,1)
+      self.positions << Position.create(title: t["title"], summary: t["summary"], start_date: start_d, company: t["company"]["name"] )
+    end
+    binding.pry
+  end
+
+  def set_educations(response)
+  end
+
+  def set_certifications(response)
+  end
+
+  def set_publications(response)
+  end
+
+  def set_patents(response)
+  end
+
+  def set_volunteers(response)
   end
 
 end

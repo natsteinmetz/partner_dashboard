@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(:version => 20130829190046) do
     t.text     "summary"
     t.date     "start_date"
     t.date     "end_date"
-    t.string   "string"
+    t.string   "company"
     t.integer  "profile_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
