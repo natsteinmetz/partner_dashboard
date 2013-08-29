@@ -104,7 +104,6 @@ private
   end
 
   def set_positions(response)
-    #:title, :summary, :start_date, :end_date, :company
     response["person"]["three_current_positions"]["position"].each do |t|
       start_d = Date.new(t["start_date"]["year"].to_i, t["start_date"]["month"].to_i,1)
       self.positions << Position.create(title: t["title"], summary: t["summary"], start_date: start_d, company: t["company"]["name"] )
@@ -113,6 +112,8 @@ private
   end
 
   def set_educations(response)
+    #:school_name, :field, :start_date, :end_date, :degree
+
   end
 
   def set_certifications(response)
