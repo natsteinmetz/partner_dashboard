@@ -117,7 +117,7 @@ private
   end
 
   def set_current_positions(response)
-    return if response["person"]["three_current_positions"] == nil
+    return if response["person"]["three_current_positions"]["total"] == 0
     response["person"]["three_current_positions"]["position"].each do |t|
       pos = Position.where("linkedin_id = ? and profile_id = ?", t["id"], self.id)
       pos.first.destroy unless pos.blank?
@@ -127,7 +127,7 @@ private
   end
 
   def set_past_positions(response)
-    return if response["person"]["three_past_positions"] == nil
+    return if response["person"]["three_past_positions"]["total"] == 0
     response["person"]["three_past_positions"]["position"].each do |t|
       pos = Position.where("linkedin_id = ? and profile_id = ?", t["id"], self.id)
       pos.first.destroy unless pos.blank?

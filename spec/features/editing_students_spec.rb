@@ -57,10 +57,9 @@ feature "editing student details" do
       click_link @student.profile.name
       page.should have_content("Edit Profile")
       click_link "Edit Profile"
-      summary = "A person who is known for leaping tall buildings in a single bound."
-      fill_in "Summary", with: summary
+      fill_in "First name", with: "my super exciting first name"
       click_button "Update Profile"
-      page.should have_content(summary)
+      page.should have_content("my super exciting first name")
     end
   end
 end
