@@ -3,7 +3,7 @@ require 'spec_helper'
 def should_have_students(*students)
   students.each do |student|
     page.should have_content(student.profile.name)
-    page.should have_content(student.profile.skills)
+    page.should have_content(student.profile.get_all_skills)
   end
 end
 
@@ -50,7 +50,7 @@ feature "Viewing students" do
 
     scenario "can filter and only show students with a particular skill", :js => true do
       find("#skills-filter-show").click
-      find(:css, "#skills-filter input").set(student.profile.skills)
+      find(:css, "#skills-filter input").set(student.profile.get_all_skills)
       page.should have_content student.profile.name
       page.should_not have_content student_2.profile.name
     end

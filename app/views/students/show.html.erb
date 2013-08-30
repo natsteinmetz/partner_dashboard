@@ -37,7 +37,7 @@
   <div class="span8">
     <h3>Skills</h3>
     <p>
-      <%= @student.profile.skills %>
+      <%= @student.profile.get_all_skills %>
     </p>
     <% if @student.courses.size != 0 %>
       <h3>Courses</h3>
