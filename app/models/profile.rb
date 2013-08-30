@@ -100,7 +100,8 @@ private
 
   def set_skills(response)
     return if response["person"]["skills"] == nil
-    existing_skills = Skill.where("linkedin_id = ? and profile_id = ?", response["id"], self.id)
+#    existing_skills = Skill.where("linkedin_id = ? and profile_id = ?", response["id"], self.id)
+    existing_skills = self.skills
     unless existing_skills.blank?
       existing_skills.each do |skill|
         skill.destroy
@@ -109,6 +110,7 @@ private
     response["person"]["skills"]["skill"].each do |t|
       self.skills << Skill.create(linkedin_id: t["id"], name: t["skill"]["name"])
     end
+
   end
 
   def set_positions(response)
