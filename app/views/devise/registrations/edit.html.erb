@@ -7,11 +7,13 @@
 
     <%= devise_error_messages! %>
 
+    <% if (current_user.has_role?(:student) || current_user.has_role?(:professional)) %>
     <div>
       Please import your LinkedIn profile:
       <%= link_to (image_tag("linkedin_importer_button.gif", :alt => "Import Your LinkedIn Profile")), user_omniauth_authorize_path(:linkedin) %>
       <br><br>
     </div>
+    <% end %>
     <div class="control-group">
       <%= f.label :email, class: "control-label" %>
       <div class="controls">
