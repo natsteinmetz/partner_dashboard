@@ -30,11 +30,15 @@ feature "Viewing students" do
 
   before do
     student.profile = FactoryGirl.create(:profile,
-                          for_hire: true,
-                          skills: "C, Java, Rails")
+                          for_hire: true)
+    ["C", "Java", "Rails"].each do |skill|
+      student.profile.skills << Skill.create(name: skill)
+    end
     student.save
-    student_2.profile = FactoryGirl.create(:profile,
-                          skills: "Ruby, Erlang, Pascal")
+    student_2.profile = FactoryGirl.create(:profile)
+    ["Ruby", "Erlang", "Pascal"].each do |skill|
+      student.profile.skills << Skill.create(name: skill)
+    end
     student_2.save
   end
 
