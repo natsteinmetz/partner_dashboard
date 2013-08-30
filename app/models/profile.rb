@@ -58,9 +58,9 @@ class Profile < ActiveRecord::Base
   def check_profile_timestamp(user)
     response = check_timestamp_call(user)
     date = DateTime.strptime(response["person"]["last_modified_timestamp"], '%s')
-    if date != self.last_modified_timestamp
+   if date != self.last_modified_timestamp
       build_profile
-    end
+   end
   end
 
 ################################################################################
