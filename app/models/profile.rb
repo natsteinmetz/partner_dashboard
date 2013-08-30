@@ -32,7 +32,7 @@ class Profile < ActiveRecord::Base
   def build_nested_elements(response)
     set_skills(response)
     set_positions(response)
-    # set_educations(response)
+    set_educations(response)
     # set_certifications(response)
     # set_publications(response)
     # set_patents(response)
@@ -142,9 +142,9 @@ private
     response["person"]["educations"]["education"].each do |t|
       edu = Education.where("linkedin_id = ? and profile_id = ?", t["id"], self.id)
       edu.first.destroy unless edu.blank?
-      start_d = Date.new(t["start_date"]["year"].to_i, t["start_date"]["month"].to_i,1)
-      binding.pry
-      self.positions << Education.create(linkedin_id: t["id"], school_name: t[""], field: t["field"], start_date: start_d, degree: t["degree"] )
+      start_d = Date.new(t["start_date"]["year"].to_i, 1, 1)
+      end_d = Date.new(t["end_date"]["year"].to_i, 1, 1)
+      self.educations << Education.create(linkedin_id: t["id"], school_name: t["school_name"], field: t["field_of_study"], start_date: start_d, degree: t["degree"] )
     end
 
     binding.pry
