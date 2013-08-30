@@ -6,7 +6,7 @@ class HomeController < ApplicationController
       redirect_to new_user_session_path
     elsif current_user.has_role? :admin
       redirect_to admin_relationships_path
-    elsif current_user.profile
+    elsif current_user.profile #user has profile
       if current_user.has_role? :professional
         redirect_to dashboard_path
       else #user is a student

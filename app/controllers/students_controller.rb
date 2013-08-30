@@ -38,6 +38,8 @@ private
   end
 
   def check_profile_timestamp
-    @student.profile.check_profile_timestamp(@student)
+    unless @student.token == nil
+      @student.profile.check_profile_timestamp(@student)
+    end
   end
 end
