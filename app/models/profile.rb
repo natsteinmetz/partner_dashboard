@@ -132,22 +132,24 @@ private
       pos = Position.where("linkedin_id = ? and profile_id = ?", t["id"], self.id)
       pos.first.destroy unless pos.blank?
       start_d = Date.new(t["start_date"]["year"].to_i, t["start_date"]["month"].to_i,1)
-      self.positions << Position.create(linkedin_id: t["id"], title: t["title"], summary: t["summary"], start_date: start_d, company: t["company"]["name"] )
+      end_d = Date.new(t["end_date"]["year"].to_i, t["end_date"]["month"].to_i, 1)
+      self.positions << Position.create(linkedin_id: t["id"], title: t["title"], summary: t["summary"], start_date: start_d, end_date: end_d, company: t["company"]["name"])
     end
   end
 
   def set_educations(response)
-    #:school_name, :field, :start_date, :end_date, :degree
     return if response["person"]["educations"] == nil
     response["person"]["educations"]["education"].each do |t|
       edu = Education.where("linkedin_id = ? and profile_id = ?", t["id"], self.id)
       edu.first.destroy unless edu.blank?
       start_d = Date.new(t["start_date"]["year"].to_i, 1, 1)
-      end_d = Date.new(t["end_date"]["year"].to_i, 1, 1)
-      self.educations << Education.create(linkedin_id: t["id"], school_name: t["school_name"], field: t["field_of_study"], start_date: start_d, degree: t["degree"] )
+      if t["end_date"] == nil
+        self.educations << Education.create(linkedin_id: t["id"], school_name: t["school_name"], field: t["field_of_study"], start_date: start_d, degree: t["degree"])
+      else
+        end_d = Date.new(t["end_date"]["year"].to_i, 1, 1)
+        self.educations << Education.create(linkedin_id: t["id"], school_name: t["school_name"], field: t["field_of_study"], start_date: start_d, end_date: end_d, degree: t["degree"])
+      end
     end
-
-    binding.pry
   end
 
   def set_certifications(response)
