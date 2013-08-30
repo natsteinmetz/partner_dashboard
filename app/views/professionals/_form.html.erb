@@ -36,6 +36,14 @@
       <%= f.text_field :personal_website_link, :class => 'input-xxlarge' %>
     </div>
   </div>
+  <% if current_user.has_role? :admin %>
+  <div class="control-group">
+    <%= f.label "Admin Notes (shown only to admin users)", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :admin_notes, class: 'text_field' %>
+    </div>
+  </div>
+  <% end %>
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

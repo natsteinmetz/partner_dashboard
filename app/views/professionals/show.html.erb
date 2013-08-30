@@ -22,20 +22,47 @@
         <td><%= mail_to @professional.email %></td>
       </tr>
       <% end -%>
+
+      <% linked_in = @professional.profile.linkedin_link %>
+      <% website = @professional.profile.personal_website_link %>
+      <% unless linked_in.blank? && website.blank? %>
       <tr>
         <th scope="row" style="text-align: left">Links</th>
           <td>
-            <%= link_to @professional.profile.linkedin_link, @professional.profile.linkedin_link %><br>
-            <%= link_to @professional.profile.personal_website_link, @professional.profile.personal_website_link %><br>
+            <% unless linked_in.blank? %>
+              <%= link_to linked_in, linked_in %><br>
+            <% end %>
+            <% unless website.blank? %>
+              <%= link_to website, website %><br>
+            <% end %>
           </td>
       </tr>
+      <% end %>
     </table>
+  </div>
+</div>
+
+</br>
+<% if (current_user.has_role? :admin) || ((current_user.has_role? :professional) && (@professional.email == current_user.email)) %>
+  <div class="row-fluid">
+    <%= link_to "Edit Profile", edit_professional_path(@professional), class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+
+<div class="row-fluid">
+  <div class="span8">
+    <% if current_user.has_role?(:admin)%>
+      </br>
+      <h4>Admin Notes</h4>
+      <p><%= simple_format @professional.profile.admin_notes || "No notes yet" %></p>
+    <% end %>
   </div>
 </div>
 
 <div class="row-fluid">
   <div class="span8">
-    <h3>Bio</h3>
+    <h3>Summary</h3>
     <p>
       <% if @professional.profile.summary.blank? %>
         None provided...
@@ -43,11 +70,18 @@
         <%= @professional.profile.summary %>
       <% end %>
     </p>
+
+    <h3>Employment</h3>
+    <%= "No information provided" if @professional.profile.positions.empty? %>
+    <% @professional.profile.positions.each do |position| %>
+      <p>
+        <h4><%= position.title %> - <%= position.company %></h4>
+        <%= position.date_range %>
+        <%= simple_format position.summary %>
+      </p>
+    <% end %>
   </div>
 </div>
-<% if (current_user.has_role? :admin) || ((current_user.has_role? :professional) && (@professional.email == current_user.email)) %>
-  <div class="row-fluid">
-    <%= link_to "Edit Profile", edit_professional_path(@professional), class: "btn btn-primary" %>
-  </div>
-<% end %>
+</br>
+
 
