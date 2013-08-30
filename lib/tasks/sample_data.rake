@@ -14,12 +14,14 @@ namespace :db do
     sean_profile = Profile.create(first_name: "Sean",
                           last_name: "Irby",
                           phone_number: "206-794-9466",
-                          skills: "Ruby, Rails, Javascript, SQL",
                           for_hire: true,
                           summary: Faker::Lorem.paragraphs(2).join,
                           github_link: "https://github.com/seanirby")
     sean_user.profile = sean_profile
     sean_user.save
+    ["Ruby", "Rails", "Javascript", "SQL"].each do |skill|
+      sean_profile.skills << Skill.create(name: skill)
+    end
     sean_user.add_role :student
 
     danielle_user = User.create(email:"danielle@tuckerlabs.com",
@@ -29,9 +31,7 @@ namespace :db do
     danielle_profile = Profile.create(first_name: "Danielle",
                           last_name: "Tucker",
                           phone_number: "206-222-2222",
-                          skills: "Ruby, Rails, jQuery, Javascript, Java",
                           for_hire: true,
-                          summary: Faker::Lorem.paragraphs(2).join,
                           github_link: "https://github.com/tuckerd",
                           linkedin_link: "http://www.linkedin.com/in/dqtucker")
     danielle_user.profile = danielle_profile
@@ -45,9 +45,7 @@ namespace :db do
     nathalie_profile = Profile.create(first_name: "Nathalie",
                           last_name: "Steinmetz",
                           phone_number: "206-777-7777",
-                          skills: "Ruby, Rails, jQuery, Javascript, Java",
                           for_hire: true,
-                          summary: Faker::Lorem.paragraphs(2).join,
                           github_link: "https://github.com/natsteinmetz",
                           linkedin_link: "http://www.linkedin.com/in/nathaliesteinmetz",
                           personal_website_link: "http://nathaliesteinmetz.net")
@@ -91,10 +89,12 @@ namespace :db do
         user.profile = Profile.create(first_name: name,
                                 last_name: last,
                                 phone_number: phone_number,
-                                skills: skills.join(", "),
                                 for_hire: [true, false].sample,
                                 summary: Faker::Lorem.paragraphs(2).join,
                                 github_link: "https://github.com/#{name.emailize}")
+        skills.each do |skill|
+          user.profile.skills << Skill.create(name: skill)
+        end
         user.save
         user.add_role :student
         student_ids.push(user.id)
