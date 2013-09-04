@@ -66,7 +66,7 @@ PartnerDashboard::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   config.action_mailer.default_url_options = {
-    :host => 'partner-dashboard-cf.herokuapp.com'
+    :host => 'ptr-dashboard.herokuapp.com'
   }
   config.action_mailer.delivery_method = :postmark
   config.action_mailer.postmark_settings = { api_key: ENV['POSTMARK_API_KEY'] }
@@ -77,7 +77,7 @@ PartnerDashboard::Application.configure do
     :user_name      => ENV['POSTMARK_API_KEY'],
     :password       => ENV['POSTMARK_API_KEY'],
     :domain         => 'ptr-dashboard.heroku.com',
-    :authentication => :plain,
+    :authentication => :plain
   }
   ActionMailer::Base.delivery_method = :smtp
 }
