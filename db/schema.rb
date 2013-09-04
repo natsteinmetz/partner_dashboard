@@ -11,15 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130829190046) do
+ActiveRecord::Schema.define(:version => 20130829223003) do
 
   create_table "certifications", :force => true do |t|
     t.string   "name"
     t.string   "authority"
     t.date     "date"
     t.integer  "profile_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "linkedin_id"
   end
 
   create_table "courses", :force => true do |t|
@@ -41,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20130829190046) do
     t.integer  "profile_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "linkedin_id"
   end
 
   create_table "enrollments", :force => true do |t|
@@ -82,8 +84,9 @@ ActiveRecord::Schema.define(:version => 20130829190046) do
     t.string   "url"
     t.string   "inventors"
     t.integer  "profile_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "linkedin_id"
   end
 
   create_table "positions", :force => true do |t|
@@ -93,8 +96,9 @@ ActiveRecord::Schema.define(:version => 20130829190046) do
     t.date     "end_date"
     t.string   "company"
     t.integer  "profile_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "linkedin_id"
   end
 
   create_table "professionals", :force => true do |t|
@@ -111,7 +115,6 @@ ActiveRecord::Schema.define(:version => 20130829190046) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "phone_number"
-    t.string   "skills"
     t.text     "summary"
     t.string   "linkedin_link"
     t.string   "github_link"
@@ -134,8 +137,9 @@ ActiveRecord::Schema.define(:version => 20130829190046) do
     t.string   "url"
     t.text     "summary"
     t.integer  "profile_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "linkedin_id"
   end
 
   create_table "relationships", :force => true do |t|
@@ -163,8 +167,9 @@ ActiveRecord::Schema.define(:version => 20130829190046) do
   create_table "skills", :force => true do |t|
     t.string   "name"
     t.integer  "profile_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "linkedin_id"
   end
 
   create_table "students", :force => true do |t|
@@ -229,6 +234,7 @@ ActiveRecord::Schema.define(:version => 20130829190046) do
     t.integer  "profile_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "linkedin_id"
   end
 
 end

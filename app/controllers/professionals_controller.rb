@@ -25,6 +25,8 @@ class ProfessionalsController < ApplicationController
   end
 
   def check_profile_timestamp
-    @professional.profile.check_profile_timestamp(@professional)
+    unless @professional.token == nil
+      @professional.profile.check_profile_timestamp(@professional)
+    end
   end
 end

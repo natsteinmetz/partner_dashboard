@@ -10,7 +10,7 @@
   <td class="name">
     <%= name_cell student %>
   </td>
-  <td class="skills"><%= student.profile.skills %></td>
+  <td class="skills"><%= student.profile.get_all_skills.blank? ? "" : student.profile.get_all_skills %></td>
   <td class="courses">
     <ul>
       <% student.courses.each do |course| %>

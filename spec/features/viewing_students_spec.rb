@@ -3,7 +3,7 @@ require 'spec_helper'
 def should_have_students(*students)
   students.each do |student|
     page.should have_content(student.profile.name)
-    page.should have_content(student.profile.skills)
+    page.should have_content(student.profile.get_all_skills)
   end
 end
 
@@ -30,11 +30,15 @@ feature "Viewing students" do
 
   before do
     student.profile = FactoryGirl.create(:profile,
-                          for_hire: true,
-                          skills: "C, Java, Rails")
+                          for_hire: true)
+    ["C", "Java", "Rails"].each do |skill|
+      student.profile.skills << Skill.create(name: skill)
+    end
     student.save
-    student_2.profile = FactoryGirl.create(:profile,
-                          skills: "Ruby, Erlang, Pascal")
+    student_2.profile = FactoryGirl.create(:profile)
+    ["Ruby", "Erlang", "Pascal"].each do |skill|
+      student.profile.skills << Skill.create(name: skill)
+    end
     student_2.save
   end
 
@@ -50,7 +54,7 @@ feature "Viewing students" do
 
     scenario "can filter and only show students with a particular skill", :js => true do
       find("#skills-filter-show").click
-      find(:css, "#skills-filter input").set(student.profile.skills)
+      find(:css, "#skills-filter input").set(student.profile.get_all_skills)
       page.should have_content student.profile.name
       page.should_not have_content student_2.profile.name
     end
