@@ -1,5 +1,5 @@
 class AdminMailer < ActionMailer::Base
-  default from: "no-reply@#{ENV["HOSTNAME"]}"
+  default from: "danielle@tuckerlabs.com"
 
   def invite_request(invite_request)
     @invite_request = invite_request
