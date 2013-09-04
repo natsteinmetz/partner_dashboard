@@ -33,6 +33,7 @@ gem 'jquery-rails'
 
 group :production do
   gem 'pg'
+  gem 'postmark-rails' #mail on heroku
 end
 
 group :production, :development do
