@@ -32,7 +32,8 @@ end
 gem 'jquery-rails'
 
 group :production do
-#  gem 'pg'
+  gem 'pg'
+  #gem 'activerecord-postgresql-adapter'
 end
 
 group :production, :development do

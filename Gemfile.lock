@@ -146,6 +146,7 @@ GEM
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
     orm_adapter (0.4.0)
+    pg (0.16.0)
     polyglot (0.3.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
@@ -272,6 +273,7 @@ DEPENDENCIES
   launchy
   meta_request
   omniauth-linkedin-oauth2
+  pg
   pry-debugger
   pry-doc
   pry-rails
